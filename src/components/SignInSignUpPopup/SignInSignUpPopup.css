@@ -1,5 +1,5 @@
 .sign-in-sign-up-popup {
-    position: absolute;
+    position: fixed;
     z-index: 1;
     width: 100%;
     height: 100%;
@@ -49,7 +49,7 @@
 .sign-in-sign-up-popup-container button {
     border: none;
     padding: 10px;
-    border-radius:4px;
+    border-radius: 4px;
     color: white;
     background-color: tomato;
     font-size: 15px;
@@ -73,3 +73,7 @@
     cursor: pointer;
 }
 
+.disabled-button:disabled {
+    background-color: rgb(139, 70, 58);
+    cursor: not-allowed;
+}

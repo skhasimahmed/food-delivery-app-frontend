@@ -24,7 +24,7 @@
 }
 
 .food-item-name-rating p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -60,7 +60,8 @@
 .food-item-counter {
     position: absolute;
     bottom: 15px;
-    right: 15px;;
+    right: 15px;
+    ;
     display: flex;
     align-items: center;
     gap: 10px;

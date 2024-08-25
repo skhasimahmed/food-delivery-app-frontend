@@ -1,0 +1,119 @@
+.payment-confirmation {
+    margin-top: 100px;
+}
+
+.payment-confirmation .success,
+.payment-confirmation .failed {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-weight: 500;
+    line-height: 1.2;
+    box-shadow: 0 1px 25px #00000019;
+    padding: 50px;
+    width: 60%;
+    margin: auto;
+}
+
+.payment-confirmation .success {
+    border-bottom: solid 4px #28a745;
+}
+
+.payment-confirmation .failed {
+    border-bottom: solid 4px red;
+}
+
+.payment-confirmation .success i {
+    font-size: 55px;
+    color: #28a745;
+}
+
+.payment-confirmation .failed i {
+    font-size: 55px;
+    color: red !important;
+}
+
+.payment-confirmation hr {
+    margin: auto;
+    margin-top: 30px;
+    border: none;
+    height: 1px;
+    background-color: #a9a9a9;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.payment-confirmation h2 {
+    margin-bottom: 12px;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+.payment-confirmation .success p {
+    font-size: 16px;
+}
+
+.payment-confirmation .success p.order-info {
+    text-align: "left";
+    margin: "auto";
+    width: "fit-content";
+    margin-bottom: 0px;
+    color: #495057;
+    font-weight: normal;
+}
+
+.payment-confirmation .success p.order-total {
+    text-align: "left";
+    margin: "auto";
+    width: "fit-content";
+    color: #495057;
+    font-weight: normal;
+    font-size: 36px;
+    margin-top: 25px;
+}
+
+.payment-confirmation button {
+    font-size: 16px;
+    border: none;
+    color: white;
+    background-color: tomato;
+    width: max(15vw, 200px);
+    padding: 12px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 35px;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+@media (max-width: 650px) {
+    .payment-confirmation .success p.order-total {
+        font-size: 28px;
+    }
+
+    .payment-confirmation .success p,
+    .payment-confirmation .success p.order-info,
+    .payment-confirmation .failed p {
+        font-size: 12px;
+    }
+
+    .payment-confirmation .success h2,
+    .payment-confirmation .failed h2 {
+        font-size: 25px;
+    }
+
+    .payment-confirmation .success,
+    .payment-confirmation .failed {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .payment-confirmation button {
+        margin-bottom: 20px;
+        width: max(12vw, 150px);
+    }
+}
