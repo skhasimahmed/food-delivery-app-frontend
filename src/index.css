@@ -22,6 +22,23 @@ a {
   margin: auto;
 }
 
+
+.admin hr {
+  border: none;
+  height: 1px;
+  background-color: #a9a9a9;
+}
+
+.admin .app-content {
+  display: flex;
+}
+
+.admin .app-content .flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

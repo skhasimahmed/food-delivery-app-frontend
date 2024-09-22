@@ -36,14 +36,15 @@ const Footer = () => {
           <h2>GET IN TOUCH</h2>
           <ul>
             <li>+91 99999 00000</li>
-            <li>contact@tomato.com</li>
+            <li>contact@foodzie.com</li>
           </ul>
         </div>
       </div>
       <hr />
       <p className="footer-copyright-text">
         Copyright {currentYear} &copy;{" "}
-        <span onClick={() => navigate("/")}>Tomato</span> - All Right Reserved.
+        <span onClick={() => navigate("/")}>FoodZie.</span> - All Right
+        Reserved.
       </p>
     </div>
   );

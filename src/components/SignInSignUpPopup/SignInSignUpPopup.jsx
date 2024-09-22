@@ -5,10 +5,14 @@ import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { json, useNavigate } from "react-router-dom";
 const SignInSignUpPopup = ({ setShowLogin }) => {
   const [currentState, setCurrentState] = useState("Sign In");
-  const { API_BASE_URL, setToken, setCartItems } = useContext(StoreContext);
+  const { API_BASE_URL, setToken, setCartItems, setIsAdmin, setAuthUser } =
+    useContext(StoreContext);
   const [showLoader, setShowLoader] = useState(false);
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     name: "",
@@ -43,9 +47,22 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
 
           setShowLogin(false);
 
+          localStorage.setItem("authUser", JSON.stringify(response.data.user));
+
+          setAuthUser(response.data.user);
+
+          localStorage.setItem(
+            "isAdmin",
+            JSON.stringify(response.data.isAdmin)
+          );
+
+          setIsAdmin(response.data.isAdmin);
+
           setCartItems(response.data.cartData);
 
           toast.success(response.data.message);
+
+          if (response.data.isAdmin) navigate("/admin/dashboard");
         } else toast.error(response.data.message);
       })
       .catch((err) => {
@@ -105,7 +122,7 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
           {currentState === "Sign Up" ? "Create Account" : "Sign In"}
         </button>
         <div className="sign-in-sign-up-popup-terms-condition">
-          <input type="checkbox" required checked />
+          <input type="checkbox" required defaultChecked />
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
         </div>
 

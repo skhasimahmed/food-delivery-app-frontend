@@ -11,14 +11,16 @@ const PaymentConfirmation = () => {
   const { search } = useLocation();
 
   const [orderId] = useState(new URLSearchParams(search).get("orderId"));
-  const [success] = useState(new URLSearchParams(search).get("success"));
+  const [success, setSuccess] = useState(
+    new URLSearchParams(search).get("success")
+  );
 
   const { API_BASE_URL, token } = useContext(StoreContext);
 
   const [paymentInfo, setPaymentInfo] = useState();
 
   useEffect(() => {
-    if (success == "true") getPaymentInfoByOrderId(orderId);
+    getPaymentInfoByOrderId(orderId);
   }, []);
 
   const getPaymentInfoByOrderId = async (orderId) => {
@@ -28,9 +30,20 @@ const PaymentConfirmation = () => {
           token,
         },
       })
+      // && response.data.status === "succeeded" && response.data.chargeStatus === "paid"
       .then((response) => {
-        if (response.data.success) setPaymentInfo(response.data.data);
-        else {
+        if (response.data.success && response.data.data) {
+          setPaymentInfo(response.data.data);
+
+          if (
+            response.data.data.status === "succeeded" &&
+            response.data.data.chargeStatus === "paid"
+          ) {
+            setSuccess("true");
+          } else {
+            setSuccess("false");
+          }
+        } else {
           toast.error(response.data.message);
           navigate("/");
         }

@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import "./PlaceOrder.css";
-import axios from "axios";
 import { toast } from "react-toastify";
+import axiosInstance from "../../common/axiosInstance";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, cartItems, API_BASE_URL, foodList } =
@@ -41,8 +41,6 @@ const PlaceOrder = () => {
       }
     });
 
-    // console.log(orderItems);
-
     let orderData = {
       address: addressData,
       items: orderItems,
@@ -50,11 +48,9 @@ const PlaceOrder = () => {
       deliveryCharge: 2,
     };
 
-    console.log(orderData);
+    const apiUrl = API_BASE_URL + "api/order/place";
 
-    let apiUrl = API_BASE_URL + "api/order/place";
-
-    let response = await axios.post(apiUrl, orderData, {
+    let response = await axiosInstance.post(apiUrl, orderData, {
       headers: {
         token,
       },

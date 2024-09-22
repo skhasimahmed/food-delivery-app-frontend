@@ -5,10 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { NameInitialsAvatar } from "react-name-initials-avatar";
 
 const Navbar = ({ setShowLogin }) => {
-  const { getTotalCartAmount, token, setToken, setCartItems } =
-    useContext(StoreContext);
+  const {
+    getTotalCartAmount,
+    token,
+    setToken,
+    setCartItems,
+    authUser,
+    setAuthUser,
+  } = useContext(StoreContext);
 
   const [menu, setMenu] = useState("home");
 
@@ -17,6 +24,10 @@ const Navbar = ({ setShowLogin }) => {
   const handleLogout = () => {
     setToken(null);
     localStorage.removeItem("token");
+
+    localStorage.removeItem("authUser");
+    setAuthUser(null);
+
     setCartItems({});
     navigate("/");
   };
@@ -80,8 +91,27 @@ const Navbar = ({ setShowLogin }) => {
           <button onClick={() => setShowLogin(true)}>Sign In</button>
         ) : (
           <div className="navbar-profile">
-            <img src={assets.profile_icon} alt="Profile Icon" />
+            {/* <img src={assets.profile_icon} alt="Profile Icon" /> */}
+            <NameInitialsAvatar
+              name={authUser.name}
+              textColor={"Tomato"}
+              backgroundColor={"#fff"}
+              fontSize={16}
+              borderColor="Tomato"
+              borderWidth="1px"
+            />
             <ul className="navbar-profile-dropdown">
+              <li>
+                <i
+                  className="fa-regular fa-user fa-lg"
+                  style={{
+                    color: "#ff6347",
+                    fontSize: "17px",
+                  }}
+                ></i>
+                <p style={{ marginLeft: "5px" }}>Profile</p>
+              </li>
+              <hr />
               <li>
                 <img src={assets.bag_icon} alt="Bag Icon" />
                 <p>Orders</p>

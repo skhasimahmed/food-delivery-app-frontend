@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import "./NotFound.css";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
 const NotFound = () => {
+  const { isAdmin } = useContext(StoreContext);
   return (
     <div id="not-found">
       <div className="not-found">
@@ -14,7 +17,9 @@ const NotFound = () => {
           Sorry but the page you are looking for does not exist, have been
           removed. name changed or is temporarily unavailable
         </p>
-        <Link to="/">Back to homepage</Link>
+        <Link to={isAdmin ? "/admin/dashboard" : "/"}>
+          Back to {isAdmin ? "Dashboard" : "Home"}
+        </Link>
       </div>
     </div>
   );

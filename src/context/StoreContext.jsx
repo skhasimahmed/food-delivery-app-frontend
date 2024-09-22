@@ -1,22 +1,54 @@
-import axios from "axios";
-import { createContext, useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axiosInstance from "../common/axiosInstance";
+import { createContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
 export const StoreContext = createContext(null);
 
+const privateAdminRoutes = [
+  "/admin/dashboard",
+  "/admin/users",
+  "/admin/settings",
+  "/admin/orders",
+  "/admin/foods",
+];
+
+const isAdminRoute = (path) => {
+  const normalizedPath = path.endsWith("/") ? path.slice(0, -1) : path;
+
+  return privateAdminRoutes.includes(normalizedPath);
+};
+
 const StoreContextProvider = (props) => {
+  const location = useLocation();
+
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [foodList, setFoodList] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
 
-  const API_BASE_URL = "http://localhost:4000/";
+  const [isAdmin, setIsAdmin] = useState(
+    localStorage.getItem("isAdmin")
+      ? JSON.parse(localStorage.getItem("isAdmin"))
+      : false
+  );
+
+  const [authUser, setAuthUser] = useState(
+    localStorage.getItem("authUser")
+      ? JSON.parse(localStorage.getItem("authUser"))
+      : null
+  );
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!token && isAdminRoute(location.pathname)) {
+      setShowLogin(true);
+    }
+
     loadData();
   }, []);
 
@@ -31,7 +63,7 @@ const StoreContextProvider = (props) => {
   };
 
   const fetchFoodList = async () => {
-    const response = await axios
+    const response = await axiosInstance
       .get(`${API_BASE_URL}api/food/list`)
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -41,7 +73,7 @@ const StoreContextProvider = (props) => {
 
   const loadCartData = async (token) => {
     if (token) {
-      await axios
+      await axiosInstance
         .get(`${API_BASE_URL}api/cart/get`, {
           headers: {
             token,
@@ -73,7 +105,7 @@ const StoreContextProvider = (props) => {
     }
 
     if (token) {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${API_BASE_URL}api/cart/add`,
         {
           itemId,
@@ -96,7 +128,7 @@ const StoreContextProvider = (props) => {
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {
-      await axios
+      await axiosInstance
         .post(
           `${API_BASE_URL}api/cart/remove`,
           {
@@ -148,6 +180,12 @@ const StoreContextProvider = (props) => {
     setToken,
     showLogin,
     setShowLogin,
+
+    isAdmin,
+    setIsAdmin,
+
+    authUser,
+    setAuthUser,
   };
 
   return (
