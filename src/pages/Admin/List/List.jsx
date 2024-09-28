@@ -1,12 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import "./List.css";
+
+import Swal from "sweetalert2";
+
 import { assets } from "../../../assets/admin/assets";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../common/axiosInstance";
 import DocumentTitle from "../../../common/documentTitle";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../../context/StoreContext";
 const List = () => {
+  const navigate = useNavigate();
+
   const { API_BASE_URL } = useContext(StoreContext);
 
   DocumentTitle("Foods");
@@ -18,7 +23,7 @@ const List = () => {
 
     if (response.data.success) {
       setFoodList(response.data.data);
-      toast.success(response.data.message);
+      // toast.success(response.data.message);
     } else toast.error(response.data.message);
   };
 
@@ -26,14 +31,65 @@ const List = () => {
     fetchFoodList();
   }, []);
 
+  const editFood = (id) => {
+    navigate(`${id}/edit`);
+  };
+
+  // const confirm = () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       try {
+  //         const response = await axiosInstance.delete(
+  //           `${API_BASE_URL}api/food/delete/${id}`
+  //         );
+
+  //         if (response.data.success) {
+  //           toast.success(response.data.message);
+  //           fetchFoodList();
+  //         } else {
+  //           toast.error(response.data.message);
+  //         }
+  //       } catch (error) {
+  //         toast.error("An error occurred while deleting the food item.");
+  //       }
+  //     } else {
+  //       Swal.fire("Cancelled", "Your file is safe :)", "info");
+  //     }
+  //   });
+  // };
   const removeFood = async (id) => {
-    const response = await axiosInstance.delete(
-      `${API_BASE_URL}api/food/delete/${id}`
-    );
-    if (response.data.success) {
-      toast.success(response.data.message);
-      fetchFoodList();
-    } else toast.error(response.data.message);
+    Swal.fire({
+      title: "Are you sure you want to delete this food item?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axiosInstance.delete(
+            `${API_BASE_URL}api/food/delete/${id}`
+          );
+
+          if (response.data.success) {
+            toast.success(response.data.message);
+            fetchFoodList();
+          } else {
+            toast.error(response.data.message);
+          }
+        } catch (error) {
+          toast.error("An error occurred while deleting the food item.");
+        }
+      }
+    });
   };
 
   return (
@@ -51,7 +107,7 @@ const List = () => {
           <b>Name</b>
           <b>Category</b>
           <b>Price</b>
-          <b>Action</b>
+          <b style={{ textAlign: "center" }}>Action</b>
         </div>
         {foodList.length > 0 &&
           foodList.map((item, index) => {
@@ -63,14 +119,23 @@ const List = () => {
                 />
                 <p>{item.name}</p>
                 <p>{item.category}</p>
-                <p>{item.price}</p>
-                <p
-                  onClick={() => removeFood(item._id)}
-                  className="delete-food"
-                  title="Delete"
-                >
-                  x
-                </p>
+                <p>₹{item.price}</p>
+                <div className="action">
+                  <div
+                    className="edit-food"
+                    title="Edit"
+                    onClick={() => editFood(item._id)}
+                  >
+                    <i className="fa fa-pencil"></i>
+                  </div>{" "}
+                  <div
+                    className="delete-food"
+                    title="Remove"
+                    onClick={() => removeFood(item._id)}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </div>
+                </div>
               </div>
             );
           })}

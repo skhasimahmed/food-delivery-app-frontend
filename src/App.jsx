@@ -15,6 +15,7 @@ import PaymentConfirmation from "./pages/PaymentConfirmation/PaymentConfirmation
 
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import Add from "./pages/Admin/Add/Add";
+import Edit from "./pages/Admin/Edit/Edit";
 import List from "./pages/Admin/List/List";
 import Orders from "./pages/Admin/Orders/Orders";
 import Settings from "./pages/Admin/Settings/Settings";
@@ -70,6 +71,7 @@ const App = () => {
 
               <Route path="/admin/foods" element={<List />} />
               <Route path="/admin/foods/add" exact element={<Add />} />
+              <Route path="/admin/foods/:id/edit" exact element={<Edit />} />
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/settings" element={<Settings />} />
               <Route path="/admin/users" element={<Users />} />

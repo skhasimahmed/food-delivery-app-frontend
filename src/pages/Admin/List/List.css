@@ -43,8 +43,31 @@
     width: 50px;
 }
 
-.list p.delete-food {
+.list div.action {
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.list div.delete-food,
+.list div.edit-food {
+    color: #525252;
+    border: 0;
+    font-size: 16px;
+    border-radius: 4px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.list div.delete-food:hover {
+    color: #d11515;
+}
+
+.list div.edit-food:hover {
+    color: #74c0fc;
 }
 
 .no-data {
@@ -53,6 +76,10 @@
     padding: 15px 15px;
     border: 1px solid #cacaca;
     font-size: 14px;
+}
+
+.list-table {
+    margin-bottom: 50px;
 }
 
 @media (max-width: 600px) {
