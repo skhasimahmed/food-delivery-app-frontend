@@ -11,7 +11,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
     <div className="food-item">
       <div className="food-item-image-container">
         <img
-          src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`}
+          src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}${image}`}
           alt={name}
           className="food-item-image"
         />
