@@ -11,9 +11,9 @@
 }
 
 .edit-image-upload img {
-    width: 150px;
+    width: 120px;
     cursor: pointer;
-    height: 150px;
+    /* height: 150px; */
 }
 
 .edit-product-name,
@@ -43,5 +43,16 @@
     padding: 10px;
     background-color: black;
     color: white;
+    cursor: pointer;
+
+    margin-bottom: 50px;
+}
+
+.edit-button:disabled {
+    background-color: rgba(10, 10, 10, 0.703);
+    cursor: not-allowed;
+}
+
+.edit-food {
     cursor: pointer;
 }

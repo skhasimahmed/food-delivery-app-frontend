@@ -5,14 +5,13 @@ import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 
 const FoodItem = ({ id, name, price, description, image }) => {
-  const { cartItems, addToCart, removeFromCart, API_BASE_URL } =
-    useContext(StoreContext);
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
     <div className="food-item">
       <div className="food-item-image-container">
         <img
-          src={`${API_BASE_URL}images/${image}`}
+          src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`}
           alt={name}
           className="food-item-image"
         />

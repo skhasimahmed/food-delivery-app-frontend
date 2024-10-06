@@ -123,8 +123,6 @@ const StoreContextProvider = (props) => {
   };
 
   const removeFromCart = async (itemId) => {
-    console.log(Object.keys(cartItems).length);
-
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {

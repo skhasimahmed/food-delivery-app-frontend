@@ -114,10 +114,14 @@ const List = () => {
             return (
               <div className="list-table-format" key={index}>
                 <img
-                  src={`${API_BASE_URL}images/${item.image}`}
+                  src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}${
+                    item.image
+                  }`}
                   alt={item.name}
                 />
-                <p>{item.name}</p>
+                <p onClick={() => editFood(item._id)} className="edit-food">
+                  {item.name}
+                </p>
                 <p>{item.category}</p>
                 <p>₹{item.price}</p>
                 <div className="action">

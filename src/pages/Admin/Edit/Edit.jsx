@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 
 const Edit = () => {
   const { id } = useParams();
+  const [updating, setUpdating] = useState(false); // State for disabled form fields
 
   const { API_BASE_URL } = useContext(StoreContext);
 
@@ -48,6 +49,8 @@ const Edit = () => {
   }, [id, API_BASE_URL]);
 
   const handleSubmit = async (e) => {
+    setUpdating(true);
+
     e.preventDefault();
 
     const formData = new FormData();
@@ -71,8 +74,10 @@ const Edit = () => {
           toast.error(response.data.message);
         }
       }
+      setUpdating(false);
     } catch (error) {
       toast.error("Failed to submit the form.");
+      setUpdating(false);
     }
   };
 
@@ -86,7 +91,7 @@ const Edit = () => {
               src={
                 image
                   ? typeof image === "string"
-                    ? `${API_BASE_URL}images/${image}`
+                    ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`
                     : URL.createObjectURL(image)
                   : assets.upload_area
               }
@@ -165,8 +170,8 @@ const Edit = () => {
             />
           </div>
         </div>
-        <button type="submit" className="edit-button">
-          Save
+        <button type="submit" className="edit-button" disabled={updating}>
+          {updating ? "Updating..." : "Update"}
         </button>
       </form>
     </div>

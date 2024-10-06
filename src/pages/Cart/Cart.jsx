@@ -49,7 +49,9 @@ const Cart = () => {
                   <div key={index}>
                     <div className="cart-items-title cart-items-item">
                       <img
-                        src={`${API_BASE_URL}images/${item.image}`}
+                        src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${
+                          item.image
+                        }`}
                         alt={item.nme}
                       />
                       <p>{item.name}</p>
