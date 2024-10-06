@@ -91,7 +91,7 @@ const Edit = () => {
               src={
                 image
                   ? typeof image === "string"
-                    ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}/${image}`
+                    ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}${image}`
                     : URL.createObjectURL(image)
                   : assets.upload_area
               }
