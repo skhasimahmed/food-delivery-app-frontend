@@ -35,42 +35,13 @@ const List = () => {
     navigate(`${id}/edit`);
   };
 
-  // const confirm = () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then(async (result) => {
-  //     if (result.isConfirmed) {
-  //       try {
-  //         const response = await axiosInstance.delete(
-  //           `${API_BASE_URL}api/food/delete/${id}`
-  //         );
-
-  //         if (response.data.success) {
-  //           toast.success(response.data.message);
-  //           fetchFoodList();
-  //         } else {
-  //           toast.error(response.data.message);
-  //         }
-  //       } catch (error) {
-  //         toast.error("An error occurred while deleting the food item.");
-  //       }
-  //     } else {
-  //       Swal.fire("Cancelled", "Your file is safe :)", "info");
-  //     }
-  //   });
-  // };
   const removeFood = async (id) => {
     Swal.fire({
       title: "Are you sure you want to delete this food item?",
       text: "You won't be able to revert this!",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "tomato",
+      cancelButtonColor: "black",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {

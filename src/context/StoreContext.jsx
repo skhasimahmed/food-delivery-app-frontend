@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 export const StoreContext = createContext(null);
 
@@ -22,6 +23,8 @@ const isAdminRoute = (path) => {
 
 const StoreContextProvider = (props) => {
   const location = useLocation();
+
+  const [activeMenu, setActiveMenu] = useState("home");
 
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -126,27 +129,39 @@ const StoreContextProvider = (props) => {
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {
-      await axiosInstance
-        .post(
-          `${API_BASE_URL}api/cart/remove`,
-          {
-            itemId,
-          },
-          {
-            headers: {
-              token,
-            },
-          }
-        )
-        .then((response) => {
-          if (response.data.success) {
-            setCartItems(response.data.cartData);
-            toast.success(response.data.message);
-          } else toast.error(response.data.message);
-        })
-        .catch((err) => {
-          toast.error(err.response.data.message);
-        });
+      console.log("removeFromCart", itemId);
+
+      Swal.fire({
+        text: "Are you sure you want to remove this food item from cart?",
+        showCancelButton: true,
+        confirmButtonColor: "tomato",
+        cancelButtonColor: "black",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axiosInstance
+            .post(
+              `${API_BASE_URL}api/cart/remove`,
+              {
+                itemId,
+              },
+              {
+                headers: {
+                  token,
+                },
+              }
+            )
+            .then((response) => {
+              if (response.data.success) {
+                setCartItems(response.data.cartData);
+                toast.success(response.data.message);
+              } else toast.error(response.data.message);
+            })
+            .catch((err) => {
+              toast.error(err.response.data.message);
+            });
+        }
+      });
     }
   };
 
@@ -184,6 +199,9 @@ const StoreContextProvider = (props) => {
 
     authUser,
     setAuthUser,
+
+    activeMenu,
+    setActiveMenu,
   };
 
   return (

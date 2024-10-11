@@ -5,7 +5,7 @@ import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const SignInSignUpPopup = ({ setShowLogin }) => {
   const [currentState, setCurrentState] = useState("Sign In");
   const { API_BASE_URL, setToken, setCartItems, setIsAdmin, setAuthUser } =

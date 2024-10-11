@@ -2,6 +2,7 @@ import { useContext } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
+import PropTypes from "prop-types";
 
 const FoodDisplay = ({ category }) => {
   const { foodList } = useContext(StoreContext);
@@ -30,3 +31,7 @@ const FoodDisplay = ({ category }) => {
 };
 
 export default FoodDisplay;
+
+FoodDisplay.propTypes = {
+  category: PropTypes.string.isRequired,
+};

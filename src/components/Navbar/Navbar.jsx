@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,9 +15,9 @@ const Navbar = ({ setShowLogin }) => {
     setCartItems,
     authUser,
     setAuthUser,
+    activeMenu,
+    setActiveMenu,
   } = useContext(StoreContext);
-
-  const [menu, setMenu] = useState("home");
 
   const navigate = useNavigate();
 
@@ -41,29 +41,29 @@ const Navbar = ({ setShowLogin }) => {
       <ul className="navbar-menu">
         <Link
           to="/"
-          onClick={() => setMenu("home")}
-          className={menu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
+          className={activeMenu === "home" ? "active" : ""}
         >
           Home
         </Link>
         <a
           href="#explore-menu"
-          onClick={() => setMenu("menu")}
-          className={menu === "menu" ? "active" : ""}
+          onClick={() => setActiveMenu("menu")}
+          className={activeMenu === "menu" ? "active" : ""}
         >
           Menu
         </a>
         <a
           href="#mobile-app-download"
-          onClick={() => setMenu("mobile-app")}
-          className={menu === "mobile-app" ? "active" : ""}
+          onClick={() => setActiveMenu("mobile-app")}
+          className={activeMenu === "mobile-app" ? "active" : ""}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={() => setMenu("contact-us")}
-          className={menu === "contact-us" ? "active" : ""}
+          onClick={() => setActiveMenu("contact-us")}
+          className={activeMenu === "contact-us" ? "active" : ""}
         >
           Contact Us
         </a>

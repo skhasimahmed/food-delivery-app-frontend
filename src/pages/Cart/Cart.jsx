@@ -9,11 +9,13 @@ const Cart = () => {
     foodList,
     removeFromCart,
     getTotalCartAmount,
-    API_BASE_URL,
     token,
+    setActiveMenu,
   } = useContext(StoreContext);
 
   useEffect(() => {
+    setActiveMenu(null);
+
     if (!token) {
       navigate("/");
     }
