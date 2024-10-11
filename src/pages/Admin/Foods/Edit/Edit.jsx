@@ -1,17 +1,21 @@
-import { useContext, useState } from "react";
-import { assets } from "../../../assets/admin/assets";
-import "./Add.css";
+import { useContext, useEffect, useState } from "react";
+import { assets } from "../../../../assets/admin/assets";
+import "./Edit.css";
 import { toast } from "react-toastify";
-import DocumentTitle from "../../../common/documentTitle";
-import { StoreContext } from "../../../context/StoreContext";
-import axiosInstance from "../../../common/axiosInstance";
+import DocumentTitle from "../../../../common/documentTitle";
+import { StoreContext } from "../../../../context/StoreContext";
+import axiosInstance from "../../../../common/axiosInstance";
+import { useParams } from "react-router-dom";
 
-const Add = () => {
+const Edit = () => {
+  const { id } = useParams();
+  const [updating, setUpdating] = useState(false); // State for disabled form fields
+
   const { API_BASE_URL } = useContext(StoreContext);
 
-  DocumentTitle("Add Food");
+  DocumentTitle("Edit Food");
 
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -19,7 +23,34 @@ const Add = () => {
     price: "",
   });
 
+  useEffect(() => {
+    const fetchFoodData = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${API_BASE_URL}api/food/${id}/get`
+        );
+        const foodData = response.data;
+        setData({
+          name: foodData.data.name,
+          description: foodData.data.description,
+          category: foodData.data.category,
+          price: foodData.data.price,
+        });
+
+        setImage(foodData.data.image);
+      } catch (error) {
+        toast.error("Failed to load food data.");
+      }
+    };
+
+    if (id) {
+      fetchFoodData();
+    }
+  }, [id, API_BASE_URL]);
+
   const handleSubmit = async (e) => {
+    setUpdating(true);
+
     e.preventDefault();
 
     const formData = new FormData();
@@ -27,35 +58,43 @@ const Add = () => {
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("price", Number(data.price));
-    formData.append("image", image);
+    if (image instanceof File) {
+      formData.append("image", image);
+    }
 
-    const response = await axiosInstance.post(
-      `${API_BASE_URL}api/food/add`,
-      formData
-    );
-
-    if (response.data.success) {
-      setData({
-        name: "",
-        description: "",
-        category: "Salad",
-        price: "",
-      });
-
-      setImage(false);
-
-      toast.success(response.data.message);
-    } else toast.error(response.data.message);
+    try {
+      if (id) {
+        const response = await axiosInstance.put(
+          `${API_BASE_URL}api/food/${id}/edit`,
+          formData
+        );
+        if (response.data.success) {
+          toast.success("Food item updated successfully!");
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+      setUpdating(false);
+    } catch (error) {
+      toast.error("Failed to submit the form.");
+      setUpdating(false);
+    }
   };
 
   return (
-    <div className="add">
+    <div className="edit">
       <form className="flex-col" onSubmit={handleSubmit}>
-        <div className="add-image-upload flex-col">
+        <div className="edit-image-upload flex-col">
           <p>Upload Image</p>
           <label htmlFor="image">
             <img
-              src={image ? URL.createObjectURL(image) : assets.upload_area}
+              src={
+                image
+                  ? typeof image === "string"
+                    ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}${image}`
+                    : URL.createObjectURL(image)
+                  : assets.upload_area
+              }
               alt="Upload Icon"
             />
           </label>
@@ -65,11 +104,10 @@ const Add = () => {
             type="file"
             id="image"
             hidden
-            required
           />
         </div>
 
-        <div className="add-product-name">
+        <div className="edit-product-name">
           <div className="flex-col">
             <p>Product Name</p>
             <input
@@ -83,7 +121,7 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="add-product-description">
+        <div className="edit-product-description">
           <div className="flex-col">
             <p>Product Description</p>
             <textarea
@@ -99,8 +137,8 @@ const Add = () => {
           </div>
         </div>
 
-        <div className="add-category-price">
-          <div className="add-category flex-col">
+        <div className="edit-category-price">
+          <div className="edit-category flex-col">
             <p>Category</p>
             <select
               name="category"
@@ -118,7 +156,7 @@ const Add = () => {
               <option value="Noodles">Noodles</option>
             </select>
           </div>
-          <div className="add-price flex-col">
+          <div className="edit-price flex-col">
             <p>Price</p>
             <input
               type="number"
@@ -132,12 +170,12 @@ const Add = () => {
             />
           </div>
         </div>
-        <button type="submit" className="add-button">
-          Add
+        <button type="submit" className="edit-button" disabled={updating}>
+          {updating ? "Updating..." : "Update"}
         </button>
       </form>
     </div>
   );
 };
 
-export default Add;
+export default Edit;

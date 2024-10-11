@@ -13,6 +13,11 @@ const Sidebar = () => {
 
   const options = [
     { to: "/admin/dashboard", icon: assets.dashboard_icon, label: "Dashboard" },
+    {
+      to: "/admin/categories",
+      icon: assets.categories_icon,
+      label: "Categories",
+    },
     { to: "/admin/foods", icon: assets.list_icon, label: "Foods" },
     { to: "/admin/orders", icon: assets.order_icon, label: "Orders" },
     { to: "/admin/users", icon: assets.users_icon, label: "Users" },
@@ -34,7 +39,11 @@ const Sidebar = () => {
             }`}
             aria-label={option.label}
           >
-            <img src={option.icon} alt={`${option.label} Icon`} />
+            <img
+              src={option.icon}
+              alt={`${option.label} Icon`}
+              title={option.label}
+            />
             {!isCollapsed && <p>{option.label}</p>}
           </NavLink>
         ))}

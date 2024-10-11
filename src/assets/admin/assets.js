@@ -8,6 +8,7 @@ import parcel_icon from "../admin/parcel_icon.png";
 import users_icon from "../admin/users_icon.png";
 import settings_icon from "../admin/settings_icon.png";
 import dashboard_icon from "../admin/dashboard_icon.png";
+import categories_icon from "../admin/categories_icon.png";
 
 export const assets = {
   logo,
@@ -20,6 +21,7 @@ export const assets = {
   users_icon,
   settings_icon,
   dashboard_icon,
+  categories_icon,
 };
 
 export const url = "http://localhost:4000";

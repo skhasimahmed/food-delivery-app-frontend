@@ -14,14 +14,15 @@ import NotFound from "./pages/NotFound/NotFound";
 import PaymentConfirmation from "./pages/PaymentConfirmation/PaymentConfirmation";
 
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
-import Add from "./pages/Admin/Add/Add";
-import Edit from "./pages/Admin/Edit/Edit";
-import List from "./pages/Admin/List/List";
+import Add from "./pages/Admin/Foods/Add/Add";
+import Edit from "./pages/Admin/Foods/Edit/Edit";
+import List from "./pages/Admin/Foods/List/List";
 import Orders from "./pages/Admin/Orders/Orders";
 import Settings from "./pages/Admin/Settings/Settings";
 import Users from "./pages/Admin/Users/Users";
 import AdminNavbar from "./components/Admin/Navbar/Navbar";
 import Sidebar from "./components/Admin/Sidebar/Sidebar";
+import Categories from "./pages/Admin/Categories/Categories";
 
 const App = () => {
   const { showLogin, setShowLogin, isAdmin } = useContext(StoreContext);
@@ -68,6 +69,10 @@ const App = () => {
               <Route path="" element={<Dashboard />}>
                 <Route path="/admin/dashboard/" element={<Dashboard />} />
               </Route>
+
+              <Route path="/admin/categories" element={<Categories />} />
+              {/* <Route path="/admin/categories/add" exact element={<Add />} />
+              <Route path="/admin/categories/:id/edit" exact element={<Edit />} /> */}
 
               <Route path="/admin/foods" element={<List />} />
               <Route path="/admin/foods/add" exact element={<Add />} />

@@ -3,12 +3,12 @@ import "./List.css";
 
 import Swal from "sweetalert2";
 
-import { assets } from "../../../assets/admin/assets";
+import { assets } from "../../../../assets/admin/assets";
 import { toast } from "react-toastify";
-import axiosInstance from "../../../common/axiosInstance";
-import DocumentTitle from "../../../common/documentTitle";
+import axiosInstance from "../../../../common/axiosInstance";
+import DocumentTitle from "../../../../common/documentTitle";
 import { NavLink, useNavigate } from "react-router-dom";
-import { StoreContext } from "../../../context/StoreContext";
+import { StoreContext } from "../../../../context/StoreContext";
 const List = () => {
   const navigate = useNavigate();
 

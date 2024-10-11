@@ -1,0 +1,94 @@
+.categories-list .list-table-format {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 2fr 0.5fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border: 1px solid #cacaca;
+    font-size: 13px;
+}
+
+.categories-list .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.add-category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #f9f9f9;
+    border: 2px solid #cacaca;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.add-category:hover {
+    background-color: #f0f0f0;
+}
+
+.add-category img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+.categories-list .list-table-format.title {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.categories-list .list-table-format img {
+    width: 50px;
+}
+
+.categories-list div.action {
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.categories-list div.delete-category,
+.categories-list div.edit-category {
+    color: #525252;
+    border: 0;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.categories-list div.delete-category:hover {
+    color: #d11515;
+}
+
+.categories-list div.edit-category:hover {
+    color: #74c0fc;
+}
+
+.no-data {
+    text-align: center;
+    padding: 15px 15px;
+    border: 1px solid #cacaca;
+    font-size: 14px;
+}
+
+.list-table {
+    margin-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+    .categories-list .list-table-format {
+        grid-template-columns: 1fr 3fr 1fr;
+        gap: 15px;
+    }
+
+    .categories-list .list-table-format.title {
+        display: none;
+    }
+}
