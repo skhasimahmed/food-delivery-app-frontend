@@ -1,0 +1,51 @@
+.edit-user {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.edit-user form {
+    gap: 20px;
+}
+
+.edit-user .edit-name,
+.edit-user .edit-email,
+.edit-user .edit-stripe-customer-id {
+    width: max(40%, 280px);
+}
+
+.edit-user input {
+    padding: 10px;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.edit-user .edit-is-admin {
+    display: flex;
+    gap: 30px;
+}
+
+.edit-user .edit-is-admin select {
+    padding: 10px;
+    max-width: 120px;
+}
+
+.edit-user .update-button {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+
+    margin-bottom: 50px;
+}
+
+.edit-user .update-button:disabled {
+    background-color: rgba(10, 10, 10, 0.703);
+    cursor: not-allowed;
+}

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../common/axiosInstance";
-import DocumentTitle from "../../../common/documentTitle";
+import axiosInstance from "../../../../common/axiosInstance";
+import DocumentTitle from "../../../../common/documentTitle";
 import "./List.css";
 
 import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
-import { assets } from "../../../assets/admin/assets";
+import { NavLink, useNavigate } from "react-router-dom";
+import { assets } from "../../../../assets/admin/assets";
 import { toast } from "react-toastify";
 const Users = () => {
   DocumentTitle("Users");
@@ -27,7 +27,18 @@ const Users = () => {
     fetchUsers();
   }, []);
 
-  const removeUser = async (id) => {
+  const navigate = useNavigate();
+
+  const editUser = (id) => {
+    navigate(`${id}/edit`);
+  };
+
+  const removeUser = async ({ _id, isAdmin }) => {
+    if (isAdmin) {
+      toast.warning("Admin user cannot be deleted");
+      return;
+    }
+
     Swal.fire({
       title: "Are you sure you want to delete this user?",
       text: "You won't be able to revert this!",
@@ -38,7 +49,9 @@ const Users = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axiosInstance.delete(`api/users/delete/${id}`);
+          const response = await axiosInstance.delete(
+            `api/users/delete/${_id}`
+          );
           if (response.data.success) {
             toast.success(response.data.message);
             fetchUsers();
@@ -83,14 +96,14 @@ const Users = () => {
                   <div
                     className="edit-category"
                     title="Edit"
-                    onClick={() => ""}
+                    onClick={() => editUser(item._id)}
                   >
                     <i className="fa fa-pencil"></i>
                   </div>
                   <div
                     className="delete-category"
                     title="Remove"
-                    onClick={() => removeUser(item._id)}
+                    onClick={() => removeUser(item)}
                   >
                     <i className="fa fa-trash"></i>
                   </div>

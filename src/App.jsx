@@ -19,7 +19,8 @@ import EditFood from "./pages/Admin/Foods/Edit/Edit";
 import ListFoods from "./pages/Admin/Foods/List/List";
 import Orders from "./pages/Admin/Orders/Orders";
 import Settings from "./pages/Admin/Settings/Settings";
-import ListUsers from "./pages/Admin/Users/List";
+import ListUsers from "./pages/Admin/Users/List/List";
+import EditUser from "./pages/Admin/Users/Edit/Edit";
 import AdminNavbar from "./components/Admin/Navbar/Navbar";
 import Sidebar from "./components/Admin/Sidebar/Sidebar";
 import ListCategories from "./pages/Admin/Categories/List/List";
@@ -94,7 +95,9 @@ const App = () => {
 
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/settings" element={<Settings />} />
+
               <Route path="/admin/users" element={<ListUsers />} />
+              <Route path="/admin/users/:id/edit" element={<EditUser />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
