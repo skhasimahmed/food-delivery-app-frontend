@@ -26,6 +26,10 @@
     border-radius: 5px;
 }
 
+.categories-list p.edit-category {
+    cursor: pointer;
+}
+
 .categories-list .add-category:hover {
     background-color: #f0f0f0;
 }

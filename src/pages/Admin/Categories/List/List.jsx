@@ -88,7 +88,10 @@ const List = () => {
                   }`}
                   alt={item.name}
                 />
-                <p onClick={() => ""} className="edit-category">
+                <p
+                  onClick={() => editCategory(item._id)}
+                  className="edit-category"
+                >
                   {item.name}
                 </p>
                 <p>{item.description}</p>
