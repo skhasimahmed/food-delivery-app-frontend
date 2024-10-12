@@ -1,8 +1,11 @@
 import "./ExploreMenu.css";
-import { menu_list } from "../../assets/assets";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
 
 const ExploreMenu = ({ category, setCategory }) => {
+  const { categories } = useContext(StoreContext);
+
   return (
     <div className="explore-menu" id="explore-menu">
       <h1>Explore our menu</h1>
@@ -12,24 +15,24 @@ const ExploreMenu = ({ category, setCategory }) => {
         one delicious meal at a time.
       </p>
       <div className="explore-menu-list">
-        {menu_list.map((item, index) => {
+        {categories.map((item, index) => {
           return (
             <div
               onClick={() =>
                 setCategory((prev) => {
-                  if (prev === item.menu_name) return "All";
-                  else return item.menu_name;
+                  if (prev === item.name) return "All";
+                  else return item.name;
                 })
               }
               key={index}
               className="explore-menu-list-item"
             >
               <img
-                className={category === item.menu_name ? "active" : ""}
-                src={item.menu_image}
-                alt={item.menu_name}
+                className={category === item.name ? "active" : ""}
+                src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}${item.image}`}
+                alt={item.name}
               />
-              <p>{item.menu_name}</p>
+              <p>{item.name}</p>
             </div>
           );
         })}

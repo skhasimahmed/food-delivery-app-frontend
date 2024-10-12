@@ -29,6 +29,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [foodList, setFoodList] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(
@@ -58,6 +59,8 @@ const StoreContextProvider = (props) => {
   const loadData = async function () {
     await fetchFoodList();
 
+    await fetchCategories();
+
     if (localStorage.getItem("token")) {
       const token = localStorage.getItem("token");
       setToken(token);
@@ -72,6 +75,13 @@ const StoreContextProvider = (props) => {
         toast.error(err.response.data.message);
       });
     setFoodList(response.data.data);
+  };
+
+  const fetchCategories = async () => {
+    const response = await axiosInstance.get(`api/categories`).catch((err) => {
+      toast.error(err.response.data.message);
+    });
+    setCategories(response.data.data);
   };
 
   const loadCartData = async (token) => {
@@ -202,6 +212,8 @@ const StoreContextProvider = (props) => {
 
     activeMenu,
     setActiveMenu,
+
+    categories,
   };
 
   return (
