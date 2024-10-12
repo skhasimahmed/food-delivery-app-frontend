@@ -15,11 +15,13 @@ const PaymentConfirmation = () => {
     new URLSearchParams(search).get("success")
   );
 
-  const { API_BASE_URL, token } = useContext(StoreContext);
+  const { API_BASE_URL, token, setActiveMenu } = useContext(StoreContext);
 
   const [paymentInfo, setPaymentInfo] = useState();
 
   useEffect(() => {
+    setActiveMenu(null);
+
     getPaymentInfoByOrderId(orderId);
   }, []);
 
@@ -30,7 +32,6 @@ const PaymentConfirmation = () => {
           token,
         },
       })
-      // && response.data.status === "succeeded" && response.data.chargeStatus === "paid"
       .then((response) => {
         if (response.data.success && response.data.data) {
           setPaymentInfo(response.data.data);
