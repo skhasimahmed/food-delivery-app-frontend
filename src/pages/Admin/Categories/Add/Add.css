@@ -1,0 +1,41 @@
+.add-category-page {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.add-category-page form {
+    gap: 20px;
+}
+
+.add-category-page .add-image-upload img {
+    width: 120px;
+    cursor: pointer;
+}
+
+.add-category-page .add-category-name,
+.add-category-page .add-category-description {
+    width: max(40%, 280px);
+}
+
+.add-category-page .add-category-name input,
+.add-category-page .add-category-description textarea {
+    padding: 10px;
+}
+
+
+.add-category-page .add-button {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.add-category-page .add-button:disabled {
+    background-color: rgba(10, 10, 10, 0.703);
+    cursor: not-allowed;
+}

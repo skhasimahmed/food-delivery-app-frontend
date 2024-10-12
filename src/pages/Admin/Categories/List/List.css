@@ -15,7 +15,7 @@
     margin-bottom: 15px;
 }
 
-.add-category {
+.categories-list .add-category {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,11 +26,11 @@
     border-radius: 5px;
 }
 
-.add-category:hover {
+.categories-list .add-category:hover {
     background-color: #f0f0f0;
 }
 
-.add-category img {
+.categories-list .add-category img {
     width: 20px;
     margin-right: 5px;
 }
@@ -71,14 +71,14 @@
     color: #74c0fc;
 }
 
-.no-data {
+.categories-list .no-data {
     text-align: center;
     padding: 15px 15px;
     border: 1px solid #cacaca;
     font-size: 14px;
 }
 
-.list-table {
+.categories-list .list-table {
     margin-bottom: 50px;
 }
 

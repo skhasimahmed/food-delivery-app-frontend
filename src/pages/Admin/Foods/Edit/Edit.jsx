@@ -65,7 +65,7 @@ const Edit = () => {
     try {
       if (id) {
         const response = await axiosInstance.put(
-          `${API_BASE_URL}api/food/${id}/edit`,
+          `${API_BASE_URL}api/food/${id}/update`,
           formData
         );
         if (response.data.success) {

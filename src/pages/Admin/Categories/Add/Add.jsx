@@ -11,14 +11,12 @@ const Add = () => {
 
   const [disabled, setDisabled] = useState(false);
 
-  DocumentTitle("Add Food");
+  DocumentTitle("Add Category");
 
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
     description: "",
-    category: "Salad",
-    price: "",
   });
 
   const handleSubmit = async (e) => {
@@ -27,14 +25,12 @@ const Add = () => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append("category", data.category);
-    formData.append("price", Number(data.price));
     formData.append("image", image);
 
     try {
       setDisabled(true);
       const response = await axiosInstance.post(
-        `${API_BASE_URL}api/food/add`,
+        `${API_BASE_URL}api/categories/add`,
         formData
       );
 
@@ -42,8 +38,6 @@ const Add = () => {
         setData({
           name: "",
           description: "",
-          category: "Salad",
-          price: "",
         });
         setImage(false);
         toast.success(response.data.message);
@@ -57,7 +51,7 @@ const Add = () => {
   };
 
   return (
-    <div className="add">
+    <div className="add-category-page">
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="add-image-upload flex-col">
           <p>Upload Image</p>
@@ -69,7 +63,9 @@ const Add = () => {
           </label>
 
           <input
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+            }}
             type="file"
             id="image"
             hidden
@@ -77,23 +73,24 @@ const Add = () => {
           />
         </div>
 
-        <div className="add-product-name">
+        <div className="add-category-name">
           <div className="flex-col">
-            <p>Product Name</p>
+            <p>Category Name</p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
               type="text"
-              placeholder="Biryani"
+              placeholder="Example: Desserts"
               name="name"
               id="name"
+              required
             />
           </div>
         </div>
 
-        <div className="add-product-description">
+        <div className="add-category-description">
           <div className="flex-col">
-            <p>Product Description</p>
+            <p>Category Description</p>
             <textarea
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
@@ -102,44 +99,11 @@ const Add = () => {
               name="description"
               id="description"
               rows="6"
-              placeholder="Biryani at ₹99 only"
+              placeholder="Enter category description"
             ></textarea>
           </div>
         </div>
 
-        <div className="add-category-price">
-          <div className="add-category flex-col">
-            <p>Category</p>
-            <select
-              name="category"
-              id="category"
-              value={data.category}
-              onChange={(e) => setData({ ...data, category: e.target.value })}
-            >
-              <option value="Salad">Salad</option>
-              <option value="Rolls">Rolls</option>
-              <option value="Deserts">Deserts</option>
-              <option value="Sandwich">Sandwich</option>
-              <option value="Cake">Cake</option>
-              <option value="Pure Veg">Pure Veg</option>
-              <option value="Pasta">Pasta</option>
-              <option value="Noodles">Noodles</option>
-            </select>
-          </div>
-          <div className="add-price flex-col">
-            <p>Price</p>
-            <input
-              type="number"
-              placeholder="₹ 99"
-              name="price"
-              id="price"
-              step="0.1"
-              min="0"
-              value={data.price}
-              onChange={(e) => setData({ ...data, price: e.target.value })}
-            />
-          </div>
-        </div>
         <button type="submit" className="add-button" disabled={disabled}>
           {disabled ? "Adding..." : "Add"}
         </button>

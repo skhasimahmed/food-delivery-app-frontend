@@ -14,15 +14,17 @@ import NotFound from "./pages/NotFound/NotFound";
 import PaymentConfirmation from "./pages/PaymentConfirmation/PaymentConfirmation";
 
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
-import Add from "./pages/Admin/Foods/Add/Add";
-import Edit from "./pages/Admin/Foods/Edit/Edit";
-import List from "./pages/Admin/Foods/List/List";
+import AddFood from "./pages/Admin/Foods/Add/Add";
+import EditFood from "./pages/Admin/Foods/Edit/Edit";
+import ListFoods from "./pages/Admin/Foods/List/List";
 import Orders from "./pages/Admin/Orders/Orders";
 import Settings from "./pages/Admin/Settings/Settings";
 import Users from "./pages/Admin/Users/Users";
 import AdminNavbar from "./components/Admin/Navbar/Navbar";
 import Sidebar from "./components/Admin/Sidebar/Sidebar";
-import Categories from "./pages/Admin/Categories/Categories";
+import ListCategories from "./pages/Admin/Categories/List/List";
+import AddCategory from "./pages/Admin/Categories/Add/Add";
+import EditCategory from "./pages/Admin/Categories/Edit/Edit";
 
 const App = () => {
   const { showLogin, setShowLogin, isAdmin } = useContext(StoreContext);
@@ -70,13 +72,26 @@ const App = () => {
                 <Route path="/admin/dashboard/" element={<Dashboard />} />
               </Route>
 
-              <Route path="/admin/categories" element={<Categories />} />
-              {/* <Route path="/admin/categories/add" exact element={<Add />} />
-              <Route path="/admin/categories/:id/edit" exact element={<Edit />} /> */}
+              <Route path="/admin/categories" element={<ListCategories />} />
+              <Route
+                path="/admin/categories/add"
+                exact
+                element={<AddCategory />}
+              />
+              <Route
+                path="/admin/categories/:id/edit"
+                exact
+                element={<EditCategory />}
+              />
 
-              <Route path="/admin/foods" element={<List />} />
-              <Route path="/admin/foods/add" exact element={<Add />} />
-              <Route path="/admin/foods/:id/edit" exact element={<Edit />} />
+              <Route path="/admin/foods" element={<ListFoods />} />
+              <Route path="/admin/foods/add" exact element={<AddFood />} />
+              <Route
+                path="/admin/foods/:id/edit"
+                exact
+                element={<EditFood />}
+              />
+
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/settings" element={<Settings />} />
               <Route path="/admin/users" element={<Users />} />

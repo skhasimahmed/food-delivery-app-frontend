@@ -1,0 +1,41 @@
+.update-category-page {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.update-category-page form {
+    gap: 20px;
+}
+
+.update-category-page .update-image-upload img {
+    width: 120px;
+    cursor: pointer;
+}
+
+.update-category-page .update-category-name,
+.update-category-page .update-category-description {
+    width: max(40%, 280px);
+}
+
+.update-category-page .update-category-name input,
+.update-category-page .update-category-description textarea {
+    padding: 10px;
+}
+
+
+.update-category-page .update-button {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.update-category-page .update-button:disabled {
+    background-color: rgba(10, 10, 10, 0.703);
+    cursor: not-allowed;
+}
