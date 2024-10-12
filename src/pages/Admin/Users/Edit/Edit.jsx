@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { assets } from "../../../../assets/admin/assets";
 import "./Edit.css";
 import { toast } from "react-toastify";
 import DocumentTitle from "../../../../common/documentTitle";

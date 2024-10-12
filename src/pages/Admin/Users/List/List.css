@@ -32,6 +32,10 @@
     border-radius: 5px;
 }
 
+.users-list .user-name {
+    cursor: pointer;
+}
+
 .users-list .list-table-format p {
     text-align: left;
 }

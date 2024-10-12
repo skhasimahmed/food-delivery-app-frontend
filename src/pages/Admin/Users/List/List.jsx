@@ -87,7 +87,9 @@ const Users = () => {
           users.map((item, index) => {
             return (
               <div className="list-table-format" key={index}>
-                <p>{item.name}</p>
+                <p className="user-name" onClick={() => editUser(item._id)}>
+                  {item.name}
+                </p>
                 <p>{item.email}</p>
                 <p>{item.isAdmin ? "Yes" : "No"}</p>
                 <p>{new Date(item.createdAt).toLocaleString()}</p>
