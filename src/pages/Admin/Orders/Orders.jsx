@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import DocumentTitle from "../../../common/documentTitle";
-import "./Orders.css";
-import { StoreContext } from "../../../context/StoreContext";
+// import { useContext } from 'react';
+import DocumentTitle from '../../../common/documentTitle';
+import './Orders.css';
+// import { StoreContext } from '../../../context/StoreContext';
 const Orders = () => {
-  const { API_BASE_URL } = useContext(StoreContext);
+  // const { API_BASE_URL } = useContext(StoreContext);
 
-  DocumentTitle("Orders");
+  DocumentTitle('Orders');
 
   return (
     <div className="orders add flex-col">

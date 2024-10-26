@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import "./Edit.css";
-import { toast } from "react-toastify";
-import DocumentTitle from "../../../../common/documentTitle";
-import axiosInstance from "../../../../common/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import './Edit.css';
+import { toast } from 'react-toastify';
+import DocumentTitle from '../../../../common/documentTitle';
+import axiosInstance from '../../../../common/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 const Edit = () => {
   const { id } = useParams();
   const [disabled, setDisabled] = useState(false);
 
-  DocumentTitle("Edit User");
+  DocumentTitle('Edit User');
 
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    isAdmin: "",
-    stripeCustomerId: "",
+    name: '',
+    email: '',
+    isAdmin: '',
+    stripeCustomerId: '',
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Edit = () => {
           stripeCustomerId: userData.data.stripeCustomerId,
         });
       } catch (error) {
-        toast.error("Failed to load user data.");
+        toast.error('Failed to load user data.');
       }
     };
 
@@ -47,12 +47,12 @@ const Edit = () => {
     try {
       const response = await axiosInstance.put(`api/users/update/${id}`, data);
 
-      if (response.data.success) toast.success("User updated successfully.");
+      if (response.data.success) toast.success('User updated successfully.');
       else toast.error(response.data.message);
 
       setDisabled(false);
     } catch (error) {
-      toast.error("Failed to submit the form.");
+      toast.error('Failed to submit the form.');
       setDisabled(false);
     }
   };
@@ -98,9 +98,9 @@ const Edit = () => {
             <input
               disabled
               onChange={(e) =>
-                setData({ ...data, stripeCustomerId: e.target.value ?? "" })
+                setData({ ...data, stripeCustomerId: e.target.value ?? '' })
               }
-              value={data.stripeCustomerId ?? ""}
+              value={data.stripeCustomerId ?? ''}
               type="text"
               placeholder="cus_qJLjlhdh446Q"
               readOnly
@@ -117,7 +117,7 @@ const Edit = () => {
             <select
               name="isAdmin"
               id="isAdmin"
-              value={data.isAdmin ? "1" : "0"}
+              value={data.isAdmin ? '1' : '0'}
               onChange={(e) => setData({ ...data, isAdmin: e.target.value })}
             >
               <option value="0">No</option>
@@ -126,7 +126,7 @@ const Edit = () => {
           </div>
         </div>
         <button type="submit" className="update-button" disabled={disabled}>
-          {disabled ? "Updating..." : "Update"}
+          {disabled ? 'Updating...' : 'Update'}
         </button>
       </form>
     </div>

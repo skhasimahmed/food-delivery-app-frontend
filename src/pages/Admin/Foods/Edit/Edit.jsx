@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { assets } from "../../../../assets/admin/assets";
-import "./Edit.css";
-import { toast } from "react-toastify";
-import DocumentTitle from "../../../../common/documentTitle";
-import { StoreContext } from "../../../../context/StoreContext";
-import axiosInstance from "../../../../common/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from 'react';
+import { assets } from '../../../../assets/admin/assets';
+import './Edit.css';
+import { toast } from 'react-toastify';
+import DocumentTitle from '../../../../common/documentTitle';
+import { StoreContext } from '../../../../context/StoreContext';
+import axiosInstance from '../../../../common/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 const Edit = () => {
   const { id } = useParams();
@@ -13,21 +13,21 @@ const Edit = () => {
 
   const { API_BASE_URL } = useContext(StoreContext);
 
-  DocumentTitle("Edit Food");
+  DocumentTitle('Edit Food');
 
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
-    name: "",
-    description: "",
-    category: "Salad",
-    price: "",
+    name: '',
+    description: '',
+    category: 'Salad',
+    price: '',
   });
 
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
         const response = await axiosInstance.get(
-          `${API_BASE_URL}api/food/${id}/get`
+          `${API_BASE_URL}api/food/${id}/get`,
         );
         const foodData = response.data;
         setData({
@@ -39,7 +39,7 @@ const Edit = () => {
 
         setImage(foodData.data.image);
       } catch (error) {
-        toast.error("Failed to load food data.");
+        toast.error('Failed to load food data.');
       }
     };
 
@@ -54,29 +54,29 @@ const Edit = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-    formData.append("category", data.category);
-    formData.append("price", Number(data.price));
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('price', Number(data.price));
     if (image instanceof File) {
-      formData.append("image", image);
+      formData.append('image', image);
     }
 
     try {
       if (id) {
         const response = await axiosInstance.put(
           `${API_BASE_URL}api/food/${id}/update`,
-          formData
+          formData,
         );
         if (response.data.success) {
-          toast.success("Food item updated successfully!");
+          toast.success('Food item updated successfully!');
         } else {
           toast.error(response.data.message);
         }
       }
       setUpdating(false);
     } catch (error) {
-      toast.error("Failed to submit the form.");
+      toast.error('Failed to submit the form.');
       setUpdating(false);
     }
   };
@@ -90,7 +90,7 @@ const Edit = () => {
             <img
               src={
                 image
-                  ? typeof image === "string"
+                  ? typeof image === 'string'
                     ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}${image}`
                     : URL.createObjectURL(image)
                   : assets.upload_area
@@ -171,7 +171,7 @@ const Edit = () => {
           </div>
         </div>
         <button type="submit" className="edit-button" disabled={updating}>
-          {updating ? "Updating..." : "Update"}
+          {updating ? 'Updating...' : 'Update'}
         </button>
       </form>
     </div>

@@ -1,7 +1,7 @@
-import "./ExploreMenu.css";
-import PropTypes from "prop-types";
-import { useContext } from "react";
-import { StoreContext } from "../../context/StoreContext";
+import './ExploreMenu.css';
+import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { StoreContext } from '../../context/StoreContext';
 
 const ExploreMenu = ({ category, setCategory }) => {
   const { categories } = useContext(StoreContext);
@@ -20,7 +20,7 @@ const ExploreMenu = ({ category, setCategory }) => {
             <div
               onClick={() =>
                 setCategory((prev) => {
-                  if (prev === item.name) return "All";
+                  if (prev === item.name) return 'All';
                   else return item.name;
                 })
               }
@@ -28,7 +28,7 @@ const ExploreMenu = ({ category, setCategory }) => {
               className="explore-menu-list-item"
             >
               <img
-                className={category === item.name ? "active" : ""}
+                className={category === item.name ? 'active' : ''}
                 src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}${item.image}`}
                 alt={item.name}
               />

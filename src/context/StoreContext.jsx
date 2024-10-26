@@ -1,22 +1,22 @@
-import axiosInstance from "../common/axiosInstance";
-import { createContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import PropTypes from "prop-types";
-import Swal from "sweetalert2";
+import axiosInstance from '../common/axiosInstance';
+import { createContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 
 export const StoreContext = createContext(null);
 
 const privateAdminRoutes = [
-  "/admin/dashboard",
-  "/admin/users",
-  "/admin/settings",
-  "/admin/orders",
-  "/admin/foods",
+  '/admin/dashboard',
+  '/admin/users',
+  '/admin/settings',
+  '/admin/orders',
+  '/admin/foods',
 ];
 
 const isAdminRoute = (path) => {
-  const normalizedPath = path.endsWith("/") ? path.slice(0, -1) : path;
+  const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path;
 
   return privateAdminRoutes.includes(normalizedPath);
 };
@@ -24,24 +24,24 @@ const isAdminRoute = (path) => {
 const StoreContextProvider = (props) => {
   const location = useLocation();
 
-  const [activeMenu, setActiveMenu] = useState("home");
+  const [activeMenu, setActiveMenu] = useState('home');
 
   const [cartItems, setCartItems] = useState({});
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [foodList, setFoodList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(
-    localStorage.getItem("isAdmin")
-      ? JSON.parse(localStorage.getItem("isAdmin"))
-      : false
+    localStorage.getItem('isAdmin')
+      ? JSON.parse(localStorage.getItem('isAdmin'))
+      : false,
   );
 
   const [authUser, setAuthUser] = useState(
-    localStorage.getItem("authUser")
-      ? JSON.parse(localStorage.getItem("authUser"))
-      : null
+    localStorage.getItem('authUser')
+      ? JSON.parse(localStorage.getItem('authUser'))
+      : null,
   );
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -52,7 +52,6 @@ const StoreContextProvider = (props) => {
     if (!token && isAdminRoute(location.pathname)) {
       setShowLogin(true);
     }
-
     loadData();
   }, []);
 
@@ -61,10 +60,10 @@ const StoreContextProvider = (props) => {
 
     await fetchCategories();
 
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
       setToken(token);
-      await loadCartData(localStorage.getItem("token"));
+      await loadCartData(localStorage.getItem('token'));
     }
   };
 
@@ -96,11 +95,11 @@ const StoreContextProvider = (props) => {
           setCartItems(response.data.data);
         })
         .catch(() => {
-          toast.error("Something went wrong. Please try again");
+          toast.error('Something went wrong. Please try again');
           setToken(null);
-          localStorage.removeItem("token");
+          localStorage.removeItem('token');
           setCartItems({});
-          navigate("/");
+          navigate('/');
         });
     } else setCartItems({});
   };
@@ -108,7 +107,7 @@ const StoreContextProvider = (props) => {
   const addToCart = async (itemId) => {
     if (!token) {
       setShowLogin(true);
-      return toast.error("Please login to add items to cart");
+      return toast.error('Please login to add items to cart');
     }
 
     if (!cartItems[itemId]) {
@@ -127,7 +126,7 @@ const StoreContextProvider = (props) => {
           headers: {
             token,
           },
-        }
+        },
       );
 
       if (response.data.success) toast.success(response.data.message);
@@ -139,14 +138,14 @@ const StoreContextProvider = (props) => {
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {
-      console.log("removeFromCart", itemId);
+      console.log('removeFromCart', itemId);
 
       Swal.fire({
-        text: "Are you sure you want to remove this food item from cart?",
+        text: 'Are you sure you want to remove this food item from cart?',
         showCancelButton: true,
-        confirmButtonColor: "tomato",
-        cancelButtonColor: "black",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonColor: 'tomato',
+        cancelButtonColor: 'black',
+        confirmButtonText: 'Yes, delete it!',
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axiosInstance
@@ -159,7 +158,7 @@ const StoreContextProvider = (props) => {
                 headers: {
                   token,
                 },
-              }
+              },
             )
             .then((response) => {
               if (response.data.success) {

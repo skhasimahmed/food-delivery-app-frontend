@@ -1,6 +1,6 @@
-import "./Footer.css";
-import { assets } from "../../assets/assets";
-import { useNavigate } from "react-router-dom";
+import './Footer.css';
+import { assets } from '../../assets/assets';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="footer-content-center">
           <h2>COMPANY</h2>
           <ul>
-            <li onClick={() => navigate("/")}>Home</li>
+            <li onClick={() => navigate('/')}>Home</li>
             <li>About Us</li>
             <li>Delivery</li>
             <li>Privacy Policy</li>
@@ -42,8 +42,8 @@ const Footer = () => {
       </div>
       <hr />
       <p className="footer-copyright-text">
-        Copyright {currentYear} &copy;{" "}
-        <span onClick={() => navigate("/")}>FoodZie.</span> - All Right
+        Copyright {currentYear} &copy;{' '}
+        <span onClick={() => navigate('/')}>FoodZie.</span> - All Right
         Reserved.
       </p>
     </div>

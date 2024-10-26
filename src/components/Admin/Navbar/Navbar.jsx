@@ -1,9 +1,9 @@
-import "./Navbar.css";
-import { useContext, useState } from "react";
-import { assets } from "../../../assets/admin/assets";
-import { StoreContext } from "../../../context/StoreContext";
-import { useNavigate } from "react-router-dom";
-import { NameInitialsAvatar } from "react-name-initials-avatar";
+import './Navbar.css';
+import { useContext, useState } from 'react';
+import { assets } from '../../../assets/admin/assets';
+import { StoreContext } from '../../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
+import { NameInitialsAvatar } from 'react-name-initials-avatar';
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -17,11 +17,11 @@ const Navbar = () => {
     setIsAdmin(false);
     setAuthUser(null);
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("isAdmin");
-    localStorage.removeItem("authUser");
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('authUser');
 
-    navigate("/");
+    navigate('/');
   };
 
   const toggleDropdown = () => {
@@ -43,8 +43,8 @@ const Navbar = () => {
         /> */}
         <NameInitialsAvatar
           name={authUser?.name}
-          textColor={"Tomato"}
-          backgroundColor={"#fff"}
+          textColor={'Tomato'}
+          backgroundColor={'#fff'}
           fontSize={16}
           borderColor="Tomato"
           borderWidth="1px"

@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { assets } from "../../../../assets/admin/assets";
-import "./Edit.css";
-import { toast } from "react-toastify";
-import DocumentTitle from "../../../../common/documentTitle";
-import axiosInstance from "../../../../common/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { assets } from '../../../../assets/admin/assets';
+import './Edit.css';
+import { toast } from 'react-toastify';
+import DocumentTitle from '../../../../common/documentTitle';
+import axiosInstance from '../../../../common/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 const Edit = () => {
   const [disabled, setDisabled] = useState(false);
 
   const { id } = useParams();
 
-  DocumentTitle("Edit Category");
+  DocumentTitle('Edit Category');
 
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   });
 
   const fetchCategoryData = async () => {
@@ -30,7 +30,7 @@ const Edit = () => {
 
       setImage(categoryData.data.image);
     } catch (error) {
-      toast.error("Failed to fetch category data");
+      toast.error('Failed to fetch category data');
     }
   };
 
@@ -40,11 +40,11 @@ const Edit = () => {
     if (!id) return;
 
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description);
+    formData.append('name', data.name);
+    formData.append('description', data.description);
 
     if (image instanceof File) {
-      formData.append("image", image);
+      formData.append('image', image);
     }
 
     try {
@@ -52,15 +52,15 @@ const Edit = () => {
 
       const response = await axiosInstance.put(
         `api/categories/${id}/update`,
-        formData
+        formData,
       );
 
-      if (response.data.success) toast.success("Category updated successfully");
+      if (response.data.success) toast.success('Category updated successfully');
       else toast.error(response.data.message);
 
       setDisabled(false);
     } catch (error) {
-      toast.error("Failed to submit the form");
+      toast.error('Failed to submit the form');
       setDisabled(false);
     }
   };
@@ -78,7 +78,7 @@ const Edit = () => {
             <img
               src={
                 image
-                  ? typeof image === "string"
+                  ? typeof image === 'string'
                     ? `${import.meta.env.VITE_CLOUDINARY_BASE_URL}${image}`
                     : URL.createObjectURL(image)
                   : assets.upload_area
@@ -129,7 +129,7 @@ const Edit = () => {
         </div>
 
         <button type="submit" className="update-button" disabled={disabled}>
-          {disabled ? "Updating..." : "Update"}
+          {disabled ? 'Updating...' : 'Update'}
         </button>
       </form>
     </div>

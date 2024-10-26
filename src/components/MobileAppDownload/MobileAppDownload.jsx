@@ -1,5 +1,5 @@
-import { assets } from "../../assets/assets";
-import "./MobileAppDownload.css";
+import { assets } from '../../assets/assets';
+import './MobileAppDownload.css';
 
 const MobileAppDownload = () => {
   return (
