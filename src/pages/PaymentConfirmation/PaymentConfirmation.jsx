@@ -1,18 +1,18 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
-import "./PaymentConfirmation.css";
-import { StoreContext } from "../../context/StoreContext";
-import { toast } from "react-toastify";
+import './PaymentConfirmation.css';
+import { StoreContext } from '../../context/StoreContext';
+import { toast } from 'react-toastify';
 
 const PaymentConfirmation = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const [orderId] = useState(new URLSearchParams(search).get("orderId"));
+  const [orderId] = useState(new URLSearchParams(search).get('orderId'));
   const [success, setSuccess] = useState(
-    new URLSearchParams(search).get("success")
+    new URLSearchParams(search).get('success'),
   );
 
   const { API_BASE_URL, token, setActiveMenu } = useContext(StoreContext);
@@ -37,53 +37,53 @@ const PaymentConfirmation = () => {
           setPaymentInfo(response.data.data);
 
           if (
-            response.data.data.status === "succeeded" &&
-            response.data.data.chargeStatus === "paid"
+            response.data.data.status === 'succeeded' &&
+            response.data.data.chargeStatus === 'paid'
           ) {
-            setSuccess("true");
+            setSuccess('true');
           } else {
-            setSuccess("false");
+            setSuccess('false');
           }
         } else {
           toast.error(response.data.message);
-          navigate("/");
+          navigate('/');
         }
       })
       .catch((err) => {
         toast.error(err.response.data.message);
-        navigate("/");
+        navigate('/');
       });
   };
 
   return (
     <div className="payment-confirmation">
-      {success == "true" ? (
+      {success == 'true' ? (
         <div className="success">
           <i className="fa fa-check-circle" aria-hidden="true"></i>
           <h2> Payment successful! </h2>
           <p>
-            Thank you for your payment. Your order has been successfully placed.{" "}
+            Thank you for your payment. Your order has been successfully placed.{' '}
           </p>
           <hr />
           <p className="order-info">
             Order ID: <strong>{orderId}</strong>
           </p>
           <p className="order-info">
-            Order Placed at:{" "}
+            Order Placed at:{' '}
             <strong>
               {paymentInfo
                 ? new Date(paymentInfo.createdAt).toLocaleString()
-                : ""}
+                : ''}
             </strong>
           </p>
           <p className="order-total">
             <strong>
-              {" "}
-              ₹{paymentInfo ? Number(paymentInfo.amount).toFixed(2) : "0.00"}
+              {' '}
+              ₹{paymentInfo ? Number(paymentInfo.amount).toFixed(2) : '0.00'}
             </strong>
           </p>
 
-          <button onClick={() => navigate("/#explore-menu")}>View Menu</button>
+          <button onClick={() => navigate('/#explore-menu')}>View Menu</button>
         </div>
       ) : (
         <div className="failed">
@@ -91,7 +91,7 @@ const PaymentConfirmation = () => {
           <h2> Payment failed! </h2>
           <p>Sorry, your payment was not successful. Please try again.</p>
 
-          <button onClick={() => navigate("/cart")}>View Cart</button>
+          <button onClick={() => navigate('/cart')}>View Cart</button>
         </div>
       )}
     </div>

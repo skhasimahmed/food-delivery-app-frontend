@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import DocumentTitle from "../../../../common/documentTitle";
-import "./List.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { assets } from "../../../../assets/admin/assets";
-import axiosInstance from "../../../../common/axiosInstance";
+import { useEffect, useState } from 'react';
+import DocumentTitle from '../../../../common/documentTitle';
+import './List.css';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { assets } from '../../../../assets/admin/assets';
+import axiosInstance from '../../../../common/axiosInstance';
 
-import Swal from "sweetalert2";
-import { toast } from "react-toastify";
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 const List = () => {
-  DocumentTitle("Categories");
+  DocumentTitle('Categories');
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const List = () => {
     try {
       const {
         data: { data },
-      } = await axiosInstance.get("api/categories");
+      } = await axiosInstance.get('api/categories');
       setCategoryList(data);
     } catch (error) {
       console.log(error);
@@ -32,17 +32,17 @@ const List = () => {
 
   const removeCategory = async (id) => {
     Swal.fire({
-      title: "Are you sure you want to delete this Category?",
+      title: 'Are you sure you want to delete this Category?',
       text: "You won't be able to revert this!",
       showCancelButton: true,
-      confirmButtonColor: "tomato",
-      cancelButtonColor: "black",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: 'tomato',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const response = await axiosInstance.delete(
-            `api/categories/delete/${id}`
+            `api/categories/delete/${id}`,
           );
 
           if (response.data.success) {
@@ -52,7 +52,7 @@ const List = () => {
             toast.error(response.data.message);
           }
         } catch (error) {
-          toast.error("An error occurred while deleting the category.");
+          toast.error('An error occurred while deleting the category.');
         }
       }
     });
@@ -76,7 +76,7 @@ const List = () => {
           <b>Image</b>
           <b>Name</b>
           <b>Description</b>
-          <b style={{ textAlign: "center" }}>Action</b>
+          <b style={{ textAlign: 'center' }}>Action</b>
         </div>
         {categoryList.length > 0 &&
           categoryList.map((item, index) => {

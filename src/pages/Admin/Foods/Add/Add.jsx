@@ -1,49 +1,49 @@
-import { useContext, useState } from "react";
-import { assets } from "../../../../assets/admin/assets";
-import "./Add.css";
-import { toast } from "react-toastify";
-import DocumentTitle from "../../../../common/documentTitle";
-import { StoreContext } from "../../../../context/StoreContext";
-import axiosInstance from "../../../../common/axiosInstance";
+import { useContext, useState } from 'react';
+import { assets } from '../../../../assets/admin/assets';
+import './Add.css';
+import { toast } from 'react-toastify';
+import DocumentTitle from '../../../../common/documentTitle';
+import { StoreContext } from '../../../../context/StoreContext';
+import axiosInstance from '../../../../common/axiosInstance';
 
 const Add = () => {
   const { API_BASE_URL } = useContext(StoreContext);
 
   const [disabled, setDisabled] = useState(false);
 
-  DocumentTitle("Add Food");
+  DocumentTitle('Add Food');
 
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
-    name: "",
-    description: "",
-    category: "Salad",
-    price: "",
+    name: '',
+    description: '',
+    category: 'Salad',
+    price: '',
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-    formData.append("category", data.category);
-    formData.append("price", Number(data.price));
-    formData.append("image", image);
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('price', Number(data.price));
+    formData.append('image', image);
 
     try {
       setDisabled(true);
       const response = await axiosInstance.post(
         `${API_BASE_URL}api/food/add`,
-        formData
+        formData,
       );
 
       if (response.data.success) {
         setData({
-          name: "",
-          description: "",
-          category: "Salad",
-          price: "",
+          name: '',
+          description: '',
+          category: 'Salad',
+          price: '',
         });
         setImage(false);
         toast.success(response.data.message);
@@ -51,7 +51,7 @@ const Add = () => {
 
       setDisabled(false);
     } catch (error) {
-      toast.error("Failed to submit the form");
+      toast.error('Failed to submit the form');
       setDisabled(false);
     }
   };
@@ -141,7 +141,7 @@ const Add = () => {
           </div>
         </div>
         <button type="submit" className="add-button" disabled={disabled}>
-          {disabled ? "Adding..." : "Add"}
+          {disabled ? 'Adding...' : 'Add'}
         </button>
       </form>
     </div>

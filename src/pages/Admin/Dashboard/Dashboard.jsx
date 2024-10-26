@@ -1,7 +1,7 @@
-import DocumentTitle from "../../../common/documentTitle";
-import "./Dashboard.css";
+import DocumentTitle from '../../../common/documentTitle';
+import './Dashboard.css';
 const Dashboard = () => {
-  DocumentTitle("Dashboard");
+  DocumentTitle('Dashboard');
 
   return (
     <div className="orders add flex-col">

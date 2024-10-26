@@ -1,7 +1,7 @@
-import { useContext, useEffect } from "react";
-import { StoreContext } from "../../context/StoreContext";
-import "./Cart.css";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from 'react';
+import { StoreContext } from '../../context/StoreContext';
+import './Cart.css';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const {
@@ -17,7 +17,7 @@ const Cart = () => {
     setActiveMenu(null);
 
     if (!token) {
-      navigate("/");
+      navigate('/');
     }
   });
 
@@ -29,8 +29,8 @@ const Cart = () => {
         <div className="cart-items-container">
           <h2>Cart</h2>
           <small>
-            Please review the items in your cart{" "}
-            {Object.keys(cartItems).length > 0 ? "and place your order." : "."}
+            Please review the items in your cart{' '}
+            {Object.keys(cartItems).length > 0 ? 'and place your order.' : '.'}
           </small>
           <hr className="cart-items-separator" />
           <div className="cart-items">
@@ -95,7 +95,7 @@ const Cart = () => {
                   </strong>
                 </div>
               </div>
-              <button onClick={() => navigate("/place-order")}>
+              <button onClick={() => navigate('/place-order')}>
                 PROCEED TO CHECKOUT
               </button>
             </div>
@@ -123,7 +123,7 @@ const Cart = () => {
           <button
             className="continue-shopping"
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
           >
             CONTINUE SHOPPING

@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
-import "./SignInSignUpPopup.css";
-import { assets } from "../../assets/assets";
-import { StoreContext } from "../../context/StoreContext";
-import PropTypes from "prop-types";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from 'react';
+import './SignInSignUpPopup.css';
+import { assets } from '../../assets/assets';
+import { StoreContext } from '../../context/StoreContext';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const SignInSignUpPopup = ({ setShowLogin }) => {
-  const [currentState, setCurrentState] = useState("Sign In");
+  const [currentState, setCurrentState] = useState('Sign In');
   const { API_BASE_URL, setToken, setCartItems, setIsAdmin, setAuthUser } =
     useContext(StoreContext);
   const [showLoader, setShowLoader] = useState(false);
@@ -15,9 +15,9 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
   const navigate = useNavigate();
 
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -28,12 +28,12 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
     setShowLoader(true);
     e.preventDefault();
 
-    let apiUrl = API_BASE_URL + "api/user";
+    let apiUrl = API_BASE_URL + 'api/user';
 
-    if (currentState === "Sign Up") {
-      apiUrl += "/register";
+    if (currentState === 'Sign Up') {
+      apiUrl += '/register';
     } else {
-      apiUrl += "/login";
+      apiUrl += '/login';
     }
 
     await axios
@@ -43,17 +43,17 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
         if (response.data.success) {
           setToken(response.data.token);
 
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem('token', response.data.token);
 
           setShowLogin(false);
 
-          localStorage.setItem("authUser", JSON.stringify(response.data.user));
+          localStorage.setItem('authUser', JSON.stringify(response.data.user));
 
           setAuthUser(response.data.user);
 
           localStorage.setItem(
-            "isAdmin",
-            JSON.stringify(response.data.isAdmin)
+            'isAdmin',
+            JSON.stringify(response.data.isAdmin),
           );
 
           setIsAdmin(response.data.isAdmin);
@@ -62,7 +62,7 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
 
           toast.success(response.data.message);
 
-          if (response.data.isAdmin) navigate("/admin/dashboard");
+          if (response.data.isAdmin) navigate('/admin/dashboard');
         } else toast.error(response.data.message);
       })
       .catch((err) => {
@@ -86,7 +86,7 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
           />
         </div>
         <div className="sign-in-sign-up-popup-inputs">
-          {currentState === "Sign Up" ? (
+          {currentState === 'Sign Up' ? (
             <input
               name="name"
               type="text"
@@ -117,21 +117,21 @@ const SignInSignUpPopup = ({ setShowLogin }) => {
         <button
           type="submit"
           disabled={showLoader}
-          className={showLoader ? "disabled-button" : ""}
+          className={showLoader ? 'disabled-button' : ''}
         >
-          {currentState === "Sign Up" ? "Create Account" : "Sign In"}
+          {currentState === 'Sign Up' ? 'Create Account' : 'Sign In'}
         </button>
         <div className="sign-in-sign-up-popup-terms-condition">
           <input type="checkbox" required defaultChecked />
           <p>By continuing, I agree to the terms of use & privacy policy.</p>
         </div>
 
-        {currentState === "Sign Up" ? (
-          <p onClick={() => setCurrentState("Sign In")}>
+        {currentState === 'Sign Up' ? (
+          <p onClick={() => setCurrentState('Sign In')}>
             Already have an account? <span>Login here</span>
           </p>
         ) : (
-          <p onClick={() => setCurrentState("Sign Up")}>
+          <p onClick={() => setCurrentState('Sign Up')}>
             Do not have an account? <span>Register here</span>
           </p>
         )}

@@ -1,7 +1,7 @@
-import "./Sidebar.css";
-import { assets } from "../../../assets/admin/assets";
-import { NavLink, useLocation } from "react-router-dom";
-import { useState } from "react";
+import './Sidebar.css';
+import { assets } from '../../../assets/admin/assets';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -12,22 +12,22 @@ const Sidebar = () => {
   };
 
   const options = [
-    { to: "/admin/dashboard", icon: assets.dashboard_icon, label: "Dashboard" },
+    { to: '/admin/dashboard', icon: assets.dashboard_icon, label: 'Dashboard' },
     {
-      to: "/admin/categories",
+      to: '/admin/categories',
       icon: assets.categories_icon,
-      label: "Categories",
+      label: 'Categories',
     },
-    { to: "/admin/foods", icon: assets.list_icon, label: "Foods" },
-    { to: "/admin/orders", icon: assets.order_icon, label: "Orders" },
-    { to: "/admin/users", icon: assets.users_icon, label: "Users" },
-    { to: "/admin/settings", icon: assets.settings_icon, label: "Settings" },
+    { to: '/admin/foods', icon: assets.list_icon, label: 'Foods' },
+    { to: '/admin/orders', icon: assets.order_icon, label: 'Orders' },
+    { to: '/admin/users', icon: assets.users_icon, label: 'Users' },
+    { to: '/admin/settings', icon: assets.settings_icon, label: 'Settings' },
   ];
 
   return (
-    <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+    <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <button className="toggle-button" onClick={toggleSidebar}>
-        {isCollapsed ? "▶" : "◀"}
+        {isCollapsed ? '▶' : '◀'}
       </button>
       <div className="options">
         {options.map((option) => (
@@ -35,7 +35,7 @@ const Sidebar = () => {
             key={option.to}
             to={option.to}
             className={`option ${
-              location.pathname === option.to ? "active" : ""
+              location.pathname === option.to ? 'active' : ''
             }`}
             aria-label={option.label}
           >

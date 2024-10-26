@@ -1,23 +1,23 @@
-import { useContext, useState } from "react";
-import { StoreContext } from "../../context/StoreContext";
-import "./PlaceOrder.css";
-import { toast } from "react-toastify";
-import axiosInstance from "../../common/axiosInstance";
+import { useContext, useState } from 'react';
+import { StoreContext } from '../../context/StoreContext';
+import './PlaceOrder.css';
+import { toast } from 'react-toastify';
+import axiosInstance from '../../common/axiosInstance';
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, cartItems, API_BASE_URL, foodList } =
     useContext(StoreContext);
 
   const [addressData, setAddressData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    street: "",
-    city: "",
-    state: "",
-    zipcode: "",
-    country: "",
-    phone: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    street: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    country: '',
+    phone: '',
   });
 
   const onChangeHandler = (e) => {
@@ -48,7 +48,7 @@ const PlaceOrder = () => {
       deliveryCharge: 2,
     };
 
-    const apiUrl = API_BASE_URL + "api/order/place";
+    const apiUrl = API_BASE_URL + 'api/order/place';
 
     let response = await axiosInstance.post(apiUrl, orderData, {
       headers: {

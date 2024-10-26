@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const DocumentTitle = (title) => {
   useEffect(() => {
-    document.title = "FoodZie. - " + title;
+    document.title = 'FoodZie. - ' + title;
   }, [title]);
 };
 

@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import "./Navbar.css";
-import { assets } from "../../assets/assets";
-import { Link, useNavigate } from "react-router-dom";
-import { StoreContext } from "../../context/StoreContext";
-import PropTypes from "prop-types";
-import { toast } from "react-toastify";
-import { NameInitialsAvatar } from "react-name-initials-avatar";
+import { useContext } from 'react';
+import './Navbar.css';
+import { assets } from '../../assets/assets';
+import { Link, useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import { NameInitialsAvatar } from 'react-name-initials-avatar';
 
 const Navbar = ({ setShowLogin }) => {
   const {
@@ -23,13 +23,13 @@ const Navbar = ({ setShowLogin }) => {
 
   const handleLogout = () => {
     setToken(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
 
-    localStorage.removeItem("authUser");
+    localStorage.removeItem('authUser');
     setAuthUser(null);
 
     setCartItems({});
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -41,29 +41,29 @@ const Navbar = ({ setShowLogin }) => {
       <ul className="navbar-menu">
         <Link
           to="/"
-          onClick={() => setActiveMenu("home")}
-          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu('home')}
+          className={activeMenu === 'home' ? 'active' : ''}
         >
           Home
         </Link>
         <a
           href="#explore-menu"
-          onClick={() => setActiveMenu("menu")}
-          className={activeMenu === "menu" ? "active" : ""}
+          onClick={() => setActiveMenu('menu')}
+          className={activeMenu === 'menu' ? 'active' : ''}
         >
           Menu
         </a>
         <a
           href="#mobile-app-download"
-          onClick={() => setActiveMenu("mobile-app")}
-          className={activeMenu === "mobile-app" ? "active" : ""}
+          onClick={() => setActiveMenu('mobile-app')}
+          className={activeMenu === 'mobile-app' ? 'active' : ''}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={() => setActiveMenu("contact-us")}
-          className={activeMenu === "contact-us" ? "active" : ""}
+          onClick={() => setActiveMenu('contact-us')}
+          className={activeMenu === 'contact-us' ? 'active' : ''}
         >
           Contact Us
         </a>
@@ -77,9 +77,9 @@ const Navbar = ({ setShowLogin }) => {
               e.preventDefault();
               if (!token) {
                 setShowLogin(true);
-                toast.error("Please login to view cart");
+                toast.error('Please login to view cart');
                 return false;
-              } else navigate("/cart");
+              } else navigate('/cart');
             }}
           >
             <img src={assets.basket_icon} alt="Basket Icon" title="Cart" />
@@ -94,8 +94,8 @@ const Navbar = ({ setShowLogin }) => {
             {/* <img src={assets.profile_icon} alt="Profile Icon" /> */}
             <NameInitialsAvatar
               name={authUser.name}
-              textColor={"Tomato"}
-              backgroundColor={"#fff"}
+              textColor={'Tomato'}
+              backgroundColor={'#fff'}
               fontSize={16}
               borderColor="Tomato"
               borderWidth="1px"
@@ -105,11 +105,11 @@ const Navbar = ({ setShowLogin }) => {
                 <i
                   className="fa-regular fa-user fa-lg"
                   style={{
-                    color: "#ff6347",
-                    fontSize: "17px",
+                    color: '#ff6347',
+                    fontSize: '17px',
                   }}
                 ></i>
-                <p style={{ marginLeft: "5px" }}>Profile</p>
+                <p style={{ marginLeft: '5px' }}>Profile</p>
               </li>
               <hr />
               <li>

@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
-import "./List.css";
+import { useContext, useEffect, useState } from 'react';
+import './List.css';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
-import { assets } from "../../../../assets/admin/assets";
-import { toast } from "react-toastify";
-import axiosInstance from "../../../../common/axiosInstance";
-import DocumentTitle from "../../../../common/documentTitle";
-import { NavLink, useNavigate } from "react-router-dom";
-import { StoreContext } from "../../../../context/StoreContext";
+import { assets } from '../../../../assets/admin/assets';
+import { toast } from 'react-toastify';
+import axiosInstance from '../../../../common/axiosInstance';
+import DocumentTitle from '../../../../common/documentTitle';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../../../context/StoreContext';
 const List = () => {
   const navigate = useNavigate();
 
   const { API_BASE_URL } = useContext(StoreContext);
 
-  DocumentTitle("Foods");
+  DocumentTitle('Foods');
 
   const [foodList, setFoodList] = useState([]);
 
@@ -37,17 +37,17 @@ const List = () => {
 
   const removeFood = async (id) => {
     Swal.fire({
-      title: "Are you sure you want to delete this food item?",
+      title: 'Are you sure you want to delete this food item?',
       text: "You won't be able to revert this!",
       showCancelButton: true,
-      confirmButtonColor: "tomato",
-      cancelButtonColor: "black",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: 'tomato',
+      cancelButtonColor: 'black',
+      confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const response = await axiosInstance.delete(
-            `${API_BASE_URL}api/food/delete/${id}`
+            `${API_BASE_URL}api/food/delete/${id}`,
           );
 
           if (response.data.success) {
@@ -57,7 +57,7 @@ const List = () => {
             toast.error(response.data.message);
           }
         } catch (error) {
-          toast.error("An error occurred while deleting the food item.");
+          toast.error('An error occurred while deleting the food item.');
         }
       }
     });
@@ -78,7 +78,7 @@ const List = () => {
           <b>Name</b>
           <b>Category</b>
           <b>Price</b>
-          <b style={{ textAlign: "center" }}>Action</b>
+          <b style={{ textAlign: 'center' }}>Action</b>
         </div>
         {foodList.length > 0 &&
           foodList.map((item, index) => {
@@ -102,7 +102,7 @@ const List = () => {
                     onClick={() => editFood(item._id)}
                   >
                     <i className="fa fa-pencil"></i>
-                  </div>{" "}
+                  </div>{' '}
                   <div
                     className="delete-food"
                     title="Remove"

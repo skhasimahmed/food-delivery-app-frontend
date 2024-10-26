@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import "./FoodDisplay.css";
-import { StoreContext } from "../../context/StoreContext";
-import FoodItem from "../FoodItem/FoodItem";
-import PropTypes from "prop-types";
+import { useContext } from 'react';
+import './FoodDisplay.css';
+import { StoreContext } from '../../context/StoreContext';
+import FoodItem from '../FoodItem/FoodItem';
+import PropTypes from 'prop-types';
 
 const FoodDisplay = ({ category }) => {
   const { foodList } = useContext(StoreContext);
@@ -12,7 +12,7 @@ const FoodDisplay = ({ category }) => {
       <h2>Top dishes near you</h2>
       <div className="food-display-list">
         {foodList.map((item, index) => {
-          if (category === "All" || category === item.category) {
+          if (category === 'All' || category === item.category) {
             return (
               <FoodItem
                 key={index}
