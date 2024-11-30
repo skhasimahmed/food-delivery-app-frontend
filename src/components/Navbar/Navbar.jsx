@@ -6,6 +6,7 @@ import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { NameInitialsAvatar } from "react-name-initials-avatar";
+import Avatar from "react-avatar";
 
 const Navbar = ({ setShowLogin }) => {
   const {
@@ -54,6 +55,13 @@ const Navbar = ({ setShowLogin }) => {
           Menu
         </a>
         <a
+          href="#foods"
+          onClick={() => setActiveMenu("foods")}
+          className={activeMenu === "foods" ? "active" : ""}
+        >
+          Foods
+        </a>
+        <a
           href="#mobile-app-download"
           onClick={() => setActiveMenu("mobile-app")}
           className={activeMenu === "mobile-app" ? "active" : ""}
@@ -91,7 +99,7 @@ const Navbar = ({ setShowLogin }) => {
           <button onClick={() => setShowLogin(true)}>Sign In</button>
         ) : (
           <div className="navbar-profile">
-            {/* <img src={assets.profile_icon} alt="Profile Icon" /> */}
+            <Avatar size="30" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round color="tomato" />
             <NameInitialsAvatar
               name={authUser.name}
               textColor={"Tomato"}
@@ -109,7 +117,9 @@ const Navbar = ({ setShowLogin }) => {
                     fontSize: "17px",
                   }}
                 ></i>
-                <p style={{ marginLeft: "5px" }}>Profile</p>
+                <p style={{ marginLeft: "5px" }}>
+                  <Link to="/user/settings">Profile</Link>
+                </p>
               </li>
               <hr />
               <li>

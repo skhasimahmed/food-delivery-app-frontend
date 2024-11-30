@@ -26,6 +26,7 @@ import Sidebar from "./components/Admin/Sidebar/Sidebar";
 import ListCategories from "./pages/Admin/Categories/List/List";
 import AddCategory from "./pages/Admin/Categories/Add/Add";
 import EditCategory from "./pages/Admin/Categories/Edit/Edit";
+import ProfileSettings from "./pages/Users/ProfileSettings";
 
 const App = () => {
   const { showLogin, setShowLogin, isAdmin } = useContext(StoreContext);
@@ -56,6 +57,10 @@ const App = () => {
               <Route
                 path="/payment-confirmation"
                 element={<PaymentConfirmation />}
+              />
+              <Route
+                path="/user/settings"
+                element={<ProfileSettings />}
               />
               <Route path="*" element={<NotFound />} />
             </Routes>

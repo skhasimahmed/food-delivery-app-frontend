@@ -99,6 +99,12 @@
     width: 20px;
 }
 
+.navbar-profile .profileImage {
+    width: 30px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
 
 
 @media (max-width: 1050px) {

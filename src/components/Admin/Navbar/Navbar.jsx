@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { useContext, useState } from "react";
 import { assets } from "../../../assets/admin/assets";
 import { StoreContext } from "../../../context/StoreContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NameInitialsAvatar } from "react-name-initials-avatar";
 
 const Navbar = () => {
@@ -52,10 +52,10 @@ const Navbar = () => {
         {isDropdownOpen && (
           <div className="dropdown-menu">
             <div className="dropdown-item">
-              <i className="fas fa-user-edit"></i> &nbsp;Edit Profile
+              <Link to="/admin/settings"><i className="fas fa-user-edit"></i> &nbsp;Edit Profile</Link>
             </div>
             <div className="dropdown-item">
-              <i className="fas fa-key"></i> &nbsp;Change Password
+            <Link to="/admin/settings"><i className="fas fa-key"></i> &nbsp;Change Password</Link>
             </div>
             <div className="dropdown-item" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt"></i> &nbsp;Logout

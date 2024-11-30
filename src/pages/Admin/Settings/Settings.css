@@ -1,0 +1,54 @@
+.add-settings-page {
+    width: 40%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.add-settings-page form {
+    gap: 20px;
+}
+
+.add-settings-page .add-image-upload img {
+    width: 120px;
+    cursor: pointer;
+}
+
+.add-settings-page .add-category-name,
+.add-settings-page .add-category-description {
+    width: max(40%, 280px);
+}
+
+.add-settings-page .add-category-name input,
+.add-settings-page .add-category-description textarea {
+    padding: 10px;
+}
+
+
+.add-settings-page .add-button {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.add-settings-page .change-password-button {
+    max-width: 240px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: rgba(10, 10, 10, 0.703);
+    cursor: not-allowed;
+}
+
+.add-settings-page h2 {
+    margin-top: 20px;
+}

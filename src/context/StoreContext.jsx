@@ -139,8 +139,6 @@ const StoreContextProvider = (props) => {
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {
-      console.log("removeFromCart", itemId);
-
       Swal.fire({
         text: "Are you sure you want to remove this food item from cart?",
         showCancelButton: true,
