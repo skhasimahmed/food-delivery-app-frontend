@@ -31,6 +31,8 @@ const StoreContextProvider = (props) => {
   const [foodList, setFoodList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
+  const [userList, setUserList] = useState([]);
+  const [orderList, setOrderList] = useState([]);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -75,6 +77,32 @@ const StoreContextProvider = (props) => {
         toast.error(err.response.data.message);
       });
     setFoodList(response.data.data);
+  };
+
+  const fetchUserList = async () => {
+    const response = await axiosInstance
+      .get(`${API_BASE_URL}api/users`, {
+        headers: {
+          token
+        },
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+    setUserList(response.data.data);
+  };
+
+  const fetchOrderList = async () => {
+    const response = await axiosInstance
+      .get(`${API_BASE_URL}api/order/all`, {
+        headers: {
+          token
+        },
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+    setOrderList(response.data.data);
   };
 
   const fetchCategories = async () => {
@@ -192,6 +220,10 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     foodList,
     fetchFoodList,
+    fetchUserList,
+    userList,
+    fetchOrderList,
+    orderList,
     cartItems,
     setCartItems,
     addToCart,
