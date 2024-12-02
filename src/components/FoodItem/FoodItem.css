@@ -74,3 +74,16 @@
     width: 30px;
     cursor: pointer;
 }
+
+.star-rating {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 40px; /* Size of the stars */
+    cursor: pointer;
+}
+
+/* Style for an empty star */
+.star {
+    color: #e6620f;
+    font-size: 18px;
+}

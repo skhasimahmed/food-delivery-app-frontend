@@ -4,6 +4,7 @@ import { assets } from "../../../assets/admin/assets";
 import { StoreContext } from "../../../context/StoreContext";
 import { Link, useNavigate } from "react-router-dom";
 import { NameInitialsAvatar } from "react-name-initials-avatar";
+import Avatar from "react-avatar";
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -36,19 +37,17 @@ const Navbar = () => {
         onMouseEnter={toggleDropdown}
         onMouseLeave={toggleDropdown}
       >
-        {/* <img
-          src={assets.profile_image}
-          alt="Admin Profile Picture"
-          className="profile"
-        /> */}
-        <NameInitialsAvatar
-          name={authUser?.name}
-          textColor={"Tomato"}
-          backgroundColor={"#fff"}
-          fontSize={16}
-          borderColor="Tomato"
-          borderWidth="1px"
-        />
+        {
+          authUser.image ? <Avatar className="imageAvatar" size="40" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round /> : 
+          <NameInitialsAvatar
+            name={authUser?.name}
+            textColor={"Tomato"}
+            backgroundColor={"#fff"}
+            fontSize={16}
+            borderColor="Tomato"
+            borderWidth="1px"
+          />
+        }
         {isDropdownOpen && (
           <div className="dropdown-menu">
             <div className="dropdown-item">

@@ -11,6 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useContext, useEffect } from "react";
+import { StoreContext } from "../../../context/StoreContext";
 
 // Register Chart.js components
 ChartJS.register(
@@ -25,6 +27,11 @@ ChartJS.register(
 
 const Dashboard = () => {
   DocumentTitle("Dashboard");
+  const { authUser, userList, fetchUserList, orderList, fetchOrderList } = useContext(StoreContext);
+  useEffect(() => {
+    fetchUserList();
+    fetchOrderList();
+  }, []);
 
   // Sample data for Users chart
   const usersData = {
@@ -85,18 +92,18 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <span className="title">Dashboard</span>
+        <span className="title">Welcome, {authUser.name}</span>
       </div>
 
       {/* Row 1: Cards */}
       <div className="dashboard-row">
         <div className="dashboard-card">
-          <h3>Users</h3>
-          <p>1,200</p>
+          <h3>Total Users</h3>
+          <p>{userList.length}</p>
         </div>
         <div className="dashboard-card">
-          <h3>Orders</h3>
-          <p>350</p>
+          <h3>Total Orders</h3>
+          <p>{orderList.length}</p>
         </div>
         <div className="dashboard-card">
           <h3>Revenue</h3>

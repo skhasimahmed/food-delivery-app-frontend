@@ -99,15 +99,16 @@ const Navbar = ({ setShowLogin }) => {
           <button onClick={() => setShowLogin(true)}>Sign In</button>
         ) : (
           <div className="navbar-profile">
-            <Avatar size="30" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round color="tomato" />
-            <NameInitialsAvatar
-              name={authUser.name}
-              textColor={"Tomato"}
-              backgroundColor={"#fff"}
-              fontSize={16}
-              borderColor="Tomato"
-              borderWidth="1px"
-            />
+            {
+              authUser.image ? <Avatar className="imageAvatar" size="40" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round /> : <NameInitialsAvatar
+                name={authUser.name}
+                textColor={"Tomato"}
+                backgroundColor={"#fff"}
+                fontSize={16}
+                borderColor="Tomato"
+                borderWidth="1px"
+              />
+            }
             <ul className="navbar-profile-dropdown">
               <li>
                 <i

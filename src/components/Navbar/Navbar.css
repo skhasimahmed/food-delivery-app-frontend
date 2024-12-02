@@ -159,3 +159,14 @@
         display: none;
     }
 }
+
+.imageAvatar {
+    background: white;
+    color: tomato;
+    font-weight: bold;
+    font-size: 16px;
+    border-width: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
