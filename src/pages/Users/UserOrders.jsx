@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import DocumentTitle from "../../../common/documentTitle";
-import "./Orders.css";
-import { StoreContext } from "../../../context/StoreContext";
-import OrderPopup from "../../../components/OrderPopUp/OrderPopup";
-const Orders = () => {
-  const { orderList, fetchOrderList, orderIsLoading } = useContext(StoreContext);
+import "./UserOrders.css";
+import OrderPopup from "../../components/OrderPopUp/OrderPopup";
+import DocumentTitle from "../../common/documentTitle";
+import { StoreContext } from "../../context/StoreContext";
+const UserOrders = () => {
+  const { orderList, fetchOrderList, authUser, orderIsLoading } = useContext(StoreContext);
   DocumentTitle("Orders");
   
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,7 +12,7 @@ const Orders = () => {
   const [selectedOrderId, setSelectedOrderId] = useState('');
 
   useEffect(() => {
-    fetchOrderList();
+    fetchOrderList(authUser.userId);
   }, []);
 
   // Function to open modal and set selected row
@@ -36,8 +36,7 @@ const Orders = () => {
         <table className="scrollable-table">
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
+              <th>Sl. No.</th>
               <th>Total Items</th>
               <th>Payable Price</th>
               <th>Payment Status</th>
@@ -58,8 +57,7 @@ const Orders = () => {
                   orderList.map((item, index) => {
                     return (
                       <tr key={index} onClick={() => handleRowClick(item, `#00${index}`)}>
-                        <td>#00{index}</td>
-                        <td>{item.userId.name}, {item.userId.email}</td>
+                        <td>{index + 1}</td>
                         <td>{item.items?.length}</td>
                         <td>₹{item.amount}</td>
                         <td><span className={`status ${item.paymentStatus}`}>{item.paymentStatus}</span></td>
@@ -68,7 +66,7 @@ const Orders = () => {
                     );
                   })) : (
                   <tr>
-                    <td colSpan="6">No Orders Found!</td>
+                    <td colSpan="5">No Orders Found!</td>
                   </tr>
                 )
               )
@@ -90,4 +88,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default UserOrders;

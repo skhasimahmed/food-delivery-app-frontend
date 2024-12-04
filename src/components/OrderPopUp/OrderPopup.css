@@ -1,0 +1,113 @@
+/* Modal overlay and background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal content box */
+.modal {
+  background-color: white;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Modal Header */
+.modal h2 {
+  margin-bottom: 20px;
+}
+
+.modal-header p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+/* Dropdown styling */
+.modal select {
+  padding: 8px;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
+/* Table styling */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.items-table th, .items-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.items-table th {
+  background-color: #f4f4f4;
+}
+
+.items-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Modal action buttons */
+.modal-actions {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  background-color: #404641;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-actions button:hover {
+  opacity: 0.9;
+}
+
+.modal img {
+  width: 50px;
+}
+
+/* Close Button (Cross Icon) */
+.close {
+  position: absolute;
+  top: 37px;
+  right: 27px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.close:hover {
+  color: #ff0000;  /* Change color when hover */
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .modal {
+    padding: 15px;
+  }
+  .close {
+    font-size: 22px;  /* Even smaller icon on very small screens */
+    top: 30px;
+    right: 19px;
+  }
+}

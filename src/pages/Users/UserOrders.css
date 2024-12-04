@@ -101,29 +101,3 @@
       font-size: 14px;
     }
   }
-
-  /* Loading Spinner Styling */
-  .loader {
-    border: 16px solid #b5a5a5; /* Light gray border */
-    border-top: 16px solid #ff6347; /* Blue top border */
-    border-radius: 50%; /* Circular shape */
-    width: 50px; /* Size of the loader */
-    height: 50px; /* Size of the loader */
-    margin: 20px auto; /* Centering the loader */
-    animation: spin 2s linear infinite; /* Spinning animation */
-  }
-
-  /* Animation for the spinner */
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  /* Hide the spinner when not loading */
-  .loading {
-    display: block;
-  }
-
-  .not-loading {
-    display: none;
-  }

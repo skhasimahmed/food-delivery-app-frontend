@@ -34,6 +34,7 @@ const StoreContextProvider = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [userList, setUserList] = useState([]);
   const [orderList, setOrderList] = useState([]);
+  const [orderIsLoading, setOrderIsLoading] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -104,17 +105,21 @@ const StoreContextProvider = (props) => {
     setUserList(response.data.data);
   };
 
-  const fetchOrderList = async () => {
-    const response = await axiosInstance
-      .get(`${API_BASE_URL}api/order/all`, {
+  const fetchOrderList = async (userId = '') => {
+    const queryParam = userId.length > 0 ? `?orderUserId=${userId}` : ''
+    setOrderIsLoading(true);
+    await axiosInstance
+      .get(`${API_BASE_URL}api/order/all${queryParam}`, {
         headers: {
           token
-        },
+        }
+      }).then(response => {
+        setOrderIsLoading(false);
+        setOrderList(response.data.data);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
-    setOrderList(response.data.data);
   };
 
   const fetchCategories = async () => {
@@ -236,6 +241,7 @@ const StoreContextProvider = (props) => {
     fetchUserList,
     userList,
     fetchOrderList,
+    orderIsLoading,
     orderList,
     cartItems,
     setCartItems,
