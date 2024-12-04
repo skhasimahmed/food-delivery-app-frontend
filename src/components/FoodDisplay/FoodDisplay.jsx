@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
@@ -26,8 +26,6 @@ const FoodDisplay = ({ searchQuery = '' }) => {
     setActiveMenu('foods')
     navigate("/foods")
   }
-
-  // const [priceOrder, setPriceOrder] = useState('lowToHigh');
 
   const handlePriceSortChange = (value) => {
     fetchFoodList(currentFetchFoodUrl.page, currentFetchFoodUrl.limit, currentFetchFoodUrl.search, currentFetchFoodUrl.category, value);
