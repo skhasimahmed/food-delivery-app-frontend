@@ -5,9 +5,10 @@ import { StoreContext } from "../../context/StoreContext";
 import PropTypes from "prop-types";
 import axiosInstance from "../../common/axiosInstance";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 const FoodItem = ({ id, name, price, description, image, ratings }) => {
-  const { API_BASE_URL, cartItems, addToCart, removeFromCart, authUser, token, setShowLogin, fetchFoodList } = useContext(StoreContext);  
+  const { API_BASE_URL, cartItems, addToCart, removeFromCart, authUser, token, setShowLogin, fetchFoodList, currentFetchFoodUrl } = useContext(StoreContext);  
 
   let totalRating = !ratings.length ? 0 : ratings.reduce((acc, newVal) => acc + newVal.rating, 0)
   let averageRating = !totalRating ? 0 : (totalRating / ratings.length)
@@ -31,7 +32,7 @@ const FoodItem = ({ id, name, price, description, image, ratings }) => {
     .then(response => {
         if (response.data.success) {
           toast.success(response.data.message);
-          fetchFoodList();
+          fetchFoodList(currentFetchFoodUrl.page, currentFetchFoodUrl.limit, currentFetchFoodUrl.search, currentFetchFoodUrl.category, currentFetchFoodUrl.priceShort);
         } else { toast.error(response.data.message); }
     })
     .catch((err) => {      

@@ -29,6 +29,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [foodList, setFoodList] = useState([]);
+  const [currentFetchFoodUrl, setCurrentFetchFoodUrl] = useState({});
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [userList, setUserList] = useState([]);
@@ -70,13 +71,24 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  const fetchFoodList = async () => {
+  const fetchFoodList = async (page = 1, limit = 8, search = '', category = 'All', priceShort = 'lowToHigh') => {
+    let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`
+    searchQueryString += search ? `&search=${search}` : '';
     const response = await axiosInstance
-      .get(`${API_BASE_URL}api/food/list`)
+      .get(`${API_BASE_URL}api/food/list${searchQueryString}`)
       .catch((err) => {
         toast.error(err.response.data.message);
       });
     setFoodList(response.data.data);
+    setCurrentFetchFoodUrl({
+      page: page, 
+      limit: limit,
+      search: search,
+      category: category,
+      priceShort: priceShort,
+      totalFoods: response.data.totalFoods,
+      totalPages: response.data.totalPages
+    })    
   };
 
   const fetchUserList = async () => {
@@ -220,6 +232,7 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     foodList,
     fetchFoodList,
+    currentFetchFoodUrl,
     fetchUserList,
     userList,
     fetchOrderList,

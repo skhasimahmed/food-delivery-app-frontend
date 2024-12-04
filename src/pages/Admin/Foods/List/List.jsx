@@ -18,17 +18,16 @@ const List = () => {
 
   const [foodList, setFoodList] = useState([]);
 
-  const fetchFoodList = async () => {
+  const fetchAdminFoodList = async () => {
     const response = await axiosInstance.get(`${API_BASE_URL}api/food/list`);
 
     if (response.data.success) {
       setFoodList(response.data.data);
-      // toast.success(response.data.message);
     } else toast.error(response.data.message);
   };
 
   useEffect(() => {
-    fetchFoodList();
+    fetchAdminFoodList();
   }, []);
 
   const editFood = (id) => {
@@ -52,7 +51,7 @@ const List = () => {
 
           if (response.data.success) {
             toast.success(response.data.message);
-            fetchFoodList();
+            fetchAdminFoodList();
           } else {
             toast.error(response.data.message);
           }

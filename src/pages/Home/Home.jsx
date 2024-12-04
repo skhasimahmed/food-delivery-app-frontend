@@ -13,13 +13,11 @@ const Home = () => {
       homeMenuRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
   });
-
-  const [category, setCategory] = useState("All");
   return (
     <div className="home" id="home-menu" ref={homeMenuRef}>
       <Header />
-      <ExploreMenu category={category} setCategory={setCategory} />
-      <FoodDisplay category={category} />
+      <ExploreMenu />
+      <FoodDisplay />
       <MobileAppDownload />
     </div>
   );

@@ -19,3 +19,88 @@
     gap: 30px;
     row-gap: 50px;
 }
+
+.no-products-container {
+    margin-top: 30px;
+    text-align: center;
+    background-color: #fff0ed;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .no-products-message h2 {
+    font-size: 2rem;
+    color: #ff6347; /* Tomato color for emphasis */
+    margin-bottom: 20px;
+  }
+  
+  .no-products-message p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  /* Style for the View More button */
+.view-more-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+/* Hover effect for the View More button */
+.view-more-btn:hover {
+  opacity: 0.9;
+}
+
+.view-more-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Basic style for the select element */
+select {
+  font-size: 16px;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Flexbox container for right-alignment */
+.container {
+  display: flex;
+  justify-content: space-between; /* This will space out the elements to the left and right */
+  align-items: center;  /* Vertically aligns the items in the center */
+  width: 100%; /* Ensures the container takes up the full width of the parent */
+}
+
+/* Styling for focused select */
+select:focus {
+  border-color: #4CAF50;
+  background-color: #eafaf1;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack the items vertically on smaller screens */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  select {
+    width: 100%; /* Make the select dropdown take up the full width on small screens */
+  }
+}

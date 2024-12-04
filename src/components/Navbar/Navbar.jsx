@@ -33,9 +33,16 @@ const Navbar = ({ setShowLogin }) => {
     navigate("/");
   };
 
+  const handleSearchClick = () => {
+    setActiveMenu("foods");
+    navigate("/foods");
+  }
+
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link to="/"
+          onClick={() => setActiveMenu("home")}
+        >
         <img src={assets.logo} alt="Logo" />
       </Link>
 
@@ -54,13 +61,13 @@ const Navbar = ({ setShowLogin }) => {
         >
           Menu
         </a>
-        <a
-          href="#foods"
+        <Link
+          to="/foods"
           onClick={() => setActiveMenu("foods")}
           className={activeMenu === "foods" ? "active" : ""}
         >
           Foods
-        </a>
+        </Link>
         <a
           href="#mobile-app-download"
           onClick={() => setActiveMenu("mobile-app")}
@@ -78,7 +85,7 @@ const Navbar = ({ setShowLogin }) => {
       </ul>
 
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="Search Icon" title="Search" />
+        <img className="searchIcon" src={assets.search_icon} alt="Search Icon" title="Search" onClick={handleSearchClick} />
         <div className="navbar-basket-icon">
           <Link
             onClick={(e) => {
