@@ -1,100 +1,102 @@
 /* Style for the search container */
 .search-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 100%;
 }
 
 /* Style for the search input */
 .search-input {
-    flex-grow: 1; /* Makes the input take up available space */
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
+  flex-grow: 1;
+  /* Makes the input take up available space */
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
 }
 
 /* Style for the search button */
 .search-btn {
-    padding: 12px 20px;
-    background-color: tomato;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  padding: 12px 20px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Hover effect for the search button */
 .search-btn:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 /* Style for the clear button */
 .clear-btn {
-    padding: 12px 20px;
-    background-color: #6a5c5b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  padding: 12px 20px;
+  background-color: #6a5c5b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Hover effect for the clear button */
 .clear-btn:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
-/* Container for pagination */
 .pagination {
-    display: flex;
-    justify-content: center;  /* Center pagination on the page */
-    align-items: center;
-    gap: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Style for each pagination link */
-  .pagination button {
-    padding: 8px 15px;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    cursor: pointer;
-  }
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
 
-  .pagination button:disabled {
-    cursor: not-allowed;
+.pagination button {
+  padding: 8px 15px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+}
+
+.pagination .page-number:hover {
+  background-color: #f2f2f2;
+  color: tomato;
+}
+
+.pagination .active {
+  background-color: tomato;
+  color: white;
+}
+
+.pagination .prev:disabled,
+.pagination .next:disabled {
+  background-color: #6a5c5b;
+  color: #ddd;
+}
+
+.pagination .prev,
+.pagination .next {
+  font-weight: bold;
+}
+
+/* Add responsiveness */
+@media (max-width: 600px) {
+  .pagination {
+    font-size: 14px;
+    /* Make pagination smaller on mobile screens */
   }
-  
-  /* Hover effect */
-  .pagination button:hover {
-    background-color: #f2f2f2;
-    color: #007bff;
-  }
-  
-  /* Style for the 'active' page */
-  .pagination .active {
-    background-color: #007bff;
-    color: white;
-    border: 1px solid #007bff;
-  }
-  
-  /* Style for 'Previous' and 'Next' buttons */
-  .pagination .prev,
-  .pagination .next {
-    font-weight: bold;
-  }
-  
-  /* Add responsiveness */
-  @media (max-width: 600px) {
-    .pagination {
-      font-size: 14px;  /* Make pagination smaller on mobile screens */
-    }
-  }
+}

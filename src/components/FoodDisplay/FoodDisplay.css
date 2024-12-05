@@ -1,48 +1,49 @@
 .food-display {
-    margin-top: 30px;
+  margin-top: 30px;
 
 }
 
 .food-display h2 {
-    font-size: max(2vw, 24px);
-    font-weight: 600;
+  font-size: max(2vw, 24px);
+  font-weight: 600;
 }
 
 .food-display h2 span {
-    color: #747474;
+  color: #747474;
 }
 
 .food-display-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    margin-top: 30px;
-    gap: 30px;
-    row-gap: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 30px;
+  gap: 30px;
+  row-gap: 50px;
 }
 
 .no-products-container {
-    margin-top: 30px;
-    text-align: center;
-    background-color: #fff0ed;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-  
-  .no-products-message .no-products-header {
-    font-size: 2rem;
-    color: #ff6347; /* Tomato color for emphasis */
-    margin-bottom: 20px;
-  }
-  
-  .no-products-message p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 30px;
-    line-height: 1.6;
-  }
+  margin-top: 30px;
+  text-align: center;
+  background-color: #fff0ed;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
 
-  /* Style for the View More button */
+.no-products-message .no-products-header {
+  font-size: 2rem;
+  color: #ff6347;
+  /* Tomato color for emphasis */
+  margin-bottom: 20px;
+}
+
+.no-products-message p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Style for the View More button */
 .view-more-btn {
   background-color: tomato;
   color: white;
@@ -64,6 +65,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 /* Basic style for the select element */
@@ -82,9 +84,12 @@ select {
 /* Flexbox container for right-alignment */
 .container {
   display: flex;
-  justify-content: space-between; /* This will space out the elements to the left and right */
-  align-items: center;  /* Vertically aligns the items in the center */
-  width: 100%; /* Ensures the container takes up the full width of the parent */
+  justify-content: space-between;
+  /* This will space out the elements to the left and right */
+  align-items: center;
+  /* Vertically aligns the items in the center */
+  width: 100%;
+  /* Ensures the container takes up the full width of the parent */
 }
 
 /* Styling for focused select */
@@ -96,11 +101,14 @@ select:focus {
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Stack the items vertically on smaller screens */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: column;
+    /* Stack the items vertically on smaller screens */
+    align-items: flex-start;
+    /* Align items to the left */
   }
 
   select {
-    width: 100%; /* Make the select dropdown take up the full width on small screens */
+    width: 100%;
+    /* Make the select dropdown take up the full width on small screens */
   }
 }

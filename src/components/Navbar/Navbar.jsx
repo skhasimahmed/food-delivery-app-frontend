@@ -36,38 +36,33 @@ const Navbar = ({ setShowLogin }) => {
   const handleSearchClick = () => {
     setActiveMenu("foods");
     navigate("/foods");
-  }
+  };
 
   return (
     <div className="navbar">
-      <Link to="/"
-          onClick={() => setActiveMenu("home")}
-        >
+      <Link to="/" onClick={() => setActiveMenu("home")}>
         <img src={assets.logo} alt="Logo" />
       </Link>
 
       <ul className="navbar-menu">
         <Link
           to="/"
-          onClick={
-            () => 
-            {
-              window.location.href = window.location.origin
-              setActiveMenu("home")
-            }
-          }
+          onClick={() => {
+            window.location.href = window.location.origin;
+            setActiveMenu("home");
+          }}
           className={activeMenu === "home" ? "active" : ""}
         >
           Home
         </Link>
         <a
           href="#explore-menu"
-          onClick={
-            () => {
-              window.location.href = window.location.origin + '#explore-menu'
-              setActiveMenu("menu")
-            }
-          }
+          onClick={() => {
+            console.log(window.location.origin);
+
+            window.location.href = window.location.origin + "#explore-menu";
+            setActiveMenu("menu");
+          }}
           className={activeMenu === "menu" ? "active" : ""}
         >
           Menu
@@ -81,25 +76,21 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#mobile-app-download"
-          onClick={
-            () => {
-              window.location.href = window.location.origin + '#mobile-app-download'
-              setActiveMenu("mobile-app")
-            }
-          }
+          onClick={() => {
+            window.location.href =
+              window.location.origin + "#mobile-app-download";
+            setActiveMenu("mobile-app");
+          }}
           className={activeMenu === "mobile-app" ? "active" : ""}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={
-            () => 
-              {
-                window.location.href = window.location.origin + '#contact-us'
-                setActiveMenu("contact-us")
-              }
-          }
+          onClick={() => {
+            window.location.href = window.location.origin + "#contact-us";
+            setActiveMenu("contact-us");
+          }}
           className={activeMenu === "contact-us" ? "active" : ""}
         >
           Contact Us
@@ -107,7 +98,13 @@ const Navbar = ({ setShowLogin }) => {
       </ul>
 
       <div className="navbar-right">
-        <img className="searchIcon" src={assets.search_icon} alt="Search Icon" title="Search" onClick={handleSearchClick} />
+        <img
+          className="searchIcon"
+          src={assets.search_icon}
+          alt="Search Icon"
+          title="Search"
+          onClick={handleSearchClick}
+        />
         <div className="navbar-basket-icon">
           <Link
             onClick={(e) => {
@@ -128,8 +125,15 @@ const Navbar = ({ setShowLogin }) => {
           <button onClick={() => setShowLogin(true)}>Sign In</button>
         ) : (
           <div className="navbar-profile">
-            {
-              authUser.image ? <Avatar className="imageAvatar" size="40" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round /> : <NameInitialsAvatar
+            {authUser.image ? (
+              <Avatar
+                className="imageAvatar"
+                size="40"
+                src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image}
+                round
+              />
+            ) : (
+              <NameInitialsAvatar
                 name={authUser.name}
                 textColor={"Tomato"}
                 backgroundColor={"#fff"}
@@ -137,7 +141,7 @@ const Navbar = ({ setShowLogin }) => {
                 borderColor="Tomato"
                 borderWidth="1px"
               />
-            }
+            )}
             <ul className="navbar-profile-dropdown">
               <li>
                 <i
@@ -154,7 +158,9 @@ const Navbar = ({ setShowLogin }) => {
               <hr />
               <li>
                 <img src={assets.bag_icon} alt="Bag Icon" />
-                <p><Link to="/user/orders">Orders</Link></p>
+                <p>
+                  <Link to="/user/orders">Orders</Link>
+                </p>
               </li>
               <hr />
               <li onClick={handleLogout}>

@@ -72,9 +72,15 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  const fetchFoodList = async (page = 1, limit = 8, search = '', category = 'All', priceShort = 'lowToHigh') => {
-    let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`
-    searchQueryString += search ? `&search=${search}` : '';
+  const fetchFoodList = async (
+    page = 1,
+    limit = 8,
+    search = "",
+    category = "All",
+    priceShort = "lowToHigh"
+  ) => {
+    let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`;
+    searchQueryString += search ? `&search=${search}` : "";
     const response = await axiosInstance
       .get(`${API_BASE_URL}api/food/list${searchQueryString}`)
       .catch((err) => {
@@ -82,21 +88,21 @@ const StoreContextProvider = (props) => {
       });
     setFoodList(response.data.data);
     setCurrentFetchFoodUrl({
-      page: page, 
+      page: page,
       limit: limit,
       search: search,
       category: category,
       priceShort: priceShort,
       totalFoods: response.data.totalFoods,
-      totalPages: response.data.totalPages
-    })    
+      totalPages: response.data.totalPages,
+    });
   };
 
   const fetchUserList = async () => {
     const response = await axiosInstance
       .get(`${API_BASE_URL}api/users`, {
         headers: {
-          token
+          token,
         },
       })
       .catch((err) => {
@@ -105,15 +111,16 @@ const StoreContextProvider = (props) => {
     setUserList(response.data.data);
   };
 
-  const fetchOrderList = async (userId = '') => {
-    const queryParam = userId.length > 0 ? `?orderUserId=${userId}` : ''
+  const fetchOrderList = async (userId = "") => {
+    const queryParam = userId.length > 0 ? `?orderUserId=${userId}` : "";
     setOrderIsLoading(true);
     await axiosInstance
       .get(`${API_BASE_URL}api/order/all${queryParam}`, {
         headers: {
-          token
-        }
-      }).then(response => {
+          token,
+        },
+      })
+      .then((response) => {
         setOrderIsLoading(false);
         setOrderList(response.data.data);
       })
@@ -223,11 +230,9 @@ const StoreContextProvider = (props) => {
 
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = foodList.find((product) => {
-          return product._id === item;
-        });
+        let itemInfo = foodList.find((product) => product._id === item);
 
-        totalAmount += itemInfo.price * cartItems[item];
+        if (itemInfo) totalAmount += itemInfo.price * cartItems[item];
       }
     }
 
