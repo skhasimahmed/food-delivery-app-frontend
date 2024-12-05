@@ -84,7 +84,7 @@ const FoodDisplay = ({ searchQuery = '' }) => {
           ) : (
             <div className="no-products-container">
               <div className="no-products-message">
-                <h2>No Foods Found</h2>
+                <h3 className="no-products-header">No Foods Found</h3>
                 <p>Sorry, we couldn't find any food that match your search. Please try again later or adjust your search criteria.</p>
               </div>
             </div>

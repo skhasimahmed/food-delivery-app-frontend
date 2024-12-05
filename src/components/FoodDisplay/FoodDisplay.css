@@ -29,7 +29,7 @@
     padding: 10px;
   }
   
-  .no-products-message h2 {
+  .no-products-message .no-products-header {
     font-size: 2rem;
     color: #ff6347; /* Tomato color for emphasis */
     margin-bottom: 20px;
