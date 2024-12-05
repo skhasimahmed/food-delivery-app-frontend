@@ -49,14 +49,25 @@ const Navbar = ({ setShowLogin }) => {
       <ul className="navbar-menu">
         <Link
           to="/"
-          onClick={() => setActiveMenu("home")}
+          onClick={
+            () => 
+            {
+              window.location.href = window.location.origin
+              setActiveMenu("home")
+            }
+          }
           className={activeMenu === "home" ? "active" : ""}
         >
           Home
         </Link>
         <a
           href="#explore-menu"
-          onClick={() => setActiveMenu("menu")}
+          onClick={
+            () => {
+              window.location.href = window.location.origin + '#explore-menu'
+              setActiveMenu("menu")
+            }
+          }
           className={activeMenu === "menu" ? "active" : ""}
         >
           Menu
@@ -70,14 +81,25 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#mobile-app-download"
-          onClick={() => setActiveMenu("mobile-app")}
+          onClick={
+            () => {
+              window.location.href = window.location.origin + '#mobile-app-download'
+              setActiveMenu("mobile-app")
+            }
+          }
           className={activeMenu === "mobile-app" ? "active" : ""}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={() => setActiveMenu("contact-us")}
+          onClick={
+            () => 
+              {
+                window.location.href = window.location.origin + '#contact-us'
+                setActiveMenu("contact-us")
+              }
+          }
           className={activeMenu === "contact-us" ? "active" : ""}
         >
           Contact Us

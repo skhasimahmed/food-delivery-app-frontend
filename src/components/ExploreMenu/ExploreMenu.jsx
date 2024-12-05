@@ -3,14 +3,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 
 const ExploreMenu = () => {
-  const { categories, activeMenu, setActiveMenu, fetchFoodList, currentFetchFoodUrl } = useContext(StoreContext);
-  const exploreMenuRef = useRef(null); 
-
-  useEffect(() => {
-    if(activeMenu === 'menu') {
-      exploreMenuRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [activeMenu]);
+  const { categories, setActiveMenu, fetchFoodList, currentFetchFoodUrl } = useContext(StoreContext);
+  const exploreMenuRef = useRef(null);
 
   const [category, setCategory] = useState("All")
   

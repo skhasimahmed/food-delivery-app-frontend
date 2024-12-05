@@ -1,17 +1,12 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import "./FoodDisplay.css";
 import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
 import { useNavigate } from "react-router-dom";
 
 const FoodDisplay = ({ searchQuery = '' }) => {
-  const { foodList, activeMenu, setActiveMenu, currentFetchFoodUrl, fetchFoodList } = useContext(StoreContext);
+  const { foodList, setActiveMenu, currentFetchFoodUrl, fetchFoodList } = useContext(StoreContext);
   const foodsMenuRef = useRef();
-  useEffect(() => {
-    if(activeMenu === 'foods') {
-      foodsMenuRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-  });
 
   // Get the full URL
   const url = window.location.href;

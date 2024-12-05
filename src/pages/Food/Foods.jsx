@@ -5,7 +5,7 @@ import { StoreContext } from "../../context/StoreContext";
 import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
 
 const Foods = () => {
-    const { foodList, fetchFoodList, currentFetchFoodUrl } = useContext(StoreContext);
+    const { foodList, fetchFoodList, currentFetchFoodUrl, setActiveMenu } = useContext(StoreContext);
     const [searchValue, setSearchValue] = useState('');
     const [searchingText, setSearchingText] = useState('');
     const [loadingButtons, setLoadingButtons] = useState({
@@ -46,7 +46,11 @@ const Foods = () => {
                 clear: 'Clear'
             })
         }
-    }, [foodList])
+    }, [foodList]);
+
+    useEffect(() => {
+        setActiveMenu('foods');
+    }, [])
     
     return (
         <div className="home" id="foods-menu">

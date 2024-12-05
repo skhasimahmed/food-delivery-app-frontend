@@ -3,7 +3,12 @@ import "./Header.css";
 import { StoreContext } from "../../context/StoreContext";
 
 const Header = () => {
-  const { setActiveMenu } = useContext(StoreContext);
+  const {setActiveMenu} = useContext(StoreContext);
+
+  const handleViewMore = () => {
+    window.location.href = '/#explore-menu'
+    setActiveMenu('menu')
+  }
   return (
     <div className="header">
       <div className="header-content">
@@ -14,7 +19,7 @@ const Header = () => {
           mission is to satisfy your cravings and elevate your dining
           experience, one delicious meal at a time.
         </p>
-        <button onClick={() => setActiveMenu('menu')}>View Menu</button>
+        <button onClick={handleViewMore}>View Menu</button>
       </div>
     </div>
   );
