@@ -76,7 +76,7 @@ const FoodDisplay = ({ searchQuery = '' }) => {
               {
                 lastSegment !== 'foods' && (
                   <div className="view-more-div">
-                    <button className="view-more-btn" onClick={handleViewMore}>View More</button>
+                    <button className="view-more-btn" onClick={handleViewMore}>View More Foods</button>
                   </div>
                 )
               }
