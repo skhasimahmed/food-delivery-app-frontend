@@ -1,5 +1,5 @@
 import "./ProfileSettings.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DocumentTitle from "../../common/documentTitle";
 import { StoreContext } from "../../context/StoreContext";
 import { assets } from "../../assets/admin/assets";
@@ -9,11 +9,8 @@ import axiosInstance from "../../common/axiosInstance";
 const ProfileSettings = () => {
   DocumentTitle("Profile Settings");
 
-  const {
-    API_BASE_URL,
-    authUser,
-    setAuthUser
-  } = useContext(StoreContext);
+  const { API_BASE_URL, authUser, setAuthUser, setActiveMenu } =
+    useContext(StoreContext);
 
   const [disabled, setDisabled] = useState(false);
   const [updatePasswordDisabled, setUpdatePasswordDisabled] = useState(false);
@@ -26,8 +23,12 @@ const ProfileSettings = () => {
   const [updatePasswordData, setUpdatePasswordData] = useState({
     currentPassword: "",
     newPassword: "",
-    confirmNewPassword: ""
+    confirmNewPassword: "",
   });
+
+  useEffect(() => {
+    setActiveMenu("");
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,48 +38,52 @@ const ProfileSettings = () => {
     formData.append("email", data.email);
     formData.append("image", image ? image : null);
     setDisabled(true);
-    const response = await axiosInstance.put(
-      `${API_BASE_URL}api/users/update-profile/${authUser.userId}`,
-      formData
-    )
-    .then(response => {
-      if (response.data.success) {
-        setImage(false);
-        localStorage.setItem("authUser", JSON.stringify(response.data.user));
-        setAuthUser(response.data.user);
-        toast.success(response.data.message);
-      } else toast.error(response.data.message);
+    await axiosInstance
+      .put(
+        `${API_BASE_URL}api/users/update-profile/${authUser.userId}`,
+        formData
+      )
+      .then((response) => {
+        if (response.data.success) {
+          setImage(false);
+          localStorage.setItem("authUser", JSON.stringify(response.data.user));
+          setAuthUser(response.data.user);
+          toast.success(response.data.message);
+        } else toast.error(response.data.message);
 
-      setDisabled(false);
-    })
-    .catch((err) => {
-      setDisabled(false);
-      toast.error(err.response.data.message);
-    });
+        setDisabled(false);
+      })
+      .catch((err) => {
+        setDisabled(false);
+        toast.error(err.response.data.message);
+      });
   };
 
   const handleUpdatePasswordSubmit = async (e) => {
     e.preventDefault();
     setUpdatePasswordDisabled(true);
-    await axiosInstance.put(
-      `${API_BASE_URL}api/users/change-password/${authUser.userId}`,
-      updatePasswordData
-    )
-    .then(response => {
+    await axiosInstance
+      .put(
+        `${API_BASE_URL}api/users/change-password/${authUser.userId}`,
+        updatePasswordData
+      )
+      .then((response) => {
         setUpdatePasswordDisabled(false);
         if (response.data.success) {
           setUpdatePasswordData({
             currentPassword: "",
             newPassword: "",
-            confirmNewPassword: ""
-          })
+            confirmNewPassword: "",
+          });
           toast.success(response.data.message);
-        } else { toast.error(response.data.message); }
-    })
-    .catch((err) => {
-      setUpdatePasswordDisabled(false);
-      toast.error(err.response.data.message);
-    });
+        } else {
+          toast.error(response.data.message);
+        }
+      })
+      .catch((err) => {
+        setUpdatePasswordDisabled(false);
+        toast.error(err.response.data.message);
+      });
   };
   return (
     <div className="place-order">
@@ -89,8 +94,12 @@ const ProfileSettings = () => {
             <p>Upload Profile Image</p>
             <label htmlFor="image">
               <img
-                src={ authUser.image && !image ? import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image
-                  : image ? (URL.createObjectURL(image)) : (assets.upload_area)
+                src={
+                  authUser.image && !image
+                    ? import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image
+                    : image
+                    ? URL.createObjectURL(image)
+                    : assets.upload_area
                 }
                 alt="Profile Image"
               />
@@ -103,7 +112,9 @@ const ProfileSettings = () => {
             />
           </div>
           <div className="flex-col">
-            <p>Name <span className="requiredStar">*</span></p>
+            <p>
+              Name <span className="requiredStar">*</span>
+            </p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -137,9 +148,16 @@ const ProfileSettings = () => {
         <div className="place-order-left">
           <p className="title">Change Password</p>
           <div className="flex-col">
-            <p>Current Password <span className="requiredStar">*</span></p>
+            <p>
+              Current Password <span className="requiredStar">*</span>
+            </p>
             <input
-              onChange={(e) => setUpdatePasswordData({ ...updatePasswordData, currentPassword: e.target.value })}
+              onChange={(e) =>
+                setUpdatePasswordData({
+                  ...updatePasswordData,
+                  currentPassword: e.target.value,
+                })
+              }
               value={updatePasswordData.currentPassword}
               type="password"
               name="currentPassword"
@@ -149,9 +167,16 @@ const ProfileSettings = () => {
             />
           </div>
           <div className="flex-col">
-            <p>New Password <span className="requiredStar">*</span></p>
+            <p>
+              New Password <span className="requiredStar">*</span>
+            </p>
             <input
-              onChange={(e) => setUpdatePasswordData({ ...updatePasswordData, newPassword: e.target.value })}
+              onChange={(e) =>
+                setUpdatePasswordData({
+                  ...updatePasswordData,
+                  newPassword: e.target.value,
+                })
+              }
               value={updatePasswordData.newPassword}
               type="password"
               name="newPassword"
@@ -161,9 +186,16 @@ const ProfileSettings = () => {
             />
           </div>
           <div className="flex-col">
-            <p>Confirm New Password <span className="requiredStar">*</span></p>
+            <p>
+              Confirm New Password <span className="requiredStar">*</span>
+            </p>
             <input
-              onChange={(e) => setUpdatePasswordData({ ...updatePasswordData, confirmNewPassword: e.target.value })}
+              onChange={(e) =>
+                setUpdatePasswordData({
+                  ...updatePasswordData,
+                  confirmNewPassword: e.target.value,
+                })
+              }
               value={updatePasswordData.confirmNewPassword}
               type="password"
               name="confirmNewPassword"
@@ -174,7 +206,9 @@ const ProfileSettings = () => {
           </div>
           <div className="cart-total">
             <button type="submit" disabled={disabled || updatePasswordDisabled}>
-              {updatePasswordDisabled ? "Changing Password..." : "Change Password"}
+              {updatePasswordDisabled
+                ? "Changing Password..."
+                : "Change Password"}
             </button>
           </div>
         </div>

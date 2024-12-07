@@ -1,103 +1,118 @@
-.order-container {
-    width: 80%;
-    margin: 40px auto;
-  }
-  
-  h2 {
-    text-align: left;
-    color: #333;
-    margin-bottom: 20px;
-    margin-top: 14px;
-  }
-  
-  /* Table Wrapper */
-  .table-wrapper {
-    width: 100%;
-    overflow-x: auto; /* Enables horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    margin-bottom: 20px; /* Space below table */
-  }
-  
-  /* Basic table styling */
-  .scrollable-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .scrollable-table th,
-  .scrollable-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .scrollable-table th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .scrollable-table tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-  
-  .scrollable-table td {
-    font-size: 16px;
-  }
-  
-  /* Ensuring the table doesn't overflow the container */
-  .table-wrapper {
-    overflow-x: auto;
-  }
-  
-  .scrollable-table {
-    min-width: 600px; /* Prevents the table from shrinking too much */
-  }
-  
-  /* Status Badges */
-.status {
+.orders-container {
+  margin-top: 100px;
+}
+
+.orders-container .orders-separator {
+  margin-top: 10px;
+  border: none;
+  height: 1px;
+  background-color: #e2e2e2;
+  margin-bottom: 25px;
+}
+
+.orders-container h2 {
+  text-align: left;
+  color: #333;
+  margin-bottom: 20px;
+  margin-top: 14px;
+}
+
+.orders-container .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 20px;
+}
+
+.orders-container .scrollable-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.orders-container .scrollable-table th,
+.orders-container .scrollable-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: gray;
+  padding-left: 0px;
+}
+
+.orders-container .scrollable-table th {
+  background-color: inherit;
+  color: gray;
+  font-size: max(1vw, 12px) !important;
+  font-weight: 500;
+}
+
+.orders-container .scrollable-table td:hover {
+  cursor: pointer;
+}
+
+.orders-container .scrollable-table td {
+  font-size: 16px;
+}
+
+.orders-container .table-wrapper {
+  overflow-x: auto;
+}
+
+.orders-container .scrollable-table {
+  min-width: 600px;
+}
+
+.orders-container .status {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  /* border-radius: 2px; */
+  font-size: 11px;
+  font-weight: 500;
   text-transform: capitalize;
-  padding: 1px 10px;
-  border-radius: 20px;
-  font-weight: bold;
   text-align: center;
-  color: #fff;
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.status.pending {
+.orders-container .status.pending {
   background-color: #323883;
+  font-weight: 500;
 }
 
-.status.paid {
+.orders-container .status.paid {
   background-color: #b1c461;
+  font-weight: 500;
 }
 
-.status.shipped {
+.orders-container .status.shipped {
   background-color: #4CAF50;
+  font-weight: 500;
 }
 
-.status.processing {
+.orders-container .status.processing {
   background-color: #ff9800;
+  font-weight: 500;
 }
 
-.status.delivered {
+.orders-container .status.delivered {
   background-color: #2196F3;
+  font-weight: 500;
 }
 
-.status.canceled {
+.orders-container .status.canceled {
   background-color: #f44336;
+  font-weight: 500;
 }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .scrollable-table th,
-    .scrollable-table td {
-      padding: 10px;
-    }
-  
-    .scrollable-table td {
-      font-size: 14px;
-    }
+@media (max-width: 768px) {
+
+  .orders-container .scrollable-table th,
+  .orders-container .scrollable-table td {
+    padding: 10px;
   }
+
+  .orders-container .scrollable-table td {
+    font-size: 14px;
+  }
+}

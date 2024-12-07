@@ -25,17 +25,17 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
             `api/order/change-status`,
             {
               status: value,
-              id: data._id
+              id: data._id,
             },
             {
               headers: {
-                token
-              }
+                token,
+              },
             }
           );
 
           if (response.data.success) {
-            toast.success(response.data.message)
+            toast.success(response.data.message);
             fetchOrderList();
             closeModal();
           } else {
@@ -48,24 +48,40 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
         setOrderStatus(data.status);
       }
     });
-  }
+  };
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Order Details {isAdmin && (`- ${selectedOrderId}`)}</h2>
-        <span className="close" onClick={closeModal}>&times;</span>
+        <h2>Order Details {isAdmin && `- ${selectedOrderId}`}</h2>
+        <span className="close" onClick={closeModal}>
+          &times;
+        </span>
         <div className="modal-header">
-          { isAdmin && <p><strong>Customer:</strong> {data.userId.name}, {data.userId.email}</p> }
-          <p><strong>Payable Price:</strong> ₹{data.amount}</p>
-          <p><strong>Payment Status:</strong> <span className={`status ${data.paymentStatus}`}>{data.paymentStatus}</span></p>
-          <p><strong>Order Status:</strong> <span className={`status ${data.status}`}>{data.status}</span></p>
-          {
-            isAdmin && <div>
+          {isAdmin && (
+            <p>
+              <strong>Customer:</strong> {data.userId.name}, {data.userId.email}
+            </p>
+          )}
+          <p>
+            <strong>Amount Paid:</strong> ₹{data.amount.toFixed(2)}
+          </p>
+          <p>
+            <strong>Payment Status:</strong>{" "}
+            <span className={`status ${data.paymentStatus}`}>
+              {data.paymentStatus}
+            </span>
+          </p>
+          <p>
+            <strong>Order Status:</strong>{" "}
+            <span className={`status ${data.status}`}>{data.status}</span>
+          </p>
+          {isAdmin && (
+            <div>
               <label htmlFor="orderStatus">Change Order Status: </label>
-              <select 
-                id="orderStatus" 
-                value={orderStatus} 
-                onChange={e => handleStatusChange(e.target.value)}
+              <select
+                id="orderStatus"
+                value={orderStatus}
+                onChange={(e) => handleStatusChange(e.target.value)}
               >
                 <option value="pending">Pending</option>
                 <option value="processing">Processing</option>
@@ -74,19 +90,25 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
                 <option value="canceled">Canceled</option>
               </select>
             </div>
-          }
+          )}
         </div>
-        
+
         <div className="order-items">
-          <h3>Order Items</h3>
+          <h3>Ordered Items</h3>
           <table className="items-table">
             <thead>
               <tr>
-                <th>Image</th>
                 <th>Item</th>
-                <th>Price/Item</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Qty.</th>
+
+                <th>Price</th>
+                <th>
+                  Delivery <br />
+                  Charge
+                </th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
@@ -101,9 +123,12 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
                     />
                   </td>
                   <td>{item.name}</td>
-                  <td>₹{item.price}</td>
+                  <td>₹{item.price.toFixed(2)}</td>
                   <td>{item.quantity}</td>
-                  <td>₹{item.price * item.quantity}</td>
+
+                  <td>₹{(item.price * item.quantity).toFixed(2)}</td>
+                  <td>₹{2}</td>
+                  <td>₹{(item.price * item.quantity + 2).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,8 +7,32 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { NameInitialsAvatar } from "react-name-initials-avatar";
 import Avatar from "react-avatar";
-
 const Navbar = ({ setShowLogin }) => {
+  const navigate = useNavigate(); // useNavigate hook to navigate programmatically
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const section = document.getElementById(hash.replace("#", ""));
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    // Trigger scroll if there's a hash when the component first loads
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
   const {
     getTotalCartAmount,
     token,
@@ -19,8 +43,6 @@ const Navbar = ({ setShowLogin }) => {
     activeMenu,
     setActiveMenu,
   } = useContext(StoreContext);
-
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     setToken(null);
@@ -57,12 +79,7 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#explore-menu"
-          onClick={() => {
-            console.log(window.location.origin);
-
-            window.location.href = window.location.origin + "#explore-menu";
-            setActiveMenu("menu");
-          }}
+          onClick={() => navigate("/#explore-menu")}
           className={activeMenu === "menu" ? "active" : ""}
         >
           Menu
@@ -76,21 +93,14 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#mobile-app-download"
-          onClick={() => {
-            window.location.href =
-              window.location.origin + "#mobile-app-download";
-            setActiveMenu("mobile-app");
-          }}
+          onClick={() => navigate("/#mobile-app-download")}
           className={activeMenu === "mobile-app" ? "active" : ""}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={() => {
-            window.location.href = window.location.origin + "#contact-us";
-            setActiveMenu("contact-us");
-          }}
+          onClick={() => navigate("/#contact-us")}
           className={activeMenu === "contact-us" ? "active" : ""}
         >
           Contact Us
@@ -102,7 +112,7 @@ const Navbar = ({ setShowLogin }) => {
           className="searchIcon"
           src={assets.search_icon}
           alt="Search Icon"
-          title="Search"
+          title="Search Food"
           onClick={handleSearchClick}
         />
         <div className="navbar-basket-icon">
