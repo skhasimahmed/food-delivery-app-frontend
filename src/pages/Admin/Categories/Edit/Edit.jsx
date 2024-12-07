@@ -73,7 +73,7 @@ const Edit = () => {
     <div className="update-category-page">
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="update-image-upload flex-col">
-          <p>Upload Image</p>
+          <p>Upload Image <span className="requiredStar">*</span></p>
           <label htmlFor="image">
             <img
               src={
@@ -99,7 +99,7 @@ const Edit = () => {
 
         <div className="update-category-name">
           <div className="flex-col">
-            <p>Category Name</p>
+            <p>Category Name <span className="requiredStar">*</span></p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -114,7 +114,7 @@ const Edit = () => {
 
         <div className="update-category-description">
           <div className="flex-col">
-            <p>Category Description</p>
+            <p>Category Description <span className="requiredStar">*</span></p>
             <textarea
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })

@@ -33,6 +33,7 @@
     background-color: black;
     color: white;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .add-category-page .add-button:disabled {

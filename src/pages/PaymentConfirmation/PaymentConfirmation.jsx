@@ -83,7 +83,7 @@ const PaymentConfirmation = () => {
             </strong>
           </p>
 
-          <button onClick={() => navigate("/#explore-menu")}>View Menu</button>
+          <button onClick={() => navigate("/user/orders")}>View Orders</button>
         </div>
       ) : (
         <div className="failed">

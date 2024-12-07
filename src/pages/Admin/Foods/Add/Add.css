@@ -43,6 +43,7 @@
     background-color: black;
     color: white;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .add-button:disabled {

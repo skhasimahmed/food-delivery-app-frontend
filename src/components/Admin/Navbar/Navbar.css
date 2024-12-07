@@ -6,8 +6,18 @@
     position: relative;
 }
 
-.navbar .logo {
+.navbar .admin-logo {
     width: max(10%, 80px);
+    cursor: pointer;
+}
+
+
+/* center hr */
+.navbar hr.dropdown-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .navbar .profile {
@@ -46,13 +56,13 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.dropdown-item:hover {
-    background-color: tomato;
-    color: white;
-}
-
 .dropdown-item i {
     transition: transform 0.3s;
+    color: tomato;
+}
+
+.dropdown-item:hover {
+    color: tomato;
 }
 
 .dropdown-item:hover i {
@@ -60,7 +70,7 @@
 }
 
 @media (max-width: 900px) {
-    .navbar .logo {
+    .navbar .admin-logo {
         width: 80px;
     }
 

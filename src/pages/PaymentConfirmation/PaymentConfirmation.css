@@ -2,6 +2,10 @@
     margin-top: 100px;
 }
 
+.payment-confirmation h2 {
+    text-align: center;
+}
+
 .payment-confirmation .success,
 .payment-confirmation .failed {
     text-align: center;

@@ -1,30 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../../../common/axiosInstance";
 import DocumentTitle from "../../../../common/documentTitle";
 import "./List.css";
 
 import Swal from "sweetalert2";
-import { NavLink, useNavigate } from "react-router-dom";
-import { assets } from "../../../../assets/admin/assets";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { StoreContext } from "../../../../context/StoreContext";
 const Users = () => {
   DocumentTitle("Users");
-
-  const [users, setUsers] = useState([]);
-
-  const fetchUsers = async () => {
-    try {
-      const {
-        data: { data },
-      } = await axiosInstance.get("api/users");
-      setUsers(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { userList, fetchUserList, usersLoading } = useContext(StoreContext);
 
   useEffect(() => {
-    fetchUsers();
+    fetchUserList();
   }, []);
 
   const navigate = useNavigate();
@@ -35,7 +23,7 @@ const Users = () => {
 
   const removeUser = async ({ _id, isAdmin }) => {
     if (isAdmin) {
-      toast.warning("Admin user cannot be deleted");
+      toast.warning("Admin user cannot be deleted.");
       return;
     }
 
@@ -54,7 +42,7 @@ const Users = () => {
           );
           if (response.data.success) {
             toast.success(response.data.message);
-            fetchUsers();
+            fetchUserList();
           } else {
             toast.error(response.data.message);
           }
@@ -69,10 +57,6 @@ const Users = () => {
     <div className="users-list flex-col">
       <div className="list-header">
         <span className="title">All Users</span>
-        <NavLink to="/admin/users/add" className="add-user">
-          <img src={assets.add_icon} alt="Add Icon" />
-          <p>Add User</p>
-        </NavLink>
       </div>
       <div className="list-table">
         <div className="list-table-format title">
@@ -83,8 +67,11 @@ const Users = () => {
           <b>Stripe ID</b>
           <b style={{ textAlign: "center" }}>Action</b>
         </div>
-        {users.length > 0 &&
-          users.map((item, index) => {
+
+        {usersLoading && <div className="loader loading"></div>}
+
+        {userList.length > 0 &&
+          userList.map((item, index) => {
             return (
               <div className="list-table-format" key={index}>
                 <p className="user-name" onClick={() => editUser(item._id)}>
@@ -114,7 +101,7 @@ const Users = () => {
             );
           })}
 
-        {users.length === 0 && (
+        {!usersLoading && userList.length === 0 && (
           <div className="no-data">
             <p>No data found!</p>
           </div>

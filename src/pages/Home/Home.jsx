@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import Header from "../../components/Header/Header";
 import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
 import FoodDisplay from "../../components/FoodDisplay/FoodDisplay";
 import MobileAppDownload from "../../components/MobileAppDownload/MobileAppDownload";
 
 const Home = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
-  const [category, setCategory] = useState("All");
+  const homeMenuRef = useRef();
   return (
-    <div className="home">
+    <div className="home" id="home-menu" ref={homeMenuRef}>
       <Header />
-      <ExploreMenu category={category} setCategory={setCategory} />
-      <FoodDisplay category={category} />
+      <ExploreMenu />
+      <FoodDisplay />
       <MobileAppDownload />
     </div>
   );

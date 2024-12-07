@@ -48,3 +48,7 @@ a {
     opacity: 1;
   }
 }
+
+.requiredStar {
+  color: red;
+}

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import DocumentTitle from "../../../common/documentTitle";
-import "./Orders.css";
-import { StoreContext } from "../../../context/StoreContext";
-import OrderPopup from "../../../components/OrderPopUp/OrderPopup";
-const Orders = () => {
-  const { orderList, fetchOrderList, orderIsLoading } =
+import "./UserOrders.css";
+import OrderPopup from "../../components/OrderPopUp/OrderPopup";
+import DocumentTitle from "../../common/documentTitle";
+import { StoreContext } from "../../context/StoreContext";
+const UserOrders = () => {
+  const { orderList, fetchOrderList, authUser, orderIsLoading, setActiveMenu } =
     useContext(StoreContext);
   DocumentTitle("Orders");
 
@@ -13,7 +13,8 @@ const Orders = () => {
   const [selectedOrderId, setSelectedOrderId] = useState("");
 
   useEffect(() => {
-    fetchOrderList();
+    setActiveMenu("");
+    fetchOrderList(authUser.userId);
   }, []);
 
   // Function to open modal and set selected row
@@ -31,15 +32,14 @@ const Orders = () => {
   };
 
   return (
-    <div className="order-container">
-      <span>All Orders</span>
+    <div className="orders-container">
+      <h2>Orders</h2>
       <hr className="orders-separator" />
       <div className="table-wrapper">
         <table className="scrollable-table">
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
+              <th>Sl. No.</th>
               <th>Total Items</th>
               <th>Total Amount</th>
               <th>Payment Status</th>
@@ -62,10 +62,7 @@ const Orders = () => {
                       key={index}
                       onClick={() => handleRowClick(item, `#00${index}`)}
                     >
-                      <td>#00{index}</td>
-                      <td>
-                        {item.userId.name}, {item.userId.email}
-                      </td>
+                      <td>{index + 1}</td>
                       <td>{item.items?.length}</td>
                       <td>₹{item.amount}</td>
                       <td>
@@ -83,13 +80,12 @@ const Orders = () => {
                 })
               ) : (
                 <tr>
-                  <td colSpan="6">No Orders Found!</td>
+                  <td colSpan="5">No order(s) found!</td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
-      {/* Modal will only open if isModalOpen is true */}
       {isModalOpen && (
         <OrderPopup
           data={selectedRow}
@@ -101,4 +97,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default UserOrders;

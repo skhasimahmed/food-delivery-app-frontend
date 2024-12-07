@@ -29,8 +29,13 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [foodList, setFoodList] = useState([]);
+  const [currentFetchFoodUrl, setCurrentFetchFoodUrl] = useState({});
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
+  const [userList, setUserList] = useState([]);
+  const [orderList, setOrderList] = useState([]);
+  const [orderIsLoading, setOrderIsLoading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -68,13 +73,67 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  const fetchFoodList = async () => {
+  const fetchFoodList = async (
+    page = 1,
+    limit = 8,
+    search = "",
+    category = "All",
+    priceShort = "lowToHigh"
+  ) => {
+    let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`;
+    searchQueryString += search ? `&search=${search}` : "";
     const response = await axiosInstance
-      .get(`${API_BASE_URL}api/food/list`)
+      .get(`${API_BASE_URL}api/food/list${searchQueryString}`)
       .catch((err) => {
         toast.error(err.response.data.message);
       });
     setFoodList(response.data.data);
+    setCurrentFetchFoodUrl({
+      page: page,
+      limit: limit,
+      search: search,
+      category: category,
+      priceShort: priceShort,
+      totalFoods: response.data.totalFoods,
+      totalPages: response.data.totalPages,
+    });
+  };
+
+  const fetchUserList = async () => {
+    setUsersLoading(true);
+    const response = await axiosInstance
+      .get(`${API_BASE_URL}api/users`, {
+        headers: {
+          token,
+        },
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+
+    if (response.data.success) {
+      setUsersLoading(false);
+    } else toast.error("Failed to fetch users.");
+
+    setUserList(response.data.data);
+  };
+
+  const fetchOrderList = async (userId = "") => {
+    const queryParam = userId.length > 0 ? `?orderUserId=${userId}` : "";
+    setOrderIsLoading(true);
+    await axiosInstance
+      .get(`${API_BASE_URL}api/order/all${queryParam}`, {
+        headers: {
+          token,
+        },
+      })
+      .then((response) => {
+        setOrderIsLoading(false);
+        setOrderList(response.data.data);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const fetchCategories = async () => {
@@ -139,8 +198,6 @@ const StoreContextProvider = (props) => {
     // setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (token) {
-      console.log("removeFromCart", itemId);
-
       Swal.fire({
         text: "Are you sure you want to remove this food item from cart?",
         showCancelButton: true,
@@ -180,11 +237,9 @@ const StoreContextProvider = (props) => {
 
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = foodList.find((product) => {
-          return product._id === item;
-        });
+        let itemInfo = foodList.find((product) => product._id === item);
 
-        totalAmount += itemInfo.price * cartItems[item];
+        if (itemInfo) totalAmount += itemInfo.price * cartItems[item];
       }
     }
 
@@ -193,6 +248,13 @@ const StoreContextProvider = (props) => {
 
   const contextValue = {
     foodList,
+    fetchFoodList,
+    currentFetchFoodUrl,
+    fetchUserList,
+    userList,
+    fetchOrderList,
+    orderIsLoading,
+    orderList,
     cartItems,
     setCartItems,
     addToCart,
@@ -214,6 +276,8 @@ const StoreContextProvider = (props) => {
     setActiveMenu,
 
     categories,
+
+    usersLoading,
   };
 
   return (

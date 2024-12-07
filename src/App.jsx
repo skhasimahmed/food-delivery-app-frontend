@@ -26,6 +26,9 @@ import Sidebar from "./components/Admin/Sidebar/Sidebar";
 import ListCategories from "./pages/Admin/Categories/List/List";
 import AddCategory from "./pages/Admin/Categories/Add/Add";
 import EditCategory from "./pages/Admin/Categories/Edit/Edit";
+import ProfileSettings from "./pages/Users/ProfileSettings";
+import UserOrders from "./pages/Users/UserOrders";
+import Foods from "./pages/Food/Foods";
 
 const App = () => {
   const { showLogin, setShowLogin, isAdmin } = useContext(StoreContext);
@@ -51,12 +54,19 @@ const App = () => {
             <UserNavbar setShowLogin={setShowLogin} />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route
+                path="/foods"
+                key={location.pathname}
+                element={<Foods />}
+              />
               <Route path="/cart" element={<Cart />} />
               <Route path="/place-order" element={<PlaceOrder />} />
               <Route
                 path="/payment-confirmation"
                 element={<PaymentConfirmation />}
               />
+              <Route path="/user/profile" element={<ProfileSettings />} />
+              <Route path="/user/orders" element={<UserOrders />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

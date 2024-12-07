@@ -1,0 +1,87 @@
+.user-profile {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 100px;
+    width: 100%;
+
+}
+
+.user-profile-left {
+    width: 500px;
+}
+
+.user-profile-left .title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+.user-profile-left p {
+    margin-bottom: 5px;
+}
+
+.user-profile-left input {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+}
+
+.user-profile-left .input-groups {
+    display: flex;
+    gap: 10px;
+}
+
+.user-profile-left input[type="email"] {
+    cursor: not-allowed;
+}
+
+.user-profile-right {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.button-div {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.button-div button {
+    padding: 10px 20px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width:750px) {
+    .user-profile {
+        flex-direction: column;
+    }
+
+    .user-profile-left {
+        width: 500px;
+    }
+}
+
+@media (max-width:560px) {
+    .user-profile {
+        flex-direction: column;
+    }
+
+    .user-profile-left {
+        width: 320px;
+    }
+}
+
+.user-profile img {
+    width: 120px;
+    cursor: pointer;
+}
