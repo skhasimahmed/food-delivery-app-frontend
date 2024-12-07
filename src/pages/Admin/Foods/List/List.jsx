@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./List.css";
-
 import Swal from "sweetalert2";
-
 import { assets } from "../../../../assets/admin/assets";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../../common/axiosInstance";
@@ -13,16 +11,19 @@ const List = () => {
   const navigate = useNavigate();
 
   const { API_BASE_URL } = useContext(StoreContext);
+  const [loading, setLoading] = useState(false);
 
   DocumentTitle("Foods");
 
   const [foodList, setFoodList] = useState([]);
 
   const fetchAdminFoodList = async () => {
+    setLoading(true);
     const response = await axiosInstance.get(`${API_BASE_URL}api/food/list`);
 
     if (response.data.success) {
       setFoodList(response.data.data);
+      setLoading(false);
     } else toast.error(response.data.message);
   };
 
@@ -79,6 +80,9 @@ const List = () => {
           <b>Price</b>
           <b style={{ textAlign: "center" }}>Action</b>
         </div>
+
+        {loading && <div className="loader loading"></div>}
+
         {foodList.length > 0 &&
           foodList.map((item, index) => {
             return (
@@ -114,7 +118,7 @@ const List = () => {
             );
           })}
 
-        {foodList.length === 0 && (
+        {!loading && foodList.length === 0 && (
           <div className="no-data">
             <p>No food(s) found!</p>
           </div>

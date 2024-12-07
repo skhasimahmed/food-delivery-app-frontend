@@ -17,7 +17,6 @@ import axiosInstance from "../../../common/axiosInstance";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -148,7 +147,6 @@ const Dashboard = () => {
     }
   };
 
-  // Sample data for Users chart
   const usersData = {
     labels: userChart.labels,
     datasets: [
@@ -157,12 +155,10 @@ const Dashboard = () => {
         data: userChart.data,
         borderColor: "#28a745",
         backgroundColor: "rgba(40, 167, 69, 0.2)",
-        // fill: true,
       },
     ],
   };
 
-  // Sample data for Orders chart
   const ordersData = {
     labels: orderChart.labels,
     datasets: [
@@ -171,12 +167,10 @@ const Dashboard = () => {
         data: orderChart.data,
         borderColor: "#007bff",
         backgroundColor: "rgba(0, 123, 255, 0.2)",
-        // fill: true,
       },
     ],
   };
 
-  // Sample data for Revenue chart
   const revenueData = {
     labels: revenueChart.labels,
     datasets: [
@@ -185,13 +179,24 @@ const Dashboard = () => {
         data: revenueChart.data,
         borderColor: "#ffc107",
         backgroundColor: "rgba(255, 193, 7, 0.2)",
-        // fill: true,
       },
     ],
   };
 
-  // Common chart options
   const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Chart Title",
+      },
+    },
+  };
+
+  const revenueChartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -203,8 +208,9 @@ const Dashboard = () => {
       },
       tooltip: {
         callbacks: {
-          // Customize tooltip for the Revenue chart
           label: function (tooltipItem) {
+            console.log(tooltipItem);
+
             return (
               "₹" +
               Number(
@@ -224,24 +230,21 @@ const Dashboard = () => {
           Welcome, <strong>{authUser.name}</strong>
         </span>
       </div>
-
-      {/* Row 1: Cards */}
       <div className="dashboard-row">
         <Link className="dashboard-card" to="/admin/users">
           <h3>Total Users</h3>
-          <p>{userList.length}</p>
+          <p className="value">{userList.length}</p>
         </Link>
         <Link className="dashboard-card" to="/admin/orders">
           <h3>Total Orders</h3>
-          <p>{orderList.length}</p>
+          <p className="value">{orderList.length}</p>
         </Link>
         <div className="dashboard-card">
           <h3>Revenue</h3>
-          <p>₹{revenue}</p>
+          <p className="value">₹{revenue}</p>
         </div>
       </div>
 
-      {/* Row 2: Charts */}
       <div className="dashboard-row">
         <div className="dashboard-chart">
           <Line
@@ -271,9 +274,9 @@ const Dashboard = () => {
           <Line
             data={revenueData}
             options={{
-              ...chartOptions,
+              ...revenueChartOptions,
               plugins: {
-                ...chartOptions.plugins,
+                ...revenueChartOptions.plugins,
                 title: { text: "Revenue Growth" },
               },
             }}

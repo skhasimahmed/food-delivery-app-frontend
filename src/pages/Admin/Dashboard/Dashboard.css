@@ -1,14 +1,9 @@
 .dashboard-container {
     width: 70%;
-    /* Use 100% width to allow it to shrink properly on smaller screens */
     max-width: 1200px;
-
     margin-left: max(5vw, 25px);
-    /* Optional: Set a max width for the dashboard */
     margin: 61px;
-    /* Center the container with auto margin */
     padding: 0 20px;
-    /* Add padding inside for a better layout */
     color: #6d6d6d;
     font-size: 16px;
 }
@@ -26,10 +21,8 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    /* Use gap for spacing between items */
     margin-bottom: 20px;
     flex-wrap: wrap;
-    /* Allow it to wrap on smaller screens */
 }
 
 .dashboard-card,
@@ -40,21 +33,17 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    /* Adds space below each card/chart */
     text-align: center;
 }
 
-/* Responsive Adjustments */
 @media screen and (max-width: 1024px) {
     .dashboard-row {
         flex-wrap: wrap;
-        /* Wrap items on smaller screens */
     }
 
     .dashboard-card,
     .dashboard-chart {
         flex: 1 1 calc(50% - 10px);
-        /* Cards will take 50% of the width with a gap */
         margin: 10px 0;
     }
 }
@@ -64,25 +53,22 @@
     .dashboard-card,
     .dashboard-chart {
         flex: 1 1 100%;
-        /* Cards will take full width on small screens */
         margin: 10px 0;
     }
 }
 
-/* Styling for the cards */
 .dashboard-card h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
     color: #333;
 }
 
-.dashboard-card p {
+.dashboard-card p.value {
     font-size: 2rem;
     font-weight: bold;
-    color: #28a745;
+    color: tomato;
 }
 
-/* Placeholder for charts styling */
 .dashboard-chart h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;

@@ -1,16 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../../../common/axiosInstance";
 import DocumentTitle from "../../../../common/documentTitle";
 import "./List.css";
 
 import Swal from "sweetalert2";
-import { NavLink, useNavigate } from "react-router-dom";
-import { assets } from "../../../../assets/admin/assets";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { StoreContext } from "../../../../context/StoreContext";
 const Users = () => {
   DocumentTitle("Users");
-  const { userList, fetchUserList } = useContext(StoreContext);
+  const { userList, fetchUserList, usersLoading } = useContext(StoreContext);
 
   useEffect(() => {
     fetchUserList();
@@ -24,7 +23,7 @@ const Users = () => {
 
   const removeUser = async ({ _id, isAdmin }) => {
     if (isAdmin) {
-      toast.warning("Admin user cannot be deleted");
+      toast.warning("Admin user cannot be deleted.");
       return;
     }
 
@@ -68,6 +67,9 @@ const Users = () => {
           <b>Stripe ID</b>
           <b style={{ textAlign: "center" }}>Action</b>
         </div>
+
+        {usersLoading && <div className="loader loading"></div>}
+
         {userList.length > 0 &&
           userList.map((item, index) => {
             return (
@@ -99,7 +101,7 @@ const Users = () => {
             );
           })}
 
-        {userList.length === 0 && (
+        {!usersLoading && userList.length === 0 && (
           <div className="no-data">
             <p>No data found!</p>
           </div>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
+import { use } from "react";
 
 export const StoreContext = createContext(null);
 
@@ -35,6 +36,7 @@ const StoreContextProvider = (props) => {
   const [userList, setUserList] = useState([]);
   const [orderList, setOrderList] = useState([]);
   const [orderIsLoading, setOrderIsLoading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -99,6 +101,7 @@ const StoreContextProvider = (props) => {
   };
 
   const fetchUserList = async () => {
+    setUsersLoading(true);
     const response = await axiosInstance
       .get(`${API_BASE_URL}api/users`, {
         headers: {
@@ -108,6 +111,11 @@ const StoreContextProvider = (props) => {
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+
+    if (response.data.success) {
+      setUsersLoading(false);
+    } else toast.error("Failed to fetch users.");
+
     setUserList(response.data.data);
   };
 
@@ -269,6 +277,8 @@ const StoreContextProvider = (props) => {
     setActiveMenu,
 
     categories,
+
+    usersLoading,
   };
 
   return (

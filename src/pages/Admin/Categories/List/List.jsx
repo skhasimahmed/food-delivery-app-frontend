@@ -15,12 +15,24 @@ const List = () => {
 
   const [categoryList, setCategoryList] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   const fetchCategories = async () => {
+    setLoading(true);
     try {
       const {
         data: { data },
+        data: { success },
       } = await axiosInstance.get("api/categories");
       setCategoryList(data);
+
+      if (!success) {
+        toast.error("Failed to fetch categories.");
+      }
+
+      if (success) {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +90,9 @@ const List = () => {
           <b>Description</b>
           <b style={{ textAlign: "center" }}>Action</b>
         </div>
+
+        {loading && <div className="loader loading"></div>}
+
         {categoryList.length > 0 &&
           categoryList.map((item, index) => {
             return (
@@ -115,7 +130,7 @@ const List = () => {
             );
           })}
 
-        {categoryList.length === 0 && (
+        {!loading && categoryList.length === 0 && (
           <div className="no-data">
             <p>No data found!</p>
           </div>
