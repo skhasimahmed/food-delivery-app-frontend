@@ -30,20 +30,27 @@ ChartJS.register(
 
 const Dashboard = () => {
   DocumentTitle("Dashboard");
-  const { authUser, userList, fetchUserList, orderList, fetchOrderList, token } = useContext(StoreContext);
-  const [revenue, setRevenue] = useState(0)
+  const {
+    authUser,
+    userList,
+    fetchUserList,
+    orderList,
+    fetchOrderList,
+    token,
+  } = useContext(StoreContext);
+  const [revenue, setRevenue] = useState(0);
   const [userChart, setUserChart] = useState({
     labels: [],
-    data: []
-  })
+    data: [],
+  });
   const [orderChart, setOrderChart] = useState({
     labels: [],
-    data: []
-  })
+    data: [],
+  });
   const [revenueChart, setRevenueChart] = useState({
     labels: [],
-    data: []
-  })
+    data: [],
+  });
   useEffect(() => {
     fetchUserList();
     fetchOrderList();
@@ -53,14 +60,11 @@ const Dashboard = () => {
 
   const getTotalRevenue = async () => {
     try {
-      const response = await axiosInstance.get(
-        `api/order/revenue`,
-        {
-          headers: {
-            token
-          },
-        }
-      );      
+      const response = await axiosInstance.get(`api/order/revenue`, {
+        headers: {
+          token,
+        },
+      });
       if (response.data.success) {
         setRevenue(response.data.revenue);
       } else {
@@ -69,7 +73,7 @@ const Dashboard = () => {
     } catch (error) {
       toast.error("An error occurred while fetching revenue!");
     }
-  }
+  };
 
   const months = [
     "January",
@@ -85,19 +89,15 @@ const Dashboard = () => {
     "November",
     "December",
   ];
-  
 
   const getChartData = async () => {
     try {
-      const response = await axiosInstance.get(
-        `api/charts`,
-        {
-          headers: {
-            token
-          },
-        }
-      );
-         
+      const response = await axiosInstance.get(`api/charts`, {
+        headers: {
+          token,
+        },
+      });
+
       if (response.data.success) {
         const userChartLabels = [];
         const userChartData = [];
@@ -105,42 +105,48 @@ const Dashboard = () => {
         const orderChartData = [];
         const revenueChartLabels = [];
         const revenueChartData = [];
-        response.data.users = response.data.users?.sort((a, b) => Number(a._id) - Number(b._id))
-        response.data.users.map(user => {
-          userChartLabels.push(months[user._id - 1])
-          userChartData.push(user.totalUsers)
-        })
+        response.data.users = response.data.users?.sort(
+          (a, b) => Number(a._id) - Number(b._id)
+        );
+        response.data.users.map((user) => {
+          userChartLabels.push(months[user._id - 1]);
+          userChartData.push(user.totalUsers);
+        });
         setUserChart({
           labels: userChartLabels,
-          data: userChartData
-        })
+          data: userChartData,
+        });
 
-        response.data.orders = response.data.orders?.sort((a, b) => Number(a._id) - Number(b._id))
-        response.data.orders.map(order => {
-          orderChartLabels.push(months[order._id - 1])
-          orderChartData.push(order.totalOrder)
-        })
+        response.data.orders = response.data.orders?.sort(
+          (a, b) => Number(a._id) - Number(b._id)
+        );
+        response.data.orders.map((order) => {
+          orderChartLabels.push(months[order._id - 1]);
+          orderChartData.push(order.totalOrder);
+        });
         setOrderChart({
           labels: orderChartLabels,
-          data: orderChartData
-        })
+          data: orderChartData,
+        });
 
-        response.data.revenue = response.data.revenue?.sort((a, b) => Number(a._id) - Number(b._id))
-        response.data.revenue.map(revenue => {
-          revenueChartLabels.push(months[revenue._id - 1])
-          revenueChartData.push(revenue.totalRevenue)
-        })
+        response.data.revenue = response.data.revenue?.sort(
+          (a, b) => Number(a._id) - Number(b._id)
+        );
+        response.data.revenue.map((revenue) => {
+          revenueChartLabels.push(months[revenue._id - 1]);
+          revenueChartData.push(revenue.totalRevenue);
+        });
         setRevenueChart({
           labels: revenueChartLabels,
-          data: revenueChartData
-        })
+          data: revenueChartData,
+        });
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       toast.error("An error occurred while fetching revenue!");
     }
-  }
+  };
 
   // Sample data for Users chart
   const usersData = {
@@ -155,7 +161,7 @@ const Dashboard = () => {
       },
     ],
   };
-  
+
   // Sample data for Orders chart
   const ordersData = {
     labels: orderChart.labels,
@@ -183,7 +189,6 @@ const Dashboard = () => {
       },
     ],
   };
-  
 
   // Common chart options
   const chartOptions = {
@@ -196,13 +201,28 @@ const Dashboard = () => {
         display: true,
         text: "Chart Title",
       },
+      tooltip: {
+        callbacks: {
+          // Customize tooltip for the Revenue chart
+          label: function (tooltipItem) {
+            return (
+              "₹" +
+              Number(
+                tooltipItem.raw.toLocaleString().replace(/,/g, "")
+              ).toFixed(2)
+            );
+          },
+        },
+      },
     },
   };
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <span className="title">Welcome, {authUser.name}</span>
+        <span className="title">
+          Welcome, <strong>{authUser.name}</strong>
+        </span>
       </div>
 
       {/* Row 1: Cards */}
@@ -256,7 +276,7 @@ const Dashboard = () => {
                 ...chartOptions.plugins,
                 title: { text: "Revenue Growth" },
               },
-            }} 
+            }}
           />
         </div>
       </div>
