@@ -57,6 +57,8 @@ const Dashboard = () => {
     getChartData();
   }, []);
 
+  const [chartDataLoading, setChartDataLoading] = useState(false);
+
   const getTotalRevenue = async () => {
     try {
       const response = await axiosInstance.get(`api/order/revenue`, {
@@ -91,6 +93,8 @@ const Dashboard = () => {
 
   const getChartData = async () => {
     try {
+      setChartDataLoading(true);
+
       const response = await axiosInstance.get(`api/charts`, {
         headers: {
           token,
@@ -139,10 +143,13 @@ const Dashboard = () => {
           labels: revenueChartLabels,
           data: revenueChartData,
         });
+
+        setChartDataLoading(false);
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
+      setChartDataLoading(false);
       toast.error("An error occurred while fetching revenue!");
     }
   };
@@ -230,59 +237,66 @@ const Dashboard = () => {
           Welcome, <strong>{authUser.name}</strong>
         </span>
       </div>
-      <div className="dashboard-row">
-        <Link className="dashboard-card" to="/admin/users">
-          <h3>Total Users</h3>
-          <p className="value">{userList.length}</p>
-        </Link>
-        <Link className="dashboard-card" to="/admin/orders">
-          <h3>Total Orders</h3>
-          <p className="value">{orderList.length}</p>
-        </Link>
-        <div className="dashboard-card">
-          <h3>Revenue</h3>
-          <p className="value">₹{revenue}</p>
-        </div>
-      </div>
 
-      <div className="dashboard-row">
-        <div className="dashboard-chart">
-          <Line
-            data={usersData}
-            options={{
-              ...chartOptions,
-              plugins: {
-                ...chartOptions.plugins,
-                title: { text: "Users Growth" },
-              },
-            }}
-          />
-        </div>
-        <div className="dashboard-chart">
-          <Line
-            data={ordersData}
-            options={{
-              ...chartOptions,
-              plugins: {
-                ...chartOptions.plugins,
-                title: { text: "Orders Growth" },
-              },
-            }}
-          />
-        </div>
-        <div className="dashboard-chart">
-          <Line
-            data={revenueData}
-            options={{
-              ...revenueChartOptions,
-              plugins: {
-                ...revenueChartOptions.plugins,
-                title: { text: "Revenue Growth" },
-              },
-            }}
-          />
-        </div>
-      </div>
+      {chartDataLoading ? (
+        <div className="loader loading"></div>
+      ) : (
+        <>
+          <div className="dashboard-row">
+            <Link className="dashboard-card" to="/admin/users">
+              <h3>Total Users</h3>
+              <p className="value">{userList.length}</p>
+            </Link>
+            <Link className="dashboard-card" to="/admin/orders">
+              <h3>Total Orders</h3>
+              <p className="value">{orderList.length}</p>
+            </Link>
+            <div className="dashboard-card">
+              <h3>Revenue</h3>
+              <p className="value">₹{revenue}</p>
+            </div>
+          </div>
+
+          <div className="dashboard-row">
+            <div className="dashboard-chart">
+              <Line
+                data={usersData}
+                options={{
+                  ...chartOptions,
+                  plugins: {
+                    ...chartOptions.plugins,
+                    title: { text: "Users Growth" },
+                  },
+                }}
+              />
+            </div>
+            <div className="dashboard-chart">
+              <Line
+                data={ordersData}
+                options={{
+                  ...chartOptions,
+                  plugins: {
+                    ...chartOptions.plugins,
+                    title: { text: "Orders Growth" },
+                  },
+                }}
+              />
+            </div>
+            <div className="dashboard-chart">
+              <Line
+                data={revenueData}
+                options={{
+                  ...revenueChartOptions,
+                  plugins: {
+                    ...revenueChartOptions.plugins,
+                    title: { text: "Revenue Growth" },
+                  },
+                }}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
