@@ -37,8 +37,14 @@ const Navbar = () => {
         onMouseEnter={toggleDropdown}
         onMouseLeave={toggleDropdown}
       >
-        {
-          authUser.image ? <Avatar className="imageAvatar" size="40" src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image} round /> : 
+        {authUser.image ? (
+          <Avatar
+            className="imageAvatar"
+            size="40"
+            src={import.meta.env.VITE_CLOUDINARY_BASE_URL + authUser.image}
+            round
+          />
+        ) : (
           <NameInitialsAvatar
             name={authUser?.name}
             textColor={"Tomato"}
@@ -47,15 +53,17 @@ const Navbar = () => {
             borderColor="Tomato"
             borderWidth="1px"
           />
-        }
+        )}
         {isDropdownOpen && (
           <div className="dropdown-menu">
             <div className="dropdown-item">
-              <Link to="/admin/settings"><i className="fas fa-user-edit"></i> &nbsp;Edit Profile</Link>
+              <Link to="/admin/settings">
+                <i className="fas fa-gear"></i> &nbsp;Settings
+              </Link>
             </div>
-            <div className="dropdown-item">
+            {/* <div className="dropdown-item">
             <Link to="/admin/settings"><i className="fas fa-key"></i> &nbsp;Change Password</Link>
-            </div>
+            </div> */}
             <div className="dropdown-item" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt"></i> &nbsp;Logout
             </div>

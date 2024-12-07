@@ -3,6 +3,7 @@ import FoodDisplay from "../../components/FoodDisplay/FoodDisplay";
 import "./Foods.css";
 import { StoreContext } from "../../context/StoreContext";
 import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
+import { useLocation } from "react-router-dom";
 
 const Foods = () => {
   const { foodList, fetchFoodList, currentFetchFoodUrl, setActiveMenu } =
@@ -61,9 +62,18 @@ const Foods = () => {
     }
   }, [foodList]);
 
+  const location = useLocation();
+
   useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
     setActiveMenu("foods");
-  }, []);
+  }, [location]);
 
   return (
     <div className="home" id="foods-menu">
@@ -79,7 +89,7 @@ const Foods = () => {
         </div>
       </div>
       <ExploreMenu />
-      <div className="search-container">
+      <div className="search-container" id="search-container">
         <input
           type="text"
           placeholder="Search your favorite foods from here..."

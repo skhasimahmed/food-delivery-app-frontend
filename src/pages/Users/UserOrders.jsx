@@ -80,13 +80,12 @@ const UserOrders = () => {
                 })
               ) : (
                 <tr>
-                  <td colSpan="5">No Orders Found!</td>
+                  <td colSpan="5">No order(s) found!</td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
-      {/* Modal will only open if isModalOpen is true */}
       {isModalOpen && (
         <OrderPopup
           data={selectedRow}

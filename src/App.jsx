@@ -54,21 +54,19 @@ const App = () => {
             <UserNavbar setShowLogin={setShowLogin} />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/foods" element={<Foods />} />
+              <Route
+                path="/foods"
+                key={location.pathname}
+                element={<Foods />}
+              />
               <Route path="/cart" element={<Cart />} />
               <Route path="/place-order" element={<PlaceOrder />} />
               <Route
                 path="/payment-confirmation"
                 element={<PaymentConfirmation />}
               />
-              <Route
-                path="/user/settings"
-                element={<ProfileSettings />}
-              />
-              <Route
-                path="/user/orders"
-                element={<UserOrders />}
-              />
+              <Route path="/user/settings" element={<ProfileSettings />} />
+              <Route path="/user/orders" element={<UserOrders />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

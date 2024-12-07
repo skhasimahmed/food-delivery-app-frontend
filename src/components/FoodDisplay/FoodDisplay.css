@@ -32,9 +32,22 @@
 .no-products-message .no-products-header {
   font-size: 2rem;
   color: #ff6347;
-  /* Tomato color for emphasis */
   margin-bottom: 20px;
 }
+
+
+select#sortOrder {
+  font-size: 16px;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
 
 .no-products-message p {
   font-size: 1rem;
@@ -43,7 +56,6 @@
   line-height: 1.6;
 }
 
-/* Style for the View More button */
 .view-more-btn {
   background-color: tomato;
   color: white;
@@ -56,7 +68,6 @@
   margin-top: 20px;
 }
 
-/* Hover effect for the View More button */
 .view-more-btn:hover {
   opacity: 0.9;
 }
@@ -68,47 +79,20 @@
   margin-top: 50px;
 }
 
-/* Basic style for the select element */
-select {
-  font-size: 16px;
-  padding: 10px 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  color: #333;
-  appearance: none;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Flexbox container for right-alignment */
 .container {
   display: flex;
   justify-content: space-between;
-  /* This will space out the elements to the left and right */
   align-items: center;
-  /* Vertically aligns the items in the center */
   width: 100%;
-  /* Ensures the container takes up the full width of the parent */
-}
-
-/* Styling for focused select */
-select:focus {
-  border-color: #4CAF50;
-  background-color: #eafaf1;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    /* Stack the items vertically on smaller screens */
     align-items: flex-start;
-    /* Align items to the left */
   }
 
   select {
     width: 100%;
-    /* Make the select dropdown take up the full width on small screens */
   }
 }

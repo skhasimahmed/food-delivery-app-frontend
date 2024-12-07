@@ -56,8 +56,8 @@ const Navbar = ({ setShowLogin }) => {
   };
 
   const handleSearchClick = () => {
-    setActiveMenu("foods");
-    navigate("/foods");
+    navigate("/foods#search-container");
+    // setActiveMenu("foods");
   };
 
   return (
@@ -70,7 +70,7 @@ const Navbar = ({ setShowLogin }) => {
         <Link
           to="/"
           onClick={() => {
-            window.location.href = window.location.origin;
+            navigate("/");
             setActiveMenu("home");
           }}
           className={activeMenu === "home" ? "active" : ""}
@@ -79,7 +79,10 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#explore-menu"
-          onClick={() => navigate("/#explore-menu")}
+          onClick={() => {
+            navigate("/#explore-menu");
+            setActiveMenu("menu");
+          }}
           className={activeMenu === "menu" ? "active" : ""}
         >
           Menu
@@ -93,14 +96,20 @@ const Navbar = ({ setShowLogin }) => {
         </Link>
         <a
           href="#mobile-app-download"
-          onClick={() => navigate("/#mobile-app-download")}
+          onClick={() => {
+            navigate("/#mobile-app-download");
+            setActiveMenu("mobile-app");
+          }}
           className={activeMenu === "mobile-app" ? "active" : ""}
         >
           Mobile App
         </a>
         <a
           href="#contact-us"
-          onClick={() => navigate("/#contact-us")}
+          onClick={() => {
+            navigate("/#contact-us");
+            setActiveMenu("contact-us");
+          }}
           className={activeMenu === "contact-us" ? "active" : ""}
         >
           Contact Us
