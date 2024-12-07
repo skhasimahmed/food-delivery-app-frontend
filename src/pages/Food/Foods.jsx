@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import FoodDisplay from "../../components/FoodDisplay/FoodDisplay";
 import "./Foods.css";
 import { StoreContext } from "../../context/StoreContext";
@@ -64,11 +64,16 @@ const Foods = () => {
 
   const location = useLocation();
 
+  const searchInputRef = useRef(null);
+
   useEffect(() => {
     if (location.hash) {
       const element = document.getElementById(location.hash.replace("#", ""));
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
+        if (searchInputRef.current) {
+          searchInputRef.current.focus(); // Focus the input
+        }
       }
     }
 
@@ -96,6 +101,7 @@ const Foods = () => {
           className="search-input"
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue}
+          ref={searchInputRef}
         />
         <button
           className="search-btn"

@@ -63,7 +63,7 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
             </p>
           )}
           <p>
-            <strong>Amount Paid:</strong> ₹{data.amount.toFixed(2)}
+            <strong>Amount:</strong> ₹{data.amount.toFixed(2)}
           </p>
           <p>
             <strong>Payment Status:</strong>{" "}
@@ -102,13 +102,7 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
                 <th>Name</th>
                 <th>Price</th>
                 <th>Qty.</th>
-
-                <th>Price</th>
-                <th>
-                  Delivery <br />
-                  Charge
-                </th>
-                <th>Total</th>
+                <th className="total">Total</th>
               </tr>
             </thead>
             <tbody>
@@ -125,12 +119,26 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
                   <td>{item.name}</td>
                   <td>₹{item.price.toFixed(2)}</td>
                   <td>{item.quantity}</td>
-
-                  <td>₹{(item.price * item.quantity).toFixed(2)}</td>
-                  <td>₹{2}</td>
-                  <td>₹{(item.price * item.quantity + 2).toFixed(2)}</td>
+                  <td className="total">
+                    ₹{(item.price * item.quantity).toFixed(2)}
+                  </td>
                 </tr>
               ))}
+              <tr>
+                <td colSpan="4">
+                  <strong>Delivery Charge</strong>
+                </td>
+                <td colSpan="1" className="total">
+                  ₹{2}.00
+                </td>
+              </tr>
+              <tr></tr>
+              <td colSpan="4">
+                <strong>Grand Total</strong>
+              </td>
+              <td colSpan="1" className="total">
+                ₹{data.amount.toFixed(2)}
+              </td>
             </tbody>
           </table>
         </div>

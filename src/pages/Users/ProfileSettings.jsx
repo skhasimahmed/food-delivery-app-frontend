@@ -86,10 +86,10 @@ const ProfileSettings = () => {
       });
   };
   return (
-    <div className="place-order">
+    <div className="user-profile">
       <form onSubmit={handleSubmit}>
-        <div className="place-order-left">
-          <p className="title">Update profile</p>
+        <div className="user-profile-left">
+          <p className="title">Update Profile</p>
           <div className="flex-col">
             <p>Upload Profile Image</p>
             <label htmlFor="image">
@@ -137,7 +137,7 @@ const ProfileSettings = () => {
               disabled
             />
           </div>
-          <div className="cart-total">
+          <div className="button-div">
             <button type="submit" disabled={disabled || updatePasswordDisabled}>
               {disabled ? "Updating..." : "Update"}
             </button>
@@ -145,7 +145,7 @@ const ProfileSettings = () => {
         </div>
       </form>
       <form onSubmit={handleUpdatePasswordSubmit}>
-        <div className="place-order-left">
+        <div className="user-profile-left">
           <p className="title">Change Password</p>
           <div className="flex-col">
             <p>
@@ -204,7 +204,7 @@ const ProfileSettings = () => {
               required
             />
           </div>
-          <div className="cart-total">
+          <div className="button-div">
             <button type="submit" disabled={disabled || updatePasswordDisabled}>
               {updatePasswordDisabled
                 ? "Changing Password..."
