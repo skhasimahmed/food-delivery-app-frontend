@@ -65,7 +65,7 @@ const App = () => {
                 path="/payment-confirmation"
                 element={<PaymentConfirmation />}
               />
-              <Route path="/user/settings" element={<ProfileSettings />} />
+              <Route path="/user/profile" element={<ProfileSettings />} />
               <Route path="/user/orders" element={<UserOrders />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

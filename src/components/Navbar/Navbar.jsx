@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { NameInitialsAvatar } from "react-name-initials-avatar";
 import Avatar from "react-avatar";
 const Navbar = ({ setShowLogin }) => {
-  const navigate = useNavigate(); // useNavigate hook to navigate programmatically
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -171,7 +171,7 @@ const Navbar = ({ setShowLogin }) => {
                   }}
                 ></i>
                 <p style={{ marginLeft: "5px" }}>
-                  <Link to="/user/settings">Profile</Link>
+                  <Link to="/user/profile">Profile</Link>
                 </p>
               </li>
               <hr />
