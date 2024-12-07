@@ -108,7 +108,7 @@ const Settings = () => {
             />
           </div>
 
-          <div className="add-category-name">
+          <div className="name">
             <div className="flex-col">
               <p>
                 Name <span className="requiredStar">*</span>
@@ -125,7 +125,7 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="add-category-name">
+          <div className="email">
             <div className="flex-col">
               <p>Email</p>
               <input
@@ -140,19 +140,22 @@ const Settings = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="add-button"
-            disabled={disabled || updatePasswordDisabled}
-          >
-            {disabled ? "Updating..." : "Update"}
-          </button>
+          <div className="update-profile-button-container">
+            <button
+              type="submit"
+              className="add-button"
+              disabled={disabled || updatePasswordDisabled}
+            >
+              {disabled ? "Updating..." : "Update"}
+            </button>
+          </div>
         </form>
       </div>
+
       <div className="add-settings-page">
         <h2>Change Password</h2>
         <form className="flex-col" onSubmit={handleUpdatePasswordSubmit}>
-          <div className="add-category-name">
+          <div className="current-password">
             <div className="flex-col">
               <p>
                 Current Password <span className="requiredStar">*</span>
@@ -174,7 +177,7 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="add-category-name">
+          <div className="new-password">
             <div className="flex-col">
               <p>
                 New Password <span className="requiredStar">*</span>
@@ -196,7 +199,7 @@ const Settings = () => {
             </div>
           </div>
 
-          <div className="add-category-name">
+          <div className="confirm-new-password">
             <div className="flex-col">
               <p>
                 Confirm New Password <span className="requiredStar">*</span>
@@ -218,15 +221,17 @@ const Settings = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="change-password-button"
-            disabled={disabled || updatePasswordDisabled}
-          >
-            {updatePasswordDisabled
-              ? "Changing Password..."
-              : "Change Password"}
-          </button>
+          <div className="change-password-button-container">
+            <button
+              type="submit"
+              className="change-password-button"
+              disabled={disabled || updatePasswordDisabled}
+            >
+              {updatePasswordDisabled
+                ? "Changing Password..."
+                : "Change Password"}
+            </button>
+          </div>
         </form>
       </div>
     </>

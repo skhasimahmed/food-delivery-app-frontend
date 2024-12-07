@@ -20,17 +20,29 @@
     cursor: not-allowed;
 }
 
-.add-settings-page .add-category-name,
-.add-settings-page .add-category-description {
-    width: max(40%, 280px);
+.add-settings-page .name,
+.add-settings-page .email,
+.add-settings-page .new-password,
+.add-settings-page .confirm-new-password,
+.add-settings-page .current-password {
+    width: 80%;
 }
 
-.add-settings-page .add-category-name input,
-.add-settings-page .add-category-description textarea {
+.add-settings-page .name input,
+.add-settings-page .email input,
+.add-settings-page .new-password input,
+.add-settings-page .confirm-new-password input,
+.add-settings-page .current-password input {
     padding: 10px;
     width: 100%;
 }
 
+/* .add-settings-page .update-profile-button-container,
+.add-settings-page .change-password-button-container {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+} */
 
 .add-settings-page .add-button {
     max-width: 120px;

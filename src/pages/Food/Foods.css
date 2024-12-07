@@ -8,6 +8,14 @@
   margin-top: 40px;
 }
 
+.foods-header {
+  background: url('/foods-banner.png');
+  /* object-fit: fill; */
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+}
+
 /* Style for the search input */
 .search-input {
   flex-grow: 1;

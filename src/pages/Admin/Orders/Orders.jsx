@@ -32,7 +32,7 @@ const Orders = () => {
 
   return (
     <div className="order-container">
-      <span>Orders</span>
+      <span>All Orders</span>
       <hr className="orders-separator" />
       <div className="table-wrapper">
         <table className="scrollable-table">
