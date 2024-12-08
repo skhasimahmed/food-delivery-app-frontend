@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const {
     cartItems,
-    foodList,
     removeFromCart,
     getTotalCartAmount,
     token,
     setActiveMenu,
+    allFoods,
+    allFoodsLoading,
+    cartLoading,
   } = useContext(StoreContext);
 
   useEffect(() => {
@@ -29,6 +31,10 @@ const Cart = () => {
 
   return (
     <div className="cart">
+      {(allFoodsLoading || cartLoading) && (
+        <div className="loader loading"></div>
+      )}
+
       {Object.keys(cartItems).length > 0 && (
         <div className="cart-items-container">
           <h2>Cart</h2>
@@ -49,7 +55,7 @@ const Cart = () => {
             <br />
             <hr />
 
-            {foodList.map((item, index) => {
+            {allFoods.map((item, index) => {
               if (cartItems[item._id] > 0) {
                 return (
                   <div key={index}>
@@ -117,7 +123,7 @@ const Cart = () => {
         </div>
       )}
 
-      {Object.keys(cartItems).length === 0 && (
+      {!cartLoading && Object.keys(cartItems).length === 0 && (
         <div className="empty-cart">
           <p>Your cart is currently empty.</p>
           <small>

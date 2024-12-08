@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../common/axiosInstance";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, cartItems, API_BASE_URL, foodList } =
+  const { getTotalCartAmount, token, cartItems, API_BASE_URL, allFoods } =
     useContext(StoreContext);
 
   const [addressData, setAddressData] = useState({
@@ -36,7 +36,7 @@ const PlaceOrder = () => {
 
     const orderItems = [];
 
-    foodList.map((item) => {
+    allFoods.map((item) => {
       if (cartItems[item._id] > 0) {
         orderItems.push({
           ...item,
