@@ -1,32 +1,13 @@
 import "./ExploreMenu.css";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { StoreContext } from "../../context/StoreContext";
 
 const ExploreMenu = () => {
-  const { categories, setActiveMenu, fetchFoodList, currentFetchFoodUrl } =
+  const { categories, handleActiveCategory, selectedCategory } =
     useContext(StoreContext);
   const exploreMenuRef = useRef(null);
-
-  const [category, setCategory] = useState("All");
-
-  const handleActiveCategory = (itemName) => {
-    let selectedCategory = category === itemName ? "All" : itemName;
-    setCategory(selectedCategory);
-    fetchFoodList(
-      currentFetchFoodUrl.page,
-      currentFetchFoodUrl.limit,
-      currentFetchFoodUrl.search,
-      selectedCategory,
-      currentFetchFoodUrl.priceShort
-    );
-    setActiveMenu("foods");
-  };
-
-  // Get the full URL
   const url = window.location.href;
-  // Split the URL into segments using '/' as the delimiter
   const segments = url.split("/");
-  // Get the last segment (the last part after the last '/')
   const lastSegment = segments[segments.length - 1];
 
   return (
@@ -50,7 +31,7 @@ const ExploreMenu = () => {
           className="explore-menu-list-item"
         >
           <img
-            className={category === "All" ? "active" : ""}
+            className={selectedCategory === "All" ? "active" : ""}
             src={`${
               import.meta.env.VITE_CLOUDINARY_BASE_URL
             }development/1732863211853-1000_F_286178925_8zk89O9uC5JJVPvqhvBMUpaRxp8AFXzD`}
@@ -66,7 +47,7 @@ const ExploreMenu = () => {
               className="explore-menu-list-item"
             >
               <img
-                className={category === item.name ? "active" : ""}
+                className={selectedCategory === item.name ? "active" : ""}
                 src={`${import.meta.env.VITE_CLOUDINARY_BASE_URL}${item.image}`}
                 alt={item.name}
               />

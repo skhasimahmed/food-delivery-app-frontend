@@ -17,6 +17,8 @@ import axiosInstance from "../../../common/axiosInstance";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
+import { assets } from "../../../assets/admin/assets";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -50,12 +52,27 @@ const Dashboard = () => {
     labels: [],
     data: [],
   });
+
+  const [greetingMessage, setGreetingMessage] = useState("");
+
   useEffect(() => {
+    greeting();
+
     fetchUserList();
     fetchOrderList();
     getTotalRevenue();
     getChartData();
   }, []);
+
+  const greeting = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12)
+      setGreetingMessage("Good Morning");
+    else if (currentHour >= 12 && currentHour < 17)
+      setGreetingMessage("Good Afternoon");
+    else setGreetingMessage("Good Evening");
+  };
 
   const [chartDataLoading, setChartDataLoading] = useState(false);
 
@@ -236,6 +253,13 @@ const Dashboard = () => {
         <span className="title">
           Welcome, <strong>{authUser.name}</strong>
         </span>
+
+        <div
+          style={{ fontSize: "1.2rem", color: "tomato", fontWeight: "bold" }}
+        >
+          {/* <img src={assets.afternoon_icon} width={"35px"} height={"35px"} /> */}
+          {/* {greetingMessage} */}
+        </div>
       </div>
 
       {chartDataLoading ? (

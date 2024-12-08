@@ -61,7 +61,7 @@ const Orders = () => {
                   return (
                     <tr
                       key={index}
-                      onClick={() => handleRowClick(item, `#00${index}`)}
+                      onClick={() => handleRowClick(item, item._id)}
                     >
                       <td>{item._id}</td>
                       <td>
