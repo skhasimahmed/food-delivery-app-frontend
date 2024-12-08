@@ -50,7 +50,7 @@ const Orders = () => {
           <tbody>
             {orderIsLoading && (
               <tr>
-                <td colSpan="6">
+                <td colSpan="7">
                   <div className="loader loading"></div>
                 </td>
               </tr>
