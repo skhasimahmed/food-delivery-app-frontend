@@ -79,6 +79,22 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const handleActiveCategory = (itemName) => {
+    let newCategory = selectedCategory === itemName ? "All" : itemName;
+    setSelectedCategory(newCategory);
+    fetchFoodList(
+      currentFetchFoodUrl.page,
+      currentFetchFoodUrl.limit,
+      currentFetchFoodUrl.search,
+      newCategory,
+      currentFetchFoodUrl.priceShort
+    );
+
+    setActiveMenu("foods");
+  };
+
   const fetchFoodList = async (
     page = 1,
     limit = 8,
@@ -313,6 +329,9 @@ const StoreContextProvider = (props) => {
     categories,
 
     usersLoading,
+
+    selectedCategory,
+    handleActiveCategory,
   };
 
   return (

@@ -9,6 +9,9 @@ import users_icon from "../admin/users_icon.png";
 import settings_icon from "../admin/settings_icon.png";
 import dashboard_icon from "../admin/dashboard_icon.png";
 import categories_icon from "../admin/categories_icon.png";
+import morning_icon from "../admin/morning_icon.png";
+import afternoon_icon from "../admin/afternoon_icon.png";
+import evening_icon from "../admin/evening_icon.png";
 
 export const assets = {
   logo,
@@ -22,6 +25,9 @@ export const assets = {
   settings_icon,
   dashboard_icon,
   categories_icon,
+  morning_icon,
+  afternoon_icon,
+  evening_icon,
 };
 
 export const url = "http://localhost:4000";
