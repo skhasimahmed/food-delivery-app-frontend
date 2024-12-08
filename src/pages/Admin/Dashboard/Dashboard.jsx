@@ -53,7 +53,7 @@ const Dashboard = () => {
     data: [],
   });
 
-  const [greetingMessage, setGreetingMessage] = useState("");
+  const [greetingMessage, setGreetingMessage] = useState("Good morning");
 
   useEffect(() => {
     greeting();
@@ -68,10 +68,10 @@ const Dashboard = () => {
     const currentHour = new Date().getHours();
 
     if (currentHour >= 5 && currentHour < 12)
-      setGreetingMessage("Good Morning");
+      setGreetingMessage("Good morning");
     else if (currentHour >= 12 && currentHour < 17)
-      setGreetingMessage("Good Afternoon");
-    else setGreetingMessage("Good Evening");
+      setGreetingMessage("Good afternoon");
+    else setGreetingMessage("Good evening");
   };
 
   const [chartDataLoading, setChartDataLoading] = useState(false);
@@ -254,11 +254,45 @@ const Dashboard = () => {
           Welcome, <strong>{authUser.name}</strong>
         </span>
 
-        <div
-          style={{ fontSize: "1.2rem", color: "tomato", fontWeight: "bold" }}
-        >
-          {/* <img src={assets.afternoon_icon} width={"35px"} height={"35px"} /> */}
-          {/* {greetingMessage} */}
+        <div style={{ fontSize: "1.2rem", color: "tomato", fontWeight: 600 }}>
+          {greetingMessage === "Good morning" && (
+            <img
+              src={assets.morning_icon}
+              width={"35px"}
+              height={"35px"}
+              style={{
+                position: "relative",
+                top: "7px",
+                right: "10px",
+              }}
+            />
+          )}
+          {greetingMessage === "Good afternoon" && (
+            <img
+              src={assets.afternoon_icon}
+              width={"35px"}
+              height={"35px"}
+              style={{
+                position: "relative",
+                top: "7px",
+                right: "10px",
+              }}
+            />
+          )}
+          {greetingMessage === "Good evening" && (
+            <img
+              src={assets.evening_icon}
+              width={"35px"}
+              height={"35px"}
+              style={{
+                position: "relative",
+                top: "7px",
+                right: "10px",
+              }}
+            />
+          )}
+
+          {`${greetingMessage}!`}
         </div>
       </div>
 
