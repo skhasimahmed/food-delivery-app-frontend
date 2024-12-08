@@ -6,6 +6,11 @@
     font-size: 16px;
 }
 
+.users-list .list-header .title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .users-list form {
     gap: 20px;
 }

@@ -23,6 +23,10 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
+  const proceedToCheckoutHandler = () => {
+    navigate("/place-order");
+  };
+
   return (
     <div className="cart">
       {Object.keys(cartItems).length > 0 && (
@@ -95,7 +99,7 @@ const Cart = () => {
                   </strong>
                 </div>
               </div>
-              <button onClick={() => navigate("/place-order")}>
+              <button onClick={proceedToCheckoutHandler}>
                 PROCEED TO CHECKOUT
               </button>
             </div>

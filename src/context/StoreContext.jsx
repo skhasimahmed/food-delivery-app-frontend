@@ -28,7 +28,7 @@ const StoreContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [foodList, setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState(null);
   const [currentFetchFoodUrl, setCurrentFetchFoodUrl] = useState({});
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
@@ -36,6 +36,7 @@ const StoreContextProvider = (props) => {
   const [orderList, setOrderList] = useState([]);
   const [orderIsLoading, setOrderIsLoading] = useState(false);
   const [usersLoading, setUsersLoading] = useState(false);
+  const [foodsLoading, setFoodsLoading] = useState(true);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -80,6 +81,7 @@ const StoreContextProvider = (props) => {
     category = "All",
     priceShort = "lowToHigh"
   ) => {
+    setFoodsLoading(true);
     let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`;
     searchQueryString += search ? `&search=${search}` : "";
     const response = await axiosInstance
@@ -87,7 +89,11 @@ const StoreContextProvider = (props) => {
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+
+    setFoodsLoading(false);
+
     setFoodList(response.data.data);
+
     setCurrentFetchFoodUrl({
       page: page,
       limit: limit,
@@ -108,13 +114,13 @@ const StoreContextProvider = (props) => {
         },
       })
       .catch((err) => {
+        setUsersLoading(false);
         toast.error(err.response.data.message);
       });
 
-    if (response.data.success) {
-      setUsersLoading(false);
-    } else toast.error("Failed to fetch users.");
+    if (!response.data.success) toast.error("Failed to fetch users.");
 
+    setUsersLoading(false);
     setUserList(response.data.data);
   };
 
@@ -247,6 +253,7 @@ const StoreContextProvider = (props) => {
   };
 
   const contextValue = {
+    foodsLoading,
     foodList,
     fetchFoodList,
     currentFetchFoodUrl,

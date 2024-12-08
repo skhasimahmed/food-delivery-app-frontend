@@ -91,6 +91,20 @@ const OrderPopup = ({ data, selectedOrderId, closeModal }) => {
               </select>
             </div>
           )}
+
+          <p>
+            <strong>Date:</strong>{" "}
+            <span>
+              {new Date(data.createdAt).toLocaleString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              })}
+            </span>
+          </p>
         </div>
 
         <div className="order-items">

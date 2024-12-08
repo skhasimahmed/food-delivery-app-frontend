@@ -83,9 +83,14 @@ const Edit = () => {
 
   return (
     <div className="edit">
+      <div className="list-header">
+        <span className="title">Edit Food</span>
+      </div>
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="edit-image-upload flex-col">
-          <p>Upload Image <span className="requiredStar">*</span></p>
+          <p>
+            Upload Image <span className="requiredStar">*</span>
+          </p>
           <label htmlFor="image">
             <img
               src={
@@ -109,7 +114,9 @@ const Edit = () => {
 
         <div className="edit-product-name">
           <div className="flex-col">
-            <p>Product Name <span className="requiredStar">*</span></p>
+            <p>
+              Product Name <span className="requiredStar">*</span>
+            </p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -123,7 +130,9 @@ const Edit = () => {
 
         <div className="edit-product-description">
           <div className="flex-col">
-            <p>Product Description <span className="requiredStar">*</span></p>
+            <p>
+              Product Description <span className="requiredStar">*</span>
+            </p>
             <textarea
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
@@ -139,7 +148,9 @@ const Edit = () => {
 
         <div className="edit-category-price">
           <div className="edit-category flex-col">
-            <p>Category <span className="requiredStar">*</span></p>
+            <p>
+              Category <span className="requiredStar">*</span>
+            </p>
             <select
               name="category"
               id="category"
@@ -157,7 +168,9 @@ const Edit = () => {
             </select>
           </div>
           <div className="edit-price flex-col">
-            <p>Price <span className="requiredStar">*</span></p>
+            <p>
+              Price <span className="requiredStar">*</span>
+            </p>
             <input
               type="number"
               placeholder="₹ 99"

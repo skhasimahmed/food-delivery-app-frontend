@@ -6,8 +6,13 @@ import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
 import { useLocation } from "react-router-dom";
 
 const Foods = () => {
-  const { foodList, fetchFoodList, currentFetchFoodUrl, setActiveMenu } =
-    useContext(StoreContext);
+  const {
+    foodList,
+    fetchFoodList,
+    currentFetchFoodUrl,
+    setActiveMenu,
+    foodsLoading,
+  } = useContext(StoreContext);
   const [searchValue, setSearchValue] = useState("");
   const [searchingText, setSearchingText] = useState("");
   const [loadingButtons, setLoadingButtons] = useState({
@@ -126,8 +131,10 @@ const Foods = () => {
           {loadingButtons.clear}
         </button>
       </div>
+
       <FoodDisplay searchQuery={searchingText} />
-      {foodList.length > 0 && (
+
+      {!foodsLoading && foodList.length > 0 && (
         <div className="pagination">
           <button
             className="prev"

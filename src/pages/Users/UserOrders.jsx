@@ -39,9 +39,10 @@ const UserOrders = () => {
         <table className="scrollable-table">
           <thead>
             <tr>
-              <th>Sl. No.</th>
-              <th>Total Items</th>
-              <th>Total Amount</th>
+              <th>Order ID</th>
+              <th>Order Date</th>
+              <th>Quantity</th>
+              <th>Amount</th>
               <th>Payment Status</th>
               <th>Order Status</th>
             </tr>
@@ -62,7 +63,17 @@ const UserOrders = () => {
                       key={index}
                       onClick={() => handleRowClick(item, `#00${index}`)}
                     >
-                      <td>{index + 1}</td>
+                      <td>FDZ-{item._id}</td>
+                      <td>
+                        {new Date(item.createdAt).toLocaleString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        })}
+                      </td>
                       <td>{item.items?.length}</td>
                       <td>₹{item.amount}</td>
                       <td>

@@ -52,9 +52,14 @@ const Add = () => {
 
   return (
     <div className="add-category-page">
+      <div className="list-header">
+        <span className="title">Add Category</span>
+      </div>
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="add-image-upload flex-col">
-          <p>Upload Image <span className="requiredStar">*</span></p>
+          <p>
+            Upload Image <span className="requiredStar">*</span>
+          </p>
           <label htmlFor="image">
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
@@ -75,7 +80,9 @@ const Add = () => {
 
         <div className="add-category-name">
           <div className="flex-col">
-            <p>Category Name <span className="requiredStar">*</span></p>
+            <p>
+              Category Name <span className="requiredStar">*</span>
+            </p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -90,7 +97,9 @@ const Add = () => {
 
         <div className="add-category-description">
           <div className="flex-col">
-            <p>Category Description <span className="requiredStar">*</span></p>
+            <p>
+              Category Description <span className="requiredStar">*</span>
+            </p>
             <textarea
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })

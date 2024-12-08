@@ -6,6 +6,15 @@
     font-size: 16px;
 }
 
+.edit-user .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
 .edit-user form {
     gap: 20px;
 }

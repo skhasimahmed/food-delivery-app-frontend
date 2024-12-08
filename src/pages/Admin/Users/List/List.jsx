@@ -70,7 +70,8 @@ const Users = () => {
 
         {usersLoading && <div className="loader loading"></div>}
 
-        {userList.length > 0 &&
+        {!usersLoading &&
+          userList.length > 0 &&
           userList.map((item, index) => {
             return (
               <div className="list-table-format" key={index}>

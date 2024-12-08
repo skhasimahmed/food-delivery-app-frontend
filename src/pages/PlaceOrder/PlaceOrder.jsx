@@ -20,6 +20,8 @@ const PlaceOrder = () => {
     phone: "",
   });
 
+  const [disabledPaymentButton, setDisabledPaymentButton] = useState(false);
+
   const onChangeHandler = (e) => {
     setAddressData({
       ...addressData,
@@ -28,6 +30,8 @@ const PlaceOrder = () => {
   };
 
   const placeOrderHandler = async (e) => {
+    setDisabledPaymentButton(true);
+
     e.preventDefault();
 
     const orderItems = [];
@@ -60,6 +64,7 @@ const PlaceOrder = () => {
       const { url } = response.data;
       window.location.replace(url); // redirect to stripe
     } else {
+      setDisabledPaymentButton(false);
       toast.error(response.data.message);
     }
   };
@@ -168,7 +173,9 @@ const PlaceOrder = () => {
               </strong>
             </div>
           </div>
-          <button>PROCEED TO PAYMENT</button>
+          <button disabled={disabledPaymentButton}>
+            {disabledPaymentButton ? "PROCESSING..." : "PROCEED TO PAYMENT"}
+          </button>
         </div>
       </div>
     </form>
