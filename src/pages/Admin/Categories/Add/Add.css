@@ -6,6 +6,15 @@
     font-size: 16px;
 }
 
+.add-category-page .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
 .add-category-page form {
     gap: 20px;
 }

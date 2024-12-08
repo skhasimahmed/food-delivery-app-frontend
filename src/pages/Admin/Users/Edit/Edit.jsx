@@ -59,10 +59,15 @@ const Edit = () => {
 
   return (
     <div className="edit edit-user">
+      <div className="list-header">
+        <span className="title">Edit User</span>
+      </div>
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="edit-name">
           <div className="flex-col">
-            <p>Name <span className="requiredStar">*</span></p>
+            <p>
+              Name <span className="requiredStar">*</span>
+            </p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -113,7 +118,9 @@ const Edit = () => {
 
         <div className="edit-is-admin">
           <div className="flex-col">
-            <p>Is Admin? <span className="requiredStar">*</span></p>
+            <p>
+              Is Admin? <span className="requiredStar">*</span>
+            </p>
             <select
               name="isAdmin"
               id="isAdmin"

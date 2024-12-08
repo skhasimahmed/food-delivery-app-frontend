@@ -19,6 +19,8 @@ const PaymentConfirmation = () => {
 
   const [paymentInfo, setPaymentInfo] = useState();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setActiveMenu(null);
 
@@ -26,6 +28,8 @@ const PaymentConfirmation = () => {
   }, []);
 
   const getPaymentInfoByOrderId = async (orderId) => {
+    setLoading(true);
+
     await axios
       .get(`${API_BASE_URL}api/order/payment-info?orderId=${orderId}`, {
         headers: {
@@ -48,8 +52,11 @@ const PaymentConfirmation = () => {
           toast.error(response.data.message);
           navigate("/");
         }
+
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error(err.response.data.message);
         navigate("/");
       });
@@ -57,7 +64,9 @@ const PaymentConfirmation = () => {
 
   return (
     <div className="payment-confirmation">
-      {success == "true" ? (
+      {loading ? (
+        <div className="loader loading"></div>
+      ) : success === "true" ? (
         <div className="success">
           <i className="fa fa-check-circle" aria-hidden="true"></i>
           <h2> Payment successful! </h2>

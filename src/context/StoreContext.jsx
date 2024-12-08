@@ -28,7 +28,7 @@ const StoreContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [foodList, setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState(null);
   const [currentFetchFoodUrl, setCurrentFetchFoodUrl] = useState({});
   const [categories, setCategories] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
@@ -36,6 +36,10 @@ const StoreContextProvider = (props) => {
   const [orderList, setOrderList] = useState([]);
   const [orderIsLoading, setOrderIsLoading] = useState(false);
   const [usersLoading, setUsersLoading] = useState(false);
+  const [foodsLoading, setFoodsLoading] = useState(true);
+  const [allFoods, setAllFoods] = useState([]);
+  const [allFoodsLoading, setAllFoodsLoading] = useState(true);
+  const [cartLoading, setCartLoading] = useState(true);
 
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin")
@@ -64,6 +68,8 @@ const StoreContextProvider = (props) => {
   const loadData = async function () {
     await fetchFoodList();
 
+    await fetchAllFoods();
+
     await fetchCategories();
 
     if (localStorage.getItem("token")) {
@@ -80,6 +86,7 @@ const StoreContextProvider = (props) => {
     category = "All",
     priceShort = "lowToHigh"
   ) => {
+    setFoodsLoading(true);
     let searchQueryString = `?page=${page}&limit=${limit}&category=${category}&priceShort=${priceShort}`;
     searchQueryString += search ? `&search=${search}` : "";
     const response = await axiosInstance
@@ -87,7 +94,11 @@ const StoreContextProvider = (props) => {
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+
+    setFoodsLoading(false);
+
     setFoodList(response.data.data);
+
     setCurrentFetchFoodUrl({
       page: page,
       limit: limit,
@@ -99,6 +110,19 @@ const StoreContextProvider = (props) => {
     });
   };
 
+  const fetchAllFoods = async () => {
+    setAllFoodsLoading(true);
+    const response = await axiosInstance
+      .get(`${API_BASE_URL}api/food/all`)
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        setAllFoodsLoading(false);
+      });
+
+    setAllFoodsLoading(false);
+    setAllFoods(response.data.data);
+  };
+
   const fetchUserList = async () => {
     setUsersLoading(true);
     const response = await axiosInstance
@@ -108,13 +132,13 @@ const StoreContextProvider = (props) => {
         },
       })
       .catch((err) => {
+        setUsersLoading(false);
         toast.error(err.response.data.message);
       });
 
-    if (response.data.success) {
-      setUsersLoading(false);
-    } else toast.error("Failed to fetch users.");
+    if (!response.data.success) toast.error("Failed to fetch users.");
 
+    setUsersLoading(false);
     setUserList(response.data.data);
   };
 
@@ -144,6 +168,7 @@ const StoreContextProvider = (props) => {
   };
 
   const loadCartData = async (token) => {
+    setCartLoading(true);
     if (token) {
       await axiosInstance
         .get(`${API_BASE_URL}api/cart/get`, {
@@ -152,16 +177,21 @@ const StoreContextProvider = (props) => {
           },
         })
         .then((response) => {
+          setCartLoading(false);
           setCartItems(response.data.data);
         })
         .catch(() => {
+          setCartLoading(false);
           toast.error("Something went wrong. Please try again");
           setToken(null);
           localStorage.removeItem("token");
           setCartItems({});
           navigate("/");
         });
-    } else setCartItems({});
+    } else {
+      setCartItems({});
+      setCartLoading(false);
+    }
   };
 
   const addToCart = async (itemId) => {
@@ -237,7 +267,7 @@ const StoreContextProvider = (props) => {
 
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = foodList.find((product) => product._id === item);
+        let itemInfo = allFoods.find((product) => product._id === item);
 
         if (itemInfo) totalAmount += itemInfo.price * cartItems[item];
       }
@@ -247,6 +277,9 @@ const StoreContextProvider = (props) => {
   };
 
   const contextValue = {
+    foodsLoading,
+    allFoodsLoading,
+    allFoods,
     foodList,
     fetchFoodList,
     currentFetchFoodUrl,
@@ -265,6 +298,8 @@ const StoreContextProvider = (props) => {
     setToken,
     showLogin,
     setShowLogin,
+
+    cartLoading,
 
     isAdmin,
     setIsAdmin,

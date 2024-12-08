@@ -5,8 +5,13 @@ import FoodItem from "../FoodItem/FoodItem";
 import { useNavigate } from "react-router-dom";
 
 const FoodDisplay = ({ searchQuery = "" }) => {
-  const { foodList, setActiveMenu, currentFetchFoodUrl, fetchFoodList } =
-    useContext(StoreContext);
+  const {
+    foodList,
+    setActiveMenu,
+    currentFetchFoodUrl,
+    fetchFoodList,
+    foodsLoading,
+  } = useContext(StoreContext);
   const foodsMenuRef = useRef();
 
   // Get the full URL
@@ -60,7 +65,10 @@ const FoodDisplay = ({ searchQuery = "" }) => {
           </select>
         </div>
       </div>
-      {foodList.length > 0 ? (
+
+      {foodsLoading && <div className="loader loading"></div>}
+
+      {!foodsLoading && foodList.length > 0 && (
         <>
           <div className="food-display-list">
             {foodList.map((item, index) => {
@@ -85,7 +93,9 @@ const FoodDisplay = ({ searchQuery = "" }) => {
             </div>
           )}
         </>
-      ) : (
+      )}
+
+      {!foodsLoading && foodList.length === 0 && (
         <div className="no-products-container">
           <div className="no-products-message">
             <h3 className="no-products-header">No food(s) found!</h3>

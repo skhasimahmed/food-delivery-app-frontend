@@ -58,9 +58,14 @@ const Add = () => {
 
   return (
     <div className="add">
+      <div className="list-header">
+        <span className="title">Add Food</span>
+      </div>
       <form className="flex-col" onSubmit={handleSubmit}>
         <div className="add-image-upload flex-col">
-          <p>Upload Image <span className="requiredStar">*</span></p>
+          <p>
+            Upload Image <span className="requiredStar">*</span>
+          </p>
           <label htmlFor="image">
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
@@ -79,7 +84,9 @@ const Add = () => {
 
         <div className="add-product-name">
           <div className="flex-col">
-            <p>Product Name <span className="requiredStar">*</span></p>
+            <p>
+              Product Name <span className="requiredStar">*</span>
+            </p>
             <input
               onChange={(e) => setData({ ...data, name: e.target.value })}
               value={data.name}
@@ -93,7 +100,9 @@ const Add = () => {
 
         <div className="add-product-description">
           <div className="flex-col">
-            <p>Product Description <span className="requiredStar">*</span></p>
+            <p>
+              Product Description <span className="requiredStar">*</span>
+            </p>
             <textarea
               onChange={(e) =>
                 setData({ ...data, description: e.target.value })
@@ -109,7 +118,9 @@ const Add = () => {
 
         <div className="add-category-price">
           <div className="add-category flex-col">
-            <p>Category <span className="requiredStar">*</span></p>
+            <p>
+              Category <span className="requiredStar">*</span>
+            </p>
             <select
               name="category"
               id="category"
@@ -127,7 +138,9 @@ const Add = () => {
             </select>
           </div>
           <div className="add-price flex-col">
-            <p>Price <span className="requiredStar">*</span></p>
+            <p>
+              Price <span className="requiredStar">*</span>
+            </p>
             <input
               type="number"
               placeholder="₹ 99"

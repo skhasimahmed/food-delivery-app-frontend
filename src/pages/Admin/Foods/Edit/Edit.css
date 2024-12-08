@@ -6,6 +6,19 @@
     font-size: 16px;
 }
 
+.edit .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+}
+
+.edit .list-header .title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .edit form {
     gap: 20px;
 }

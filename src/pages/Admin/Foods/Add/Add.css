@@ -6,6 +6,18 @@
     font-size: 16px;
 }
 
+.add .list-header .title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.add .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
 .add form {
     gap: 20px;
 }

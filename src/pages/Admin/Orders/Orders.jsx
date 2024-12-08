@@ -32,7 +32,7 @@ const Orders = () => {
 
   return (
     <div className="order-container">
-      <span>All Orders</span>
+      <span className="list-header">All Orders</span>
       <hr className="orders-separator" />
       <div className="table-wrapper">
         <table className="scrollable-table">
@@ -40,8 +40,9 @@ const Orders = () => {
             <tr>
               <th>Order ID</th>
               <th>Customer</th>
-              <th>Total Items</th>
-              <th>Total Amount</th>
+              <th>Order Date</th>
+              <th>Quantity</th>
+              <th>Amount</th>
               <th>Payment Status</th>
               <th>Order Status</th>
             </tr>
@@ -62,9 +63,20 @@ const Orders = () => {
                       key={index}
                       onClick={() => handleRowClick(item, `#00${index}`)}
                     >
-                      <td>#00{index}</td>
+                      <td>{item._id}</td>
                       <td>
                         {item.userId.name}, {item.userId.email}
+                      </td>
+                      <td>
+                        {new Date(item.createdAt).toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          second: "numeric",
+                          hour12: true,
+                        })}
                       </td>
                       <td>{item.items?.length}</td>
                       <td>₹{item.amount}</td>

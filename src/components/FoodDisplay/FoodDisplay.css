@@ -92,7 +92,7 @@ select#sortOrder {
     align-items: flex-start;
   }
 
-  select {
+  /* select {
     width: 100%;
-  }
+  } */
 }
